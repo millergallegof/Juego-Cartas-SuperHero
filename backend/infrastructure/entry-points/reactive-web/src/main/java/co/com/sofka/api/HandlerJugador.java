@@ -33,7 +33,7 @@ private final ObtenerTodosUseCase obtenerTodosUseCase;
                         .body(apostarCartaUseCase.apostarCarta(id, e), Jugador.class));
     }
 
-    public Mono<ServerResponse> obtenerJugador(ServerRequest serverRequest){
+    public Mono<ServerResponse> obtenerJugadoPost(ServerRequest serverRequest){
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(obtenerTodosUseCase.ObtenerTodosUseCase(), Jugador.class);
