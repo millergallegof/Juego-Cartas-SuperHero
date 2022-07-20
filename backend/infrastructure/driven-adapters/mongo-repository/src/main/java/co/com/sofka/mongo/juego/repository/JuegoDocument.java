@@ -18,7 +18,7 @@ public class JuegoDocument {
     @Id
     private String id;
     private Integer ronda;
-    private ArrayList<Tarjeta>;
-    private ArrayList<Jugador>;
+    private ArrayList<Tarjeta> tarjetas;
+    private ArrayList<Jugador> jugadores;
 
 }
