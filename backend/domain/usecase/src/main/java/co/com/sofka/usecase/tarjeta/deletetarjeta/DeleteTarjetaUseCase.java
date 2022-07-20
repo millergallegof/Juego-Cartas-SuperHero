@@ -1,15 +1,15 @@
-package co.com.sofka.usecase.listarbaraja;
+package co.com.sofka.usecase.tarjeta.deletetarjeta;
 
 import co.com.sofka.model.tarjeta.Tarjeta;
 import co.com.sofka.model.tarjeta.gateways.TarjetaRepository;
 import lombok.RequiredArgsConstructor;
-import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
-public class ListarBarajaUseCase {
+public class DeleteTarjetaUseCase {
     private final TarjetaRepository tarjetaRepository;
 
-    public Flux<Tarjeta> listarBaraja() {
-        return tarjetaRepository.listarBaraja();
+    public Mono<Void> eliminarTarjeta(String id) {
+        return tarjetaRepository.deleteById(id);
     }
 }

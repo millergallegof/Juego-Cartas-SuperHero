@@ -1,4 +1,4 @@
-package co.com.sofka.usecase.actualizartarjeta;
+package co.com.sofka.usecase.tarjeta.actualizartarjeta;
 
 import co.com.sofka.model.tarjeta.Tarjeta;
 import co.com.sofka.model.tarjeta.gateways.TarjetaRepository;

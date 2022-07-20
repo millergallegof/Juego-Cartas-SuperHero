@@ -1,4 +1,4 @@
-package co.com.sofka.usecase.deletetarjeta;
+package co.com.sofka.usecase.tarjeta.createtarjeta;
 
 import co.com.sofka.model.tarjeta.Tarjeta;
 import co.com.sofka.model.tarjeta.gateways.TarjetaRepository;
@@ -6,10 +6,10 @@ import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
-public class DeleteTarjetaUseCase {
+public class CreateTarjetaUseCase {
     private final TarjetaRepository tarjetaRepository;
 
-    public Mono<Void> eliminarTarjeta(String id) {
-        return tarjetaRepository.deleteById(id);
+    public Mono<Tarjeta> crearTarjeta(Tarjeta tarjeta) {
+        return tarjetaRepository.save(tarjeta);
     }
 }
