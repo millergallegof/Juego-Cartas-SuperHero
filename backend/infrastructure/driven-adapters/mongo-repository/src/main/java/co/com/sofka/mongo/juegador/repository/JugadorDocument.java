@@ -12,7 +12,6 @@ import java.util.List;
 
 @Document
 @Data
-//@AllArgsConstructor
 @NoArgsConstructor
 public class JugadorDocument {
     @Id

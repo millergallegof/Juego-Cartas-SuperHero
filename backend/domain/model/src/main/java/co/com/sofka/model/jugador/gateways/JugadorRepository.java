@@ -15,4 +15,6 @@ public interface JugadorRepository {
     Mono<Jugador> traerBaraja(String idJugador, Jugador jugador);
 
     Mono<Jugador> save(Jugador jugador);
+
+    Flux<Jugador> findAll();
 }
