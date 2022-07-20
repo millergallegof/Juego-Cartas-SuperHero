@@ -27,7 +27,7 @@ public class MongoJugadorRepositoryAdapter extends AdapterOperations<Jugador, Ju
     public Mono<Jugador> apostarCarta(String idJugador, Jugador jugador) {
         jugador.setIdentificador(idJugador);
         return repository
-                .save(new JugadorDocument(jugador.getIdentificador(), jugador.getPuntos(), jugador.getBaraja(), jugador.getEstado(), jugador.getNickName()))
+                .save(new JugadorDocument(jugador.getIdentificador(), jugador.getNickName(), jugador.getPuntos(), jugador.getBaraja(), jugador.getEstado()))
                 .flatMap(x -> Mono.just(jugador));
     }
 
@@ -36,7 +36,7 @@ public class MongoJugadorRepositoryAdapter extends AdapterOperations<Jugador, Ju
         jugador.setIdentificador(idJugador);
         jugador.setEstado(false);
         return repository
-                .save(new JugadorDocument(jugador.getIdentificador(), jugador.getPuntos(), jugador.getBaraja(), jugador.getEstado(), jugador.getNickName()))
+                .save(new JugadorDocument(jugador.getIdentificador(), jugador.getNickName(), jugador.getPuntos(), jugador.getBaraja(), jugador.getEstado()))
                 .flatMap(x -> Mono.just(jugador));
     }
 
@@ -44,7 +44,7 @@ public class MongoJugadorRepositoryAdapter extends AdapterOperations<Jugador, Ju
     public Mono<Jugador> traerBaraja(String idJugador, Jugador jugador) {
         jugador.setIdentificador(idJugador);
         return repository
-                .save(new JugadorDocument(jugador.getIdentificador(), jugador.getPuntos(), jugador.getBaraja(), jugador.getEstado(), jugador.getNickName()))
+                .save(new JugadorDocument(jugador.getIdentificador(), jugador.getNickName(), jugador.getPuntos(), jugador.getBaraja(), jugador.getEstado()))
                 .flatMap(x -> Mono.just(jugador));
     }
 
