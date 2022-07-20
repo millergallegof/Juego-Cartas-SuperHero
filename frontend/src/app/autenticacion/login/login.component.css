@@ -1,8 +1,17 @@
-body {
-    background-image: url("../../img/fondoLogin.jpg");
-    /* padding-top: 15px; */
-    font-size: 13px;
-
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300&display=swap');
+.container {
+    background-image: url("../../../assets/img/background.jpg");
+    background-size: 100%;
+    font-size: 15px;    
+    height: 100vh ;
+    max-width: 100%;
+    font-family: 'Cormorant SC', serif;
+}
+h2{
+    font-size: 35px;
+    font-family: 'Cormorant SC', serif;
+    text-align: center;
+    line-height: 300%;
 }
 
 .main {
@@ -36,9 +45,4 @@ body {
     height: 1px;
     margin-top: 0px !important;
     margin-bottom: 0px !important;
-}
-
-h3 {
-    text-align: center;
-    line-height: 300%;
 }
