@@ -6,16 +6,9 @@ import { SingupComponent } from './component/singup/singup.component';
 import { LoginComponent } from './component/login/login.component';
 
 const routesChildrens: Routes = [
-  // {
-  //   path: 'auth', 
-  //   loadChildren: () => import ('./autenticacion/autenticacion.module').then((m) => m.AutenticacionModule)
-  // },
   { path: 'singup', component: SingupComponent },
   { path: 'login', component: LoginComponent },
-  {
-    path: '**',
-    redirectTo: 'auth'
-  }
+  { path: '**', redirectTo: 'login' }
 ]
 
 @NgModule({

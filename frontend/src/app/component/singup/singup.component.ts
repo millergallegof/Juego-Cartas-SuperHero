@@ -11,7 +11,6 @@ export class SingupComponent implements OnInit {
 
   constructor(public autenticacionService: AutenticacionServiceService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

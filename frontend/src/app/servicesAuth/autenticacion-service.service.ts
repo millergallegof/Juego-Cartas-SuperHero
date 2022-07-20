@@ -30,14 +30,11 @@ export class AutenticacionServiceService {
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         console.log(result);
-        /* Call the SendVerificaitonMail() function when new user sign 
-        up and returns promise */
-        // this.SetUserData(result.user);
+        this.SetUserData(result.user);
       })
       .catch((error) => {
         console.log(error);
-
-        // window.alert(error.message);
+        window.alert(error.message);
       });
   }
 
