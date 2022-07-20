@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public class MongoTarjetaRepositoryAdapter extends AdapterOperations<Tarjeta, TarjetaDocument, String, MongoDBTarjetaRepository>
-implements TarjetaRepository
+    implements TarjetaRepository
 {
 
     public MongoTarjetaRepositoryAdapter(MongoDBTarjetaRepository repository, ObjectMapper mapper) {
@@ -22,6 +22,7 @@ implements TarjetaRepository
          */
         super(repository, mapper, d -> mapper.map(d, Tarjeta.class));
     }
+
 
     @Override
     public Mono<Tarjeta> update(String id, Tarjeta tarjeta) {

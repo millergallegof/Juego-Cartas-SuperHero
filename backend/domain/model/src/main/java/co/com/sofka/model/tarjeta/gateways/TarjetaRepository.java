@@ -6,7 +6,7 @@ import reactor.core.publisher.Mono;
 
 public interface TarjetaRepository {
     Mono<Tarjeta> save(Tarjeta tarjeta);
-    Mono<Tarjeta> deleteById(String id);
+    Mono<Void> deleteById(String id);
     Mono<Tarjeta> update(String id, Tarjeta tarjeta);
     Flux<Tarjeta> listarBaraja();
     Flux<Tarjeta> findAll();

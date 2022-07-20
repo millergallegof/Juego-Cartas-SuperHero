@@ -6,6 +6,6 @@ import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.data.repository.query.ReactiveQueryByExampleExecutor;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
-public interface MongoDBTarjetaRepository extends ReactiveMongoRepository<Tarjeta, String>, ReactiveQueryByExampleExecutor<Tarjeta>, ReactiveCrudRepository<TarjetaDocument, String> {
+public interface MongoDBTarjetaRepository extends ReactiveMongoRepository<TarjetaDocument, String>, ReactiveQueryByExampleExecutor<TarjetaDocument> {
 
 }
