@@ -34,7 +34,8 @@ public class MongoTarjetaRepositoryAdapter extends AdapterOperations<Tarjeta, Ta
 
     @Override
     public Flux<Tarjeta> listarBaraja() {
-
+        repository.findAll()
+                .map(element -> element.getPoderXp());
         return null;
     }
 }
