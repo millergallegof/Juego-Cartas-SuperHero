@@ -15,11 +15,22 @@ public class Juego {
     private ArrayList<Tarjeta> tarjetas;
     private ArrayList<Jugador> jugadores;
 
+    private String ganador;
+
     public Juego(String id, Integer ronda, ArrayList<Tarjeta> tarjetas, ArrayList<Jugador> jugadores) {
         this.id = id;
         this.ronda = ronda;
         this.tarjetas = tarjetas;
         this.jugadores = jugadores;
+        this.ganador = "";
+    }
+
+    public Juego(String id, Integer ronda, ArrayList<Tarjeta> tarjetas, ArrayList<Jugador> jugadores, String ganador) {
+        this.id = id;
+        this.ronda = ronda;
+        this.tarjetas = tarjetas;
+        this.jugadores = jugadores;
+        this.ganador = ganador;
     }
 
     public Juego() {
