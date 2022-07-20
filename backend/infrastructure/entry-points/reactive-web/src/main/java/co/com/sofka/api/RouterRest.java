@@ -12,9 +12,20 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 @Configuration
 public class RouterRest {
 @Bean
-public RouterFunction<ServerResponse> routerFunction(HandlerTarjeta handler) {
-    return route(GET("/api/usecase/path"), handler::listenGETUseCase)
-    .andRoute(POST("/api/usecase/otherpath"), handler::listenPOSTUseCase).and(route(GET("/api/otherusercase/path"), handler::listenGETOtherUseCase));
+public RouterFunction<ServerResponse> routerFunction(HandlerTarjeta handlerTarjeta, HandlerJuego handlerJuego, HandlerJugador handlerJugador) {
+    return route(POST("/api/tarjeta/crear"), handlerTarjeta::crearTarjetaPOSTUseCase).andRoute
+            (DELETE("/api/tarjeta/eliminar/{id}"), handlerTarjeta::eliminarTarjetaDELETEUseCase).andRoute
+            (POST("/api/tarjeta/actualizar/{id}"), handlerTarjeta::atcualizarPOSTUseCase).andRoute
+            (GET("/api/tarjeta/listar"), handlerTarjeta::listarTarjetasGETUseCase).andRoute
+            (POST("/api/juego/crear"), handlerJuego::crearJuegoPOSTUseCase).andRoute
+            (POST("/api/juego/ganador/{id}"), handlerJuego::enviarGanadorPOSTUseCase).andRoute
+            (POST("/api/juego/cartas/{id}"), handlerJuego::recibirCartasPOSTUseCase).andRoute
+            (GET("/api/juego/jugador/{id}"), handlerJuego::recibirJugadoresPOSTUseCase).andRoute
+            (POST("/api/tarjeta/crear"), handlerTarjeta::crearTarjetaPOSTUseCase).andRoute
+            (DELETE("/api/tarjeta/eliminar/{id}"), handlerTarjeta::eliminarTarjetaDELETEUseCase).andRoute
+            (POST("/api/tarjeta/actualizar/{id}"), handlerTarjeta::atcualizarPOSTUseCase).andRoute
+            (GET("/api/tarjeta/listar"), handlerTarjeta::listarTarjetasGETUseCase)
+            ;
 
     }
 }

@@ -20,14 +20,14 @@ public class HandlerJuego {
  private final RecibirCartasUseCase recibirCartasUseCase;
  private final RecibirJugadoresUseCase recibirJugadoresUseCase;
 
-    public Mono<ServerResponse> crearJuegoUseCase(ServerRequest serverRequest) {
+    public Mono<ServerResponse> crearJuegoPOSTUseCase(ServerRequest serverRequest) {
         return serverRequest.bodyToMono(Juego.class)
                 .flatMap(e -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(crearJuegoUseCase.crearJuego(e), Juego.class));
     }
 
-    public Mono<ServerResponse> enviarGanadorUseCase(ServerRequest serverRequest) {
+    public Mono<ServerResponse> enviarGanadorPOSTUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
         return serverRequest.bodyToMono(Juego.class)
                 .flatMap(element -> ServerResponse.ok()
@@ -35,7 +35,7 @@ public class HandlerJuego {
                         .body(enviarGanadorUseCase.enviarGanador(id, element), Juego.class));
     }
 
-    public Mono<ServerResponse> recibirCartasUseCase(ServerRequest serverRequest) {
+    public Mono<ServerResponse> recibirCartasPOSTUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
         return serverRequest.bodyToMono(Juego.class)
                 .flatMap(element -> ServerResponse.ok()
@@ -43,7 +43,7 @@ public class HandlerJuego {
                         .body(recibirCartasUseCase.recibirCartas(id, element), Juego.class));
     }
 
-    public Mono<ServerResponse> recibirJugadoresUseCase(ServerRequest serverRequest) {
+    public Mono<ServerResponse> recibirJugadoresPOSTUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
         return serverRequest.bodyToMono(Juego.class)
                 .flatMap(element -> ServerResponse.ok()
