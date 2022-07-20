@@ -15,17 +15,16 @@ public class RouterRest {
 public RouterFunction<ServerResponse> routerFunction(HandlerTarjeta handlerTarjeta, HandlerJuego handlerJuego, HandlerJugador handlerJugador) {
     return route(POST("/api/tarjeta/crear"), handlerTarjeta::crearTarjetaPOSTUseCase).andRoute
             (DELETE("/api/tarjeta/eliminar/{id}"), handlerTarjeta::eliminarTarjetaDELETEUseCase).andRoute
-            (POST("/api/tarjeta/actualizar/{id}"), handlerTarjeta::atcualizarPOSTUseCase).andRoute
+            (POST("/api/tarjeta/actualizar/{id}"), handlerTarjeta::actualizarPOSTUseCase).andRoute
             (GET("/api/tarjeta/listar"), handlerTarjeta::listarTarjetasGETUseCase).andRoute
             (POST("/api/juego/crear"), handlerJuego::crearJuegoPOSTUseCase).andRoute
             (POST("/api/juego/ganador/{id}"), handlerJuego::enviarGanadorPOSTUseCase).andRoute
             (POST("/api/juego/cartas/{id}"), handlerJuego::recibirCartasPOSTUseCase).andRoute
-            (GET("/api/juego/jugador/{id}"), handlerJuego::recibirJugadoresPOSTUseCase).andRoute
-            (POST("/api/tarjeta/crear"), handlerTarjeta::crearTarjetaPOSTUseCase).andRoute
-            (DELETE("/api/tarjeta/eliminar/{id}"), handlerTarjeta::eliminarTarjetaDELETEUseCase).andRoute
-            (POST("/api/tarjeta/actualizar/{id}"), handlerTarjeta::atcualizarPOSTUseCase).andRoute
-            (GET("/api/tarjeta/listar"), handlerTarjeta::listarTarjetasGETUseCase)
-            ;
+            (POST("/api/juego/jugador/{id}"), handlerJuego::recibirJugadoresPOSTUseCase).andRoute
+            (POST("/api/jugador/crear"), handlerJugador::guardarJugadorPostUseCase).andRoute
+            (POST("/api/jugador/carta/{id}"), handlerJugador::apostaCartaPutUseCase).andRoute
+            (POST("/api/jugador/retirarse/{id}"), handlerJugador::retirarsePOSTUseCase).andRoute
+            (POST("/api/jugador/baraja/{id}"), handlerJugador::traerPOSTBaraja);
 
     }
 }

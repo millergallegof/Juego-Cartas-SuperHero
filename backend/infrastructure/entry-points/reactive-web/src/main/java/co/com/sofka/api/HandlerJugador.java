@@ -37,7 +37,7 @@ private final TraerbarajaUseCase traerbarajaUseCase;
                         .body(guardarJugadorUseCase.save(element), Jugador.class));
     }
 
-    public Mono<ServerResponse> retirarsePuttUseCase(ServerRequest serverRequest) {
+    public Mono<ServerResponse> retirarsePOSTUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
         return serverRequest.
                 bodyToMono(Jugador.class)
@@ -46,7 +46,7 @@ private final TraerbarajaUseCase traerbarajaUseCase;
                         .body(retirarseUseCase.restirarse(id, element), Jugador.class));
     }
 
-    public Mono<ServerResponse> TreaerPutBaraja(ServerRequest serverRequest) {
+    public Mono<ServerResponse> traerPOSTBaraja(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
         return serverRequest.
                 bodyToMono(Jugador.class)

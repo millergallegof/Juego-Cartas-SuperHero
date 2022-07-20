@@ -35,7 +35,7 @@ public class HandlerTarjeta {
                 .body(deleteTarjetaUseCase.eliminarTarjeta(id), Tarjeta.class);
     }
 
-    public Mono<ServerResponse> atcualizarPOSTUseCase(ServerRequest serverRequest) {
+    public Mono<ServerResponse> actualizarPOSTUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
         return serverRequest.bodyToMono(Tarjeta.class)
                 .flatMap(element -> ServerResponse.ok()

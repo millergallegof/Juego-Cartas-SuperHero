@@ -4,6 +4,7 @@ import co.com.sofka.model.tarjeta.Tarjeta;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.List;
 //@AllArgsConstructor
 @NoArgsConstructor
 public class JugadorDocument {
+    @Id
     private String identificador;
     private String puntos;
     private List<Tarjeta> baraja;
