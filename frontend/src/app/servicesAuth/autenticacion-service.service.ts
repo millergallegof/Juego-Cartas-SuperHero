@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../../../app/models/Iusuario';
+import { User } from '../models/Iusuario';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 
@@ -29,16 +29,20 @@ export class AutenticacionServiceService {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        
-        this.SetUserData(result.user);
+        console.log(result);
+        /* Call the SendVerificaitonMail() function when new user sign 
+        up and returns promise */
+        // this.SetUserData(result.user);
       })
       .catch((error) => {
-        window.alert("no se pudo conectar al servidor" + error.message);
+        console.log(error);
+
+        // window.alert(error.message);
       });
   }
 
   SignIn(email: string, password: string) {
-    return this.afAuth
+    this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.SetUserData(result.user);
