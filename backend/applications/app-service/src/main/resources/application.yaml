@@ -13,7 +13,7 @@ spring:
     include: null
   data:
     mongodb:
-      uri: "mongodb://localhost:27017/juegocartas"
+      uri: "mongodb+srv://juegocartasmhd:lo7LNnNyzcL2PK17@cluster0.qcqbwou.mongodb.net/juegocartas"
 management:
   endpoints:
     web:
