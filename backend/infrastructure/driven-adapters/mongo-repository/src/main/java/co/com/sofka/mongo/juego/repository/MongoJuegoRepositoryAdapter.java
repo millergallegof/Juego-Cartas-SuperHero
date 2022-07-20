@@ -26,27 +26,23 @@ public class MongoJuegoRepositoryAdapter extends AdapterOperations<Juego,JuegoDo
     }
 
     @Override
-    public Flux<Jugador> recibirJugadores() {
-        return null;
+    public Mono<Juego> recibirJugadores(String id, Juego juego) {
+        juego.setId(id);
+        return repository.save(new JuegoDocument(juego.getId(), juego.getRonda(),juego.getTarjetas(),juego.getJugadores()))
+                .flatMap(e -> Mono.just(juego));
     }
 
     @Override
-    public Flux<Tarjeta> recibirCartas() {
-        return null;
+    public Mono<Juego> recibirCartas(String id, Juego juego) {
+        juego.setId(id);
+        return repository.save(new JuegoDocument(juego.getId(), juego.getRonda(),juego.getTarjetas(),juego.getJugadores()))
+                .flatMap(e -> Mono.just(juego));
     }
 
     @Override
-    public Mono<Tarjeta> verificarApuesta(Flux<Tarjeta> tarjetas) {
-        return null;
-    }
-
-    @Override
-    public Flux<Tarjeta> envioCartas(Flux<Tarjeta> tarjetas) {
-        return null;
-    }
-
-    @Override
-    public Mono<Jugador> enviarPuntaje(String id) {
-        return null;
+    public Mono<Juego> enviarGanador(String id, Juego juego) {
+        juego.setId(id);
+        return repository.save(new JuegoDocument(juego.getId(), juego.getRonda(),juego.getTarjetas(),juego.getJugadores()))
+                .flatMap(e -> Mono.just(juego));
     }
 }
