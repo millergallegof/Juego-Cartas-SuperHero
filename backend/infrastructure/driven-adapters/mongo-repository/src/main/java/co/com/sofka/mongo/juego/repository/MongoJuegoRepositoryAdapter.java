@@ -45,4 +45,5 @@ public class MongoJuegoRepositoryAdapter extends AdapterOperations<Juego,JuegoDo
         return repository.save(new JuegoDocument(juego.getId(), juego.getRonda(),juego.getTarjetas(),juego.getJugadores()))
                 .flatMap(e -> Mono.just(juego));
     }
+
 }

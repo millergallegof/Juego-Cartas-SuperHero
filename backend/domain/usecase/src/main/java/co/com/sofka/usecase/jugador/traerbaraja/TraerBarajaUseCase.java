@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
-public class TraerbarajaUseCase {
+public class TraerBarajaUseCase {
 
     private final JugadorRepository jugadorRepository;
 

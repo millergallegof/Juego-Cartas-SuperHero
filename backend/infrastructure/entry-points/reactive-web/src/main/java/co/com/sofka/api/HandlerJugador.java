@@ -5,7 +5,7 @@ import co.com.sofka.usecase.jugador.apostarcarta.ApostarCartaUseCase;
 import co.com.sofka.usecase.jugador.guardarjugador.GuardarJugadorUseCase;
 import co.com.sofka.usecase.jugador.obtenertodos.ObtenerTodosUseCase;
 import co.com.sofka.usecase.jugador.retirarse.RetirarseUseCase;
-import co.com.sofka.usecase.jugador.traerbaraja.TraerbarajaUseCase;
+import co.com.sofka.usecase.jugador.traerbaraja.TraerBarajaUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ private final ApostarCartaUseCase apostarCartaUseCase;
 private final GuardarJugadorUseCase guardarJugadorUseCase;
 private final RetirarseUseCase retirarseUseCase;
 
-private final TraerbarajaUseCase traerbarajaUseCase;
+private final TraerBarajaUseCase traerBarajaUseCase;
 
 private final ObtenerTodosUseCase obtenerTodosUseCase;
 
@@ -33,7 +33,7 @@ private final ObtenerTodosUseCase obtenerTodosUseCase;
                         .body(apostarCartaUseCase.apostarCarta(id, e), Jugador.class));
     }
 
-    public Mono<ServerResponse> obtenerJugadoPost(ServerRequest serverRequest){
+    public Mono<ServerResponse> obtenerJugadorPost(ServerRequest serverRequest){
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(obtenerTodosUseCase.ObtenerTodosUseCase(), Jugador.class);
@@ -56,12 +56,12 @@ private final ObtenerTodosUseCase obtenerTodosUseCase;
                         .body(retirarseUseCase.restirarse(id, element), Jugador.class));
     }
 
-    public Mono<ServerResponse> traerPOSTBaraja(ServerRequest serverRequest) {
+    public Mono<ServerResponse> traerJugadorPOSTBaraja(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
         return serverRequest.
                 bodyToMono(Jugador.class)
                 .flatMap(element -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(traerbarajaUseCase.traerBaraja(id, element), Jugador.class));
+                        .body(traerBarajaUseCase.traerBaraja(id, element), Jugador.class));
     }
 }
