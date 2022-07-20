@@ -29,11 +29,11 @@ export class AutenticacionServiceService {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        console.log("login");
+        
         this.SetUserData(result.user);
       })
       .catch((error) => {
-        window.alert(error.message);
+        window.alert("no se pudo conectar al servidor" + error.message);
       });
   }
 
