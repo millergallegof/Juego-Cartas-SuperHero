@@ -1,15 +1,15 @@
-package co.com.sofka.usecase.createtarjeta;
+package co.com.sofka.usecase.listarbaraja;
 
 import co.com.sofka.model.tarjeta.Tarjeta;
 import co.com.sofka.model.tarjeta.gateways.TarjetaRepository;
 import lombok.RequiredArgsConstructor;
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
 
 @RequiredArgsConstructor
-public class CreateTarjetaUseCase {
+public class ListarBarajaUseCase {
     private final TarjetaRepository tarjetaRepository;
 
-    public Mono<Tarjeta> crearTarjeta(Tarjeta tarjeta) {
-        return tarjetaRepository.save(tarjeta);
+    public Flux<Tarjeta> listarBaraja() {
+        return tarjetaRepository.listarBaraja();
     }
 }
