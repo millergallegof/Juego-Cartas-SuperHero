@@ -37,7 +37,6 @@ export class AutenticacionServiceService {
       });
   }
 
-
   SignIn(email: string, password: string) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)

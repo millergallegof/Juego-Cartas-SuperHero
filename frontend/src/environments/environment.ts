@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  firebaseConfig : {
+  firebaseConfig: {
     apiKey: "AIzaSyA49_nZqHyQmMkM0mBVoBb_zAoLEqjI3wo",
     authDomain: "marvel-game-9a665.firebaseapp.com",
     projectId: "marvel-game-9a665",
