@@ -9,6 +9,8 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { environment } from '../../environments/environment';
+// import { AngularFireModule } from '@angular/fire/compat';
 
 @NgModule({
   declarations: [
@@ -20,13 +22,13 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
     RoutingLoginModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
+    // AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFireDatabaseModule,
   ],
   providers: [
     AutenticacionServiceService
   ]
-
 
 })
 export class AutenticacionModule { }
