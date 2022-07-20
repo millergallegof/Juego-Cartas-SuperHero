@@ -3,6 +3,7 @@ package co.com.sofka.api;
 import co.com.sofka.model.jugador.Jugador;
 import co.com.sofka.usecase.jugador.apostarcarta.ApostarCartaUseCase;
 import co.com.sofka.usecase.jugador.guardarjugador.GuardarJugadorUseCase;
+import co.com.sofka.usecase.jugador.obtenertodos.ObtenerTodosUseCase;
 import co.com.sofka.usecase.jugador.retirarse.RetirarseUseCase;
 import co.com.sofka.usecase.jugador.traerbaraja.TraerbarajaUseCase;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,9 @@ private final GuardarJugadorUseCase guardarJugadorUseCase;
 private final RetirarseUseCase retirarseUseCase;
 
 private final TraerbarajaUseCase traerbarajaUseCase;
+
+private final ObtenerTodosUseCase obtenerTodosUseCase;
+
     public Mono<ServerResponse> apostaCartaPutUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
         return serverRequest
@@ -27,6 +31,12 @@ private final TraerbarajaUseCase traerbarajaUseCase;
                 .flatMap(e -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(apostarCartaUseCase.apostarCarta(id, e), Jugador.class));
+    }
+
+    public Mono<ServerResponse> obtenerJugador(ServerRequest serverRequest){
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(obtenerTodosUseCase.ObtenerTodosUseCase(), Jugador.class);
     }
 
     public Mono<ServerResponse> guardarJugadorPostUseCase(ServerRequest serverRequest) {
