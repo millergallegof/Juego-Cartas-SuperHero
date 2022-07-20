@@ -10,7 +10,7 @@ public class CrearJuegoUseCase {
 
     private final JuegoRepository juegoRepository;
 
-    public Mono<Juego> apply(Juego juego) {
+    public Mono<Juego> crearJuego(Juego juego) {
         return this.juegoRepository.save(juego);
     }
 }
