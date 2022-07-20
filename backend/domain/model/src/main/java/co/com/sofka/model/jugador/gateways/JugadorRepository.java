@@ -1,5 +1,11 @@
 package co.com.sofka.model.jugador.gateways;
 
-public interface JugadorRepository {
+import co.com.sofka.model.jugador.Jugador;
+import reactor.core.publisher.Mono;
 
+public interface JugadorRepository {
+    Mono<Jugador> apostarCarta(String carta);
+    Mono<Void> restirarse(String identificador);
+
+    
 }
