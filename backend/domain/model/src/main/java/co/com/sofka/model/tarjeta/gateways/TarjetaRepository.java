@@ -5,6 +5,4 @@ import reactor.core.publisher.Mono;
 
 public interface TarjetaRepository {
     Mono<Tarjeta> save(Tarjeta tarjeta);
-
-
 }
