@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300&display=swap');
+.container {
+    background-image: url("../../../assets/img/background.jpg");
+    background-size: 100%;
+    font-size: 15px;
+    height: 100vh ;
+    max-width: 100%;
+    font-family: 'Cormorant SC', serif;
+}
 .send-button {
   background: #54C7C3;
   width: 100%;
@@ -37,15 +46,9 @@ h1 {
   font-size: 31px;
   line-height: 40px;
   font-weight: 600;
-  color: #4c5357;
+  color: #ffffff;
 }
 
-h2 {
-  color: #5e8396;
-  font-size: 21px;
-  line-height: 32px;
-  font-weight: 400;
-}
 
 .login-or {
   position: relative;
@@ -71,14 +74,4 @@ h2 {
   height: 1px;
   margin-top: 0px !important;
   margin-bottom: 0px !important;
-}
-
-@media screen and (max-width:480px) {
-  h1 {
-    font-size: 26px;
-  }
-
-  h2 {
-    font-size: 20px;
-  }
 }

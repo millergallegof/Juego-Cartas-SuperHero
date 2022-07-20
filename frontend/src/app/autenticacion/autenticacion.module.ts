@@ -6,7 +6,10 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { AutenticacionServiceService } from '../autenticacion/servicesAuth/autenticacion-service.service';
 import { SingupComponent } from './singup/singup.component';
-
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,11 @@ import { SingupComponent } from './singup/singup.component';
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     CommonModule,
-    RoutingLoginModule
+    RoutingLoginModule,
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
   ],
   providers: [
     AutenticacionServiceService

@@ -7,7 +7,6 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat
   providedIn: 'root'
 })
 
-
 export class AutenticacionServiceService {
   userData: any;
   constructor(
@@ -30,6 +29,7 @@ export class AutenticacionServiceService {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
+        console.log("login");
         this.SetUserData(result.user);
       })
       .catch((error) => {
