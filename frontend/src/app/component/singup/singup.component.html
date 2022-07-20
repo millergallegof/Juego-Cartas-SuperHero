@@ -4,25 +4,29 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
-<div class="container" >
-      <h1 class="wv-heading--title row justify-content-md-center" >
-        Registrate
-      </h1>
+<div class="container">
+  <h1 class="wv-heading--title row justify-content-md-center">
+    Registrate
+  </h1>
   <div class="row" style="margin-top: 50px;">
     <div class="col-md-4 mx-auto">
       <div class="myform form ">
         <form name="login">
           <div class="form-group">
-            <input #nickName required type="text" name="nickName" class="form-control my-input" id="nickName" placeholder="NickName">
+            <input #nickName type="text" name="nickName" class="form-control my-input" id="nickName"
+              placeholder="NickName">
           </div>
           <div class="form-group">
-            <input #userEmail required type="email" name="email" class="form-control my-input" id="email" placeholder="Email">
+            <input #userEmail required type="email" name="email" class="form-control my-input" id="email"
+              placeholder="Email">
           </div>
           <div class="form-group">
-            <input #password required type="password" name="password" id="password" class="form-control my-input" placeholder="Contraseña">
+            <input #password required type="password" name="password" id="password" class="form-control my-input"
+              placeholder="Contraseña">
           </div>
           <div class="text-center ">
-            <button type="submit" class=" btn btn-block send-button tx-tfm" (click)="autenticacionService.SignUp(userEmail.value, password.value)">Registraste</button>
+            <button class=" btn btn-block send-button tx-tfm"
+              (click)="autenticacionService.SignUp(userEmail.value, password.value)">Registraste</button>
           </div>
           <br>
           <div class="text-center ">
