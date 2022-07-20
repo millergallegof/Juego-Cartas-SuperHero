@@ -1,4 +1,4 @@
-package co.com.sofka.mongo.juego.repository;
+package co.com.sofka.mongo.juego.document;
 
 import co.com.sofka.model.jugador.Jugador;
 import co.com.sofka.model.tarjeta.Tarjeta;

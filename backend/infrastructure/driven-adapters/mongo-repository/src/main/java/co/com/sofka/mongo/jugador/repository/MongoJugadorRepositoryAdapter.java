@@ -1,15 +1,12 @@
-package co.com.sofka.mongo.juegador.repository;
+package co.com.sofka.mongo.jugador.repository;
 
 import co.com.sofka.model.jugador.Jugador;
 import co.com.sofka.model.jugador.gateways.JugadorRepository;
-import co.com.sofka.model.tarjeta.Tarjeta;
 import co.com.sofka.mongo.helper.AdapterOperations;
+import co.com.sofka.mongo.jugador.document.JugadorDocument;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.List;
 
 @Repository
 public class MongoJugadorRepositoryAdapter extends AdapterOperations<Jugador, JugadorDocument, String, MongoDBJugadorRepository>
@@ -30,7 +27,7 @@ public class MongoJugadorRepositoryAdapter extends AdapterOperations<Jugador, Ju
     public Mono<Jugador> apostarCarta(String idJugador, Jugador jugador) {
         jugador.setIdentificador(idJugador);
         return repository
-                .save(new JugadorDocument(jugador.getIdentificador(), jugador.getPuntos(), jugador.getBaraja(), jugador.getEstado()))
+                .save(new JugadorDocument(jugador.getIdentificador(), jugador.getPuntos(), jugador.getBaraja(), jugador.getEstado(), jugador.getNickName()))
                 .flatMap(x -> Mono.just(jugador));
     }
 
@@ -39,7 +36,7 @@ public class MongoJugadorRepositoryAdapter extends AdapterOperations<Jugador, Ju
         jugador.setIdentificador(idJugador);
         jugador.setEstado(false);
         return repository
-                .save(new JugadorDocument(jugador.getIdentificador(), jugador.getPuntos(), jugador.getBaraja(), jugador.getEstado()))
+                .save(new JugadorDocument(jugador.getIdentificador(), jugador.getPuntos(), jugador.getBaraja(), jugador.getEstado(), jugador.getNickName()))
                 .flatMap(x -> Mono.just(jugador));
     }
 
@@ -47,7 +44,7 @@ public class MongoJugadorRepositoryAdapter extends AdapterOperations<Jugador, Ju
     public Mono<Jugador> traerBaraja(String idJugador, Jugador jugador) {
         jugador.setIdentificador(idJugador);
         return repository
-                .save(new JugadorDocument(jugador.getIdentificador(), jugador.getPuntos(), jugador.getBaraja(), jugador.getEstado()))
+                .save(new JugadorDocument(jugador.getIdentificador(), jugador.getPuntos(), jugador.getBaraja(), jugador.getEstado(), jugador.getNickName()))
                 .flatMap(x -> Mono.just(jugador));
     }
 
