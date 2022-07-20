@@ -5,10 +5,7 @@ import { RoutingLoginModule } from '../autenticacion/routing-login.module';
 
 import { AutenticacionServiceService } from '../autenticacion/servicesAuth/autenticacion-service.service';
 import { SingupComponent } from './singup/singup.component';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+
 
 @NgModule({
   declarations: [
@@ -18,14 +15,9 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
   imports: [
     CommonModule,
     RoutingLoginModule,
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    AngularFireStorageModule,
-    AngularFireDatabaseModule,
+
   ],
-  providers: [
-    AutenticacionServiceService
-  ]
+ 
 
 
 })
