@@ -4,10 +4,12 @@ import { AutenticacionModule } from './autenticacion/autenticacion.module';
 import { RoutingLoginModule } from './autenticacion/routing-login.module';
 import { RouterModule } from '@angular/router';
 
+
 const appRoutes = [
   {path: 'autenticacion', loadChildre: () => {
     import ('./autenticacion/autenticacion.module').then((m) => m.AutenticacionModule)
   }}
+  
 ]
 
 @NgModule({
