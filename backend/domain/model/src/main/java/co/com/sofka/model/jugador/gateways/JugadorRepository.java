@@ -7,6 +7,4 @@ public interface JugadorRepository {
     Mono<Jugador> apostarCarta(String carta);
     Mono<Void> restirarse(String identificador);
 
-    
-
 }
