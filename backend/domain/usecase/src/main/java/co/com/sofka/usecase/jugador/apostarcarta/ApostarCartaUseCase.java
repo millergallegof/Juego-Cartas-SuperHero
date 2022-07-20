@@ -1,4 +1,4 @@
-package co.com.sofka.usecase.apostarcarta;
+package co.com.sofka.usecase.jugador.apostarcarta;
 
 import co.com.sofka.model.jugador.Jugador;
 import co.com.sofka.model.jugador.gateways.JugadorRepository;

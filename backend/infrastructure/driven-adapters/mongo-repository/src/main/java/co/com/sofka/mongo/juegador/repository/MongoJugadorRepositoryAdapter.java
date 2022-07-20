@@ -51,4 +51,5 @@ public class MongoJugadorRepositoryAdapter extends AdapterOperations<Jugador, Ju
                 .flatMap(x -> Mono.just(jugador));
     }
 
+
 }
