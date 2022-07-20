@@ -2,9 +2,11 @@ package co.com.sofka.mongo.juegador.repository;
 
 import co.com.sofka.model.jugador.Jugador;
 import co.com.sofka.model.jugador.gateways.JugadorRepository;
+import co.com.sofka.model.tarjeta.Tarjeta;
 import co.com.sofka.mongo.helper.AdapterOperations;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Repository
@@ -21,13 +23,19 @@ public class MongoJugadorRepositoryAdapter extends AdapterOperations<Jugador, Ju
         super(repository, mapper, d -> mapper.map(d,  Jugador.class/* change for domain model */));
     }
 
+
     @Override
-    public Mono<Jugador> apostarCarta(String carta) {
+    public Mono<Tarjeta> apostarCarta(String tarjeta) {
         return null;
     }
 
     @Override
     public Mono<Void> restirarse(String identificador) {
+        return null;
+    }
+
+    @Override
+    public Flux<Tarjeta> traerBaraja(Flux<Tarjeta> baraja) {
         return null;
     }
 }
