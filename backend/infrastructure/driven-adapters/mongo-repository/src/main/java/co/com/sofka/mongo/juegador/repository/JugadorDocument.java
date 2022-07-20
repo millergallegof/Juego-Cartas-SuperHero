@@ -13,4 +13,5 @@ public class JugadorDocument {
     private String identificador;
     private String puntos;
     private String baraja;
+    private Boolean estado;
 }

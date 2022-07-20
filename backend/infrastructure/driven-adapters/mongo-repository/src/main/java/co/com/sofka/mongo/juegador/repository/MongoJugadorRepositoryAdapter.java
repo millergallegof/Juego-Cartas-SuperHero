@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @Repository
 public class MongoJugadorRepositoryAdapter extends AdapterOperations<Jugador, JugadorDocument, String, MongoDBJugadorRepository>
  implements JugadorRepository
@@ -25,17 +27,28 @@ public class MongoJugadorRepositoryAdapter extends AdapterOperations<Jugador, Ju
 
 
     @Override
-    public Mono<Tarjeta> apostarCarta(String tarjeta) {
-        return null;
+    public Mono<Jugador> apostarCarta(String idJugador, Jugador jugador) {
+        jugador.setIdentificador(idJugador);
+        return repository
+                .save(new JugadorDocument(jugador.getIdentificador(), jugador.getPuntos(), jugador.getBaraja(), jugador.getEstado()))
+                .flatMap(x -> Mono.just(jugador));
     }
 
     @Override
-    public Mono<Void> restirarse(String identificador) {
-        return null;
+    public Mono<Jugador> restirarse(String idJugador, Jugador jugador) {
+        jugador.setIdentificador(idJugador);
+        jugador.setEstado(false);
+        return repository
+                .save(new JugadorDocument(jugador.getIdentificador(), jugador.getPuntos(), jugador.getBaraja(), jugador.getEstado()))
+                .flatMap(x -> Mono.just(jugador));
     }
 
     @Override
-    public Flux<Tarjeta> traerBaraja(Flux<Tarjeta> baraja) {
-        return null;
+    public Mono<Jugador> traerBaraja(String idJugador, Jugador jugador) {
+        jugador.setIdentificador(idJugador);
+        return repository
+                .save(new JugadorDocument(jugador.getIdentificador(), jugador.getPuntos(), jugador.getBaraja(), jugador.getEstado()))
+                .flatMap(x -> Mono.just(jugador));
     }
+
 }

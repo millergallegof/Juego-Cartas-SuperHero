@@ -8,5 +8,6 @@ public class Jugador {
     private String identificador;
     private String puntos;
     private String baraja;
+    private Boolean estado;
 
 }
