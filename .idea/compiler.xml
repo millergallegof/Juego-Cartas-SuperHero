@@ -13,7 +13,9 @@
         <module name="juegocartas.usecase.test" />
         <module name="juegocartas.usecase.main" />
         <module name="juegocartas.app-service.main" />
+        <module name="juegocartas.reactive-web.main" />
         <module name="juegocartas.model.test" />
+        <module name="juegocartas.reactive-web.test" />
         <module name="juegocartas.model.main" />
       </profile>
     </annotationProcessing>

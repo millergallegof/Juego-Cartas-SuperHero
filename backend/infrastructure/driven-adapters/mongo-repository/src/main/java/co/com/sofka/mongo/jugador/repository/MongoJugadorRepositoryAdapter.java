@@ -40,13 +40,5 @@ public class MongoJugadorRepositoryAdapter extends AdapterOperations<Jugador, Ju
                 .flatMap(x -> Mono.just(jugador));
     }
 
-    @Override
-    public Mono<Jugador> traerBaraja(String idJugador, Jugador jugador) {
-        jugador.setIdentificador(idJugador);
-        return repository
-                .save(new JugadorDocument(jugador.getIdentificador(), jugador.getNickName(), jugador.getPuntos(), jugador.getBaraja(), jugador.getEstado()))
-                .flatMap(x -> Mono.just(jugador));
-    }
-
 
 }

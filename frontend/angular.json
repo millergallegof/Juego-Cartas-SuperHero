@@ -68,7 +68,11 @@
           "configurations": {
             "production": {
               "browserTarget": "frontend:build:production",
+<<<<<<< HEAD
+              "proxyConfig": "src/proxy.conf.json"
+=======
               "proxyConfig": "proxy.conf.json"
+>>>>>>> d1cbacade647c8cfd8431b0f92f17a97e35325c8
             },
             "development": {
               "browserTarget": "frontend:build:development"

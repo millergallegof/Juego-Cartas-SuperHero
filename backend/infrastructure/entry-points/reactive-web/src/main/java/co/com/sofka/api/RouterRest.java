@@ -9,7 +9,6 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 
-@CrossOrigin(origins = "*")
 @Configuration
 public class RouterRest {
 @Bean
@@ -22,11 +21,8 @@ public RouterFunction<ServerResponse> routerFunction(HandlerTarjeta handlerTarje
             (POST("/api/juego/ganador/{id}"), handlerJuego::enviarGanadorPOSTUseCase).andRoute
             (POST("/api/juego/cartas/{id}"), handlerJuego::recibirCartasPOSTUseCase).andRoute
             (POST("/api/juego/jugador/{id}"), handlerJuego::recibirJugadoresPOSTUseCase).andRoute
-            (POST("/api/jugador/crear"), handlerJugador::guardarJugadorPostUseCase).andRoute
             (POST("/api/jugador/carta/{id}"), handlerJugador::apostaCartaPutUseCase).andRoute
             (POST("/api/jugador/retirarse/{id}"), handlerJugador::retirarsePOSTUseCase).andRoute
-            (POST("/api/jugador/baraja/{id}"), handlerJugador::traerJugadorPOSTBaraja).andRoute
-            (GET("/api/jugador/obtejerjugador"), handlerJugador::obtenerJugadorPost).andRoute
             (GET("/api/juego/listar"), handlerJuego::listarJuegosGETUseCase);
 
     }
