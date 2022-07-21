@@ -13,6 +13,7 @@ import { AutenticacionServiceService } from './servicesAuth/autenticacion-servic
 import { LoginComponent } from './component/login/login.component';
 import { SingupComponent } from './component/singup/singup.component';
 import { HomeComponentComponent } from './component/home-component/home-component.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { HomeComponentComponent } from './component/home-component/home-componen
     AppComponent,
     LoginComponent,
     SingupComponent,
-    HomeComponentComponent
+    HomeComponentComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -30,6 +32,10 @@ import { HomeComponentComponent } from './component/home-component/home-componen
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    FormsModule,
+  ],
+  providers: [
+    AutenticacionServiceService
   ],
   // providers: [
   //   AutenticacionServiceService

@@ -6,7 +6,7 @@
     "frontend": {
       "projectType": "application",
       "schematics": {},
-      "root": "",
+      "root": "/login",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AutenticacionServiceService } from 'src/app/servicesAuth/autenticacion-service.service';
 
 @Component({
@@ -8,7 +9,10 @@ import { AutenticacionServiceService } from 'src/app/servicesAuth/autenticacion-
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public autenticacionService: AutenticacionServiceService) { }
+  constructor(
+    public autenticacionService: AutenticacionServiceService,
+    public router: Router
+    ) { }
 
   ngOnInit(): void {
   }
