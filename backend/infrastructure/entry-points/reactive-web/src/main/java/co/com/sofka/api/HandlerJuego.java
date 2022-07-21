@@ -2,8 +2,8 @@ package co.com.sofka.api;
 
 import co.com.sofka.model.juego.Juego;
 import co.com.sofka.usecase.juego.crearjuego.CrearJuegoUseCase;
-import co.com.sofka.usecase.juego.enviarganador.EnviarGanadorUseCase;
-import co.com.sofka.usecase.juego.recibircartas.RecibirCartasUseCase;
+import co.com.sofka.usecase.juego.asignarganador.AsignarGanadorUseCase;
+import co.com.sofka.usecase.juego.aumentaronda.AumentaRondaUseCase;
 import co.com.sofka.usecase.juego.recibirjugadores.RecibirJugadoresUseCase;
 import co.com.sofka.usecase.tarjeta.listartarjeta.ListarTarjetasUseCase;
 import lombok.RequiredArgsConstructor;
@@ -17,11 +17,11 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class HandlerJuego {
  private final CrearJuegoUseCase crearJuegoUseCase;
- private final EnviarGanadorUseCase enviarGanadorUseCase;
- private final RecibirCartasUseCase recibirCartasUseCase;
- private final RecibirJugadoresUseCase recibirJugadoresUseCase;
 
- private final ListarTarjetasUseCase listarCartasUseCase;
+ private final AsignarGanadorUseCase asignarGanadorUseCase;
+ private final AumentaRondaUseCase aumentaRondaUseCase;
+ private final ListarCartasUseCase listarCartasUseCase;
+
 
     public Mono<ServerResponse> crearJuegoPOSTUseCase(ServerRequest serverRequest) {
         return serverRequest.bodyToMono(Juego.class)
@@ -30,28 +30,20 @@ public class HandlerJuego {
                         .body(crearJuegoUseCase.crearJuego(e), Juego.class));
     }
 
-    public Mono<ServerResponse> enviarGanadorPOSTUseCase(ServerRequest serverRequest) {
+    public Mono<ServerResponse> asignarGanadorPOSTUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
         return serverRequest.bodyToMono(Juego.class)
                 .flatMap(element -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(enviarGanadorUseCase.enviarGanador(id, element), Juego.class));
+                        .body(asignarGanadorUseCase.asignarGanador(), Juego.class));
     }
 
-    public Mono<ServerResponse> recibirCartasPOSTUseCase(ServerRequest serverRequest) {
+    public Mono<ServerResponse> aumentaRondaPOSTUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
         return serverRequest.bodyToMono(Juego.class)
                 .flatMap(element -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(recibirCartasUseCase.recibirCartas(id, element), Juego.class));
-    }
-
-    public Mono<ServerResponse> recibirJugadoresPOSTUseCase(ServerRequest serverRequest) {
-        var id = serverRequest.pathVariable("id");
-        return serverRequest.bodyToMono(Juego.class)
-                .flatMap(element -> ServerResponse.ok()
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(recibirJugadoresUseCase.recibirJugadores(id, element), Juego.class));
+                        .body(aumentaRondaUseCase.aumentaRonda(id, element), Juego.class));
     }
 
     public Mono<ServerResponse> listarJuegosGETUseCase(ServerRequest serverRequest) {
