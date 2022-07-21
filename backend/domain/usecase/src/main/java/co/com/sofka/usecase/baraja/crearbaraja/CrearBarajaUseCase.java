@@ -10,7 +10,8 @@ import reactor.core.publisher.Mono;
 
 import java.util.*;
 
-
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RequiredArgsConstructor
 public class CrearBarajaUseCase {
@@ -22,28 +23,35 @@ public class CrearBarajaUseCase {
 
         List<Tarjeta> barajaList = new ArrayList<>();
         Set<Tarjeta> baraja = new HashSet<>();
-        System.out.println("baraja" + barajaList);
-        tarjetaRepository.findAll()
-                .subscribe(element -> {
-                    System.out.println(element);
-                    barajaList.add(element);
-                });
 
+        List<Tarjeta> barajaList = new ArrayList<Tarjeta>();
+        var baraja2 =  tarjetaRepository.findAll()
+                .map(elemen -> {
+                    System.out.println(elemen);
+                    barajaList.add(elemen);
+                            return  elemen;
+                })
+                .subscribe(e -> System.out.println(e));
+        //.subscribe(element -> barajaList.add(element));
+        System.out.println(barajaList);
         Collections.shuffle(barajaList);
 
-//        Stream
-//                .generate(new Random()::nextInt)
-//                .filter(e -> e < 9 && e > 0)
-//                .distinct()
-//                .limit(5)
-//                .forEach(System.out::println);
+        // Stream
+        //       .generate(new Random()::nextInt)
+        //     .filter(e -> e < 9 && e > 0)
+        //   .distinct()
+        //  .limit(5)
+        //          .forEach(System.out::println);
+
         // .map(randon -> {
         //      System.out.println(randon);
         //     baraja.add(tarjetas.elementAt(randon).block());
         //    return tarjetas.elementAt(randon).block();
         // });
         // tarjetas.subscribe(e-> System.out.println(e));
-        System.out.println(barajaList);
+
+        System.out.println(baraja);
+
         return barajaRepository.save(new Baraja(baraja));
     }
 }

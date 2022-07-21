@@ -6,7 +6,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface BarajaRepository {
-  //  Flux<Tarjeta> enviarBaraja();
-   // Flux<Tarjeta> crearBaraja(Flux<Tarjeta> tarjetas);
+
     Mono<Baraja> save(Baraja baraja);
+
+   // Flux<Tarjeta> findAll();
 }
