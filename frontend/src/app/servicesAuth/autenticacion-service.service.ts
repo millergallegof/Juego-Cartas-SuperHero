@@ -32,10 +32,12 @@ export class AutenticacionServiceService {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        console.log(result);
+        console.log(result.user);
         /* Call the SendVerificaitonMail() function when new user sign
         up and returns promise */
         // this.SetUserData(result.user);
+        this.router.navigate(['']);
+
       })
       .catch((error) => {
         window.alert(error.message);
@@ -68,7 +70,7 @@ export class AutenticacionServiceService {
     const userData: User = {
       uid: user.uid,
       email: user.email,
-      userName: user.userName
+      displayName: user.displayName
     };
     return userRef.set(userData, {
       merge: true,

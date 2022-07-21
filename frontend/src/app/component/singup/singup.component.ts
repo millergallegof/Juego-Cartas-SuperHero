@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AutenticacionServiceService } from 'src/app/servicesAuth/autenticacion-service.service';
 
 
@@ -9,7 +10,10 @@ import { AutenticacionServiceService } from 'src/app/servicesAuth/autenticacion-
 })
 export class SingupComponent implements OnInit {
 
-  constructor(public autenticacionService: AutenticacionServiceService) { }
+  constructor(
+    public autenticacionService: AutenticacionServiceService,
+    public router: Router
+  ) { }
 
   ngOnInit(): void {
   }
