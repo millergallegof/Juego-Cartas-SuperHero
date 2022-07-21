@@ -3,6 +3,7 @@ import { User } from '../models/Iusuario';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import * as auth from 'firebase/auth';
 
 
 @Injectable({
@@ -61,6 +62,26 @@ export class AutenticacionServiceService {
       localStorage.removeItem('user');
       this.router.navigate(['login']);
     });
+  }
+
+  GoogleAuth() {
+    return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
+      if (res) {
+        this.router.navigate(['']);
+      }
+    });
+  }
+
+  AuthLogin(provider: any) {
+    return this.afAuth
+      .signInWithPopup(provider)
+      .then((result) => {
+        this.SetUserData(result.user);
+        this.router.navigate(['']);
+      })
+      .catch((error) => {
+        window.alert(error);
+      });
   }
 
   SetUserData(user: any) {

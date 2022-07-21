@@ -15,7 +15,7 @@
                     <a (click)="router.navigate(['singup'])" class="btn btn-lg btn-primary btn-block">Registrate</a>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">
-                    <a href="#" class="btn btn-lg btn-info btn-block">Google</a>
+                    <a (click)="autenticacionService.GoogleAuth()" class="btn btn-lg btn-info btn-block">Google</a>
                 </div>
             </div>
             <div class="login-or">
@@ -26,13 +26,14 @@
             <form role="form">
                 <div class="form-group">
                     <label for="inputUsernameEmail" style="color: white;">Correo Electronico</label>
-                    <input #userName type="text" class="form-control" id="inputUsernameEmail"
+                    <input required #userName type="text" class="form-control" id="inputUsernameEmail"
                         placeholder="alguien@hotmail.com">
                 </div>
                 <div class="form-group">
                     <!-- <a class="pull-right" href="#">Forgot password?</a> -->
                     <label for="inputPassword" style="color: white;">Password</label>
-                    <input #password type="password" class="form-control" id="inputPassword" placeholder="password">
+                    <input required #password type="password" class="form-control" id="inputPassword"
+                        placeholder="password">
                 </div>
                 <!-- <div class="checkbox pull-right">
                     <label style="color: white;">
