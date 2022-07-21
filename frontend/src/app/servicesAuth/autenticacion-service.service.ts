@@ -32,7 +32,7 @@ export class AutenticacionServiceService {
         console.log(result);
         /* Call the SendVerificaitonMail() function when new user sign 
         up and returns promise */
-        this.SetUserData(result.user);
+        // this.SetUserData(result.user);
       })
       .catch((error) => {
         window.alert(error.message);
