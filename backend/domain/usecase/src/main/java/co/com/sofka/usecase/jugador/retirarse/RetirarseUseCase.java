@@ -12,6 +12,10 @@ public class RetirarseUseCase {
 
     public Mono<Jugador> restirarse(String idJugador, Jugador jugador){
     //    return jugadorRepository.restirarse(idJugador, jugador);
-        return null;
+
+//        var jugadorId =
+
+//        return jugadorRepository.restirarse(idJugador);
+    return null;
     }
 }
