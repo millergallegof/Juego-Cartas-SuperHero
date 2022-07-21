@@ -12,8 +12,4 @@ public interface JugadorRepository {
     Mono<Jugador> apostarCarta(String idJugador, Jugador jugador);
     Mono<Jugador> restirarse(String idJugador, Jugador jugador);
 
-    Mono<Jugador> traerBaraja(String idJugador, Jugador jugador);
-    Mono<Jugador> save(Jugador jugador);
-
-    Flux<Jugador> findAll();
 }
