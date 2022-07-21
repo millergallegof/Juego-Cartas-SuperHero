@@ -13,8 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class TarjetaDocument {
     @Id
     private String id;
-    private String caracteristicas;
-    private String imagen;
-    private Integer poderXp;
     private String descripcion;
+    private Integer poderXp;
+    private String imagen;
 }

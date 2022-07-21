@@ -28,14 +28,8 @@ public class MongoTarjetaRepositoryAdapter extends AdapterOperations<Tarjeta, Ta
     public Mono<Tarjeta> update(String id, Tarjeta tarjeta) {
         tarjeta.setId(id);
         return repository
-                .save(new TarjetaDocument(tarjeta.getId(), tarjeta.getCaracteristicas(), tarjeta.getImagen(), tarjeta.getPoderXp(), tarjeta.getDescripcion()))
+                .save(new TarjetaDocument(tarjeta.getId(), tarjeta.getDescripcion(),tarjeta.getPoderXp(), tarjeta.getImagen() ))
                 .flatMap(element -> Mono.just(tarjeta));
     }
 
-    @Override
-    public Flux<Tarjeta> listarBaraja() {
-        repository.findAll()
-                .map(element -> element.getPoderXp());
-        return null;
-    }
 }

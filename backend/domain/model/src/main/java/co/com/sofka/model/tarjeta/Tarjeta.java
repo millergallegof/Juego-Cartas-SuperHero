@@ -6,17 +6,16 @@ import lombok.Data;
 @Builder(toBuilder = true)
 public class Tarjeta {
     private String id;
-    private String caracteristicas;
-    private String imagen;
-    private Integer poderXp;
     private String descripcion;
+    private Integer poderXp;
+    private String imagen;
 
-    public Tarjeta(String id, String caracteristicas, String imagen, Integer poderXp, String descripcion) {
+
+    public Tarjeta(String id, String descripcion, Integer poderXp, String imagen) {
         this.id = id;
-        this.caracteristicas = caracteristicas;
-        this.imagen = imagen;
-        this.poderXp = poderXp;
         this.descripcion = descripcion;
+        this.poderXp = poderXp;
+        this.imagen = imagen;
     }
 
     public Tarjeta() {

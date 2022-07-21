@@ -4,7 +4,7 @@ import co.com.sofka.model.tarjeta.Tarjeta;
 import co.com.sofka.usecase.tarjeta.actualizartarjeta.ActualizarTarjetaUseCase;
 import co.com.sofka.usecase.tarjeta.createtarjeta.CreateTarjetaUseCase;
 import co.com.sofka.usecase.tarjeta.deletetarjeta.DeleteTarjetaUseCase;
-import co.com.sofka.usecase.tarjeta.listarcartas.ListarCartasUseCase;
+import co.com.sofka.usecase.tarjeta.listartarjeta.ListarTarjetasUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ public class HandlerTarjeta {
     private final CreateTarjetaUseCase createTarjetaUseCase;
     private final ActualizarTarjetaUseCase actualizarTarjetaUseCase;
     private final DeleteTarjetaUseCase deleteTarjetaUseCase;
-    private final ListarCartasUseCase listarCartasUseCase;
+    private final ListarTarjetasUseCase listarCartasUseCase;
 
     public Mono<ServerResponse> crearTarjetaPOSTUseCase(ServerRequest serverRequest) {
 

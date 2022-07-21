@@ -5,7 +5,7 @@ import co.com.sofka.usecase.juego.crearjuego.CrearJuegoUseCase;
 import co.com.sofka.usecase.juego.enviarganador.EnviarGanadorUseCase;
 import co.com.sofka.usecase.juego.recibircartas.RecibirCartasUseCase;
 import co.com.sofka.usecase.juego.recibirjugadores.RecibirJugadoresUseCase;
-import co.com.sofka.usecase.tarjeta.listarcartas.ListarCartasUseCase;
+import co.com.sofka.usecase.tarjeta.listartarjeta.ListarTarjetasUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ public class HandlerJuego {
  private final RecibirCartasUseCase recibirCartasUseCase;
  private final RecibirJugadoresUseCase recibirJugadoresUseCase;
 
- private final ListarCartasUseCase listarCartasUseCase;
+ private final ListarTarjetasUseCase listarCartasUseCase;
 
     public Mono<ServerResponse> crearJuegoPOSTUseCase(ServerRequest serverRequest) {
         return serverRequest.bodyToMono(Juego.class)
