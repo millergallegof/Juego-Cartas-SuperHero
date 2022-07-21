@@ -10,11 +10,17 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AutenticacionServiceService } from './servicesAuth/autenticacion-service.service';
+import { LoginComponent } from './component/login/login.component';
+import { SingupComponent } from './component/singup/singup.component';
+import { HomeComponentComponent } from './component/home-component/home-component.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    SingupComponent,
+    HomeComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -24,11 +30,10 @@ import { AutenticacionServiceService } from './servicesAuth/autenticacion-servic
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-
   ],
-  providers: [
-    AutenticacionServiceService
-  ],
+  // providers: [
+  //   AutenticacionServiceService
+  // ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
