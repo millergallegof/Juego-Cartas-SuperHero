@@ -18,7 +18,6 @@ public class JuegoDocument {
     @Id
     private String id;
     private Integer ronda;
-
     private String ganador;
 
     private Tablero tablero;
