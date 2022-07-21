@@ -14,12 +14,13 @@ import { ErrorComponentComponent } from './component/error-component/error-compo
 const routesChildrens: Routes = [
   {
     path: '',
-     component: HomeComponentComponent,
-     canActivate: [AngularFireAuthGuard],
+    component: HomeComponentComponent,
+    canActivate: [AngularFireAuthGuard],
     //data: { authGuardPipe: redirectLoggedInToDashboard },
   },
   { path: 'singup', component: SingupComponent },
   { path: 'login', component: LoginComponent },
+  {path: '', redirectTo:'/login', pathMatch: 'full'},
   { path: '**', component: ErrorComponentComponent },
 
 ]
