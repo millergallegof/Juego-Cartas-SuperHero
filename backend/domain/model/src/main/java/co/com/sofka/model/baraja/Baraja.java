@@ -17,5 +17,9 @@ public class Baraja {
         this.tarjetas = tarjetas;
     }
 
+    public Baraja(Set<Tarjeta> tarjetas) {
+        this.tarjetas = tarjetas;
+    }
+
     public Baraja() {}
 }

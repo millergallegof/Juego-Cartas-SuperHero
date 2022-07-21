@@ -8,26 +8,25 @@ import java.util.List;
 @Data
 @Builder(toBuilder = true)
 public class Jugador {
-    private String identificador;
+    private JugadorId jugadorId;
     private String nickName;
     private Integer puntos;
     private List<Tarjeta> baraja;
     private Boolean estado;
 
-    public Jugador(String identificador, String nickName, Integer puntos, List<Tarjeta> baraja, Boolean estado) {
-        this.identificador = identificador;
+    public Jugador(JugadorId jugadorId, String nickName, Integer puntos, List<Tarjeta> baraja, Boolean estado) {
+        this.jugadorId = jugadorId;
         this.nickName = nickName;
         this.puntos = puntos;
         this.baraja = baraja;
         this.estado = estado;
     }
 
-    public Jugador(String identificador, String nickName, Integer puntos, Boolean estado) {
-        this.identificador = identificador;
+    public Jugador(JugadorId jugadorId, String nickName, Integer puntos, Boolean estado) {
+        this.jugadorId = jugadorId;
         this.nickName = nickName;
         this.puntos = puntos;
         this.estado = estado;
-        this.baraja = new ArrayList<>();
     }
 
     public Jugador() {

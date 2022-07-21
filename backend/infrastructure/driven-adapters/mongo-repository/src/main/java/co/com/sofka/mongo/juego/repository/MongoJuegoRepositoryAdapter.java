@@ -12,6 +12,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class MongoJuegoRepositoryAdapter extends AdapterOperations<Juego, JuegoDocument, String, MongoDBJuegoRepository>
@@ -27,33 +28,14 @@ public class MongoJuegoRepositoryAdapter extends AdapterOperations<Juego, JuegoD
         super(repository, mapper, d -> mapper.map(d, Juego.class));
     }
 
+
     @Override
-    public Flux<Jugador> recibirJugadores(List<Jugador> jugadores) {
-      //  repository.findAll()
-       //         .flatMap()
-       // return repository.save(new JuegoDocument(juego.getId(), juego.getRonda(),juego.getTarjetas(),juego.getJugadores()))
-        //        .flatMap(e -> Mono.just(juego));
+    public Mono<Juego> asignarGanador(Set<Jugador> jugadores) {
         return null;
     }
 
     @Override
-    public Flux<Tarjeta> recibirCartas(List<Tarjeta> tarjetas) {
+    public Mono<Juego> aumentaRonda() {
         return null;
     }
-
-    //   @Override
-  //  public Flux<Juego> recibirCartas(List<Tarjeta> tarjetas) {
-      //  juego.setId(id);
-       // return repository.save(new JuegoDocument(juego.getId(), juego.getRonda(),juego.getTarjetas(),juego.getJugadores()))
-        //        .flatMap(e -> Mono.just(juego));
-  //      return null;
-  //  }
-
-    @Override
-    public Mono<Juego> enviarGanador(String id, Juego juego) {
-        juego.setId(id);
-        return repository.save(new JuegoDocument(juego.getId(), juego.getRonda(),juego.getTarjetas(),juego.getJugadores()))
-                .flatMap(e -> Mono.just(juego));
-    }
-
 }
