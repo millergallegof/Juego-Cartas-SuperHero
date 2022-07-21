@@ -1,6 +1,7 @@
 package co.com.sofka.mongo.juego.document;
 
 import co.com.sofka.model.jugador.Jugador;
+import co.com.sofka.model.tablero.Tablero;
 import co.com.sofka.model.tarjeta.Tarjeta;
 import lombok.AllArgsConstructor;
 import lombok.Data;

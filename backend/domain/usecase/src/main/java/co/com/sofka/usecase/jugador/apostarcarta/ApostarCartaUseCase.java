@@ -11,6 +11,7 @@ public class ApostarCartaUseCase {
     private final JugadorRepository jugadorRepository;
 
     public Mono<Jugador> apostarCarta(String idJugador, Jugador jugador){
-        return jugadorRepository.apostarCarta(idJugador, jugador);
+       // return jugadorRepository.apostarCarta( );
+        return null;
     }
 }
