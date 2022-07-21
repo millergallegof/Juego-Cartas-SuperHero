@@ -1,4 +1,4 @@
-export interface Carta{
+export interface Tarjeta {
     id : string;
     caracteristicas:string;
     image:string;
