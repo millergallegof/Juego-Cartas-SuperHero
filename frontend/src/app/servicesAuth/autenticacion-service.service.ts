@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/Iusuario';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,8 @@ export class AutenticacionServiceService {
   userData: any;
   constructor(
     public afs: AngularFirestore,
-    public afAuth: AngularFireAuth
+    public afAuth: AngularFireAuth,
+    public router: Router
   ) {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
@@ -30,7 +33,7 @@ export class AutenticacionServiceService {
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         console.log(result);
-        /* Call the SendVerificaitonMail() function when new user sign 
+        /* Call the SendVerificaitonMail() function when new user sign
         up and returns promise */
         // this.SetUserData(result.user);
       })
@@ -44,16 +47,17 @@ export class AutenticacionServiceService {
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.SetUserData(result.user);
+        this.router.navigate(['']);
       })
       .catch((error) => {
-        window.alert(error.message);
+        console.log(error);
       });
   }
 
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      //this.router.navigate(['sign-in']);
+      this.router.navigate(['login']);
     });
   }
 
@@ -64,7 +68,7 @@ export class AutenticacionServiceService {
     const userData: User = {
       uid: user.uid,
       email: user.email,
-      nickName: user.nickName
+      userName: user.userName
     };
     return userRef.set(userData, {
       merge: true,
