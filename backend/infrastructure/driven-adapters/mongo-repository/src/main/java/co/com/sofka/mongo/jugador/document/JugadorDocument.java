@@ -19,13 +19,13 @@ public class JugadorDocument {
 
     private String nickName;
 
-    private String puntos;
+    private Integer puntos;
 
     private List<Tarjeta> baraja;
 
     private Boolean estado;
 
-    public JugadorDocument(String identificador, String nickName, String puntos, List<Tarjeta> baraja, Boolean estado) {
+    public JugadorDocument(String identificador, String nickName, Integer puntos, List<Tarjeta> baraja, Boolean estado) {
         this.identificador = identificador;
         this.nickName = nickName;
         this.puntos = puntos;
@@ -33,7 +33,7 @@ public class JugadorDocument {
         this.estado = estado;
     }
 
-    public JugadorDocument(String identificador, String nickName, String puntos, Boolean estado) {
+    public JugadorDocument(String identificador, String nickName, Integer puntos, Boolean estado) {
         this.identificador = identificador;
         this.nickName = nickName;
         this.puntos = puntos;
