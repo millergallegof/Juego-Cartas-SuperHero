@@ -13,7 +13,7 @@ export const environment = {
     messagingSenderId: "687970498885",
     appId: "1:687970498885:web:6c223808e9740d57b2e62c"
   },
-  HostBackend: 'http://localhost:8080/api/'
+  HostBackend: '/api/'
 };
 
 /*

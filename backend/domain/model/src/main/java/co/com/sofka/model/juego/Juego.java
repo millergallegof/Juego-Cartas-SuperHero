@@ -14,7 +14,6 @@ public class Juego {
     private Integer ronda;
     private ArrayList<Tarjeta> tarjetas;
     private ArrayList<Jugador> jugadores;
-
     private String ganador;
 
     public Juego(String id, Integer ronda, ArrayList<Tarjeta> tarjetas, ArrayList<Jugador> jugadores) {
