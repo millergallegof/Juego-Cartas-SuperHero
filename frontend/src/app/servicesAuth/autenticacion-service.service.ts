@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/Iusuario';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import * as auth from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AutenticacionServiceService {
-  private userData: any ={};
+  private userData: any = {};
   constructor(
     public afAuth: AngularFireAuth,
     public afs: AngularFirestore
@@ -25,23 +26,11 @@ export class AutenticacionServiceService {
     });
   }
 
-  SignUp(email: string, password: string) {
-    return this.afAuth
-      .createUserWithEmailAndPassword(email, password)
-      .then((result) => {
-        console.log(result);
-        this.SetUserData(result.user);
-      })
-      .catch((error) => {
-        console.log(error);
-        window.alert(error.message);
-      });
-  }
-
   SignIn(email: string, password: string) {
-    this.afAuth
+    return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
+        console.log(result);
         this.SetUserData(result.user);
       })
       .catch((error) => {
@@ -51,8 +40,7 @@ export class AutenticacionServiceService {
 
   SignOut() {
     return this.afAuth.signOut().then(() => {
-      localStorage.removeItem('user');
-      //this.router.navigate(['sign-in']);
+      window.alert('Logged out!');
     });
   }
 
@@ -70,4 +58,38 @@ export class AutenticacionServiceService {
     });
   }
 
+  // AUTH GOOGLE
+  AuthLogin(provider: any) {
+    return this.afAuth
+      .signInWithPopup(provider)
+      .then((result) => {
+        this.SetUserData(result.user);
+      })
+      .catch((error) => {
+        window.alert(error);
+      });
+  }
+
+  GoogleAuth() {
+    return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
+      if (res) {
+        console.log(`router`);
+        // this.router.navigate(['dashboard']);
+      }
+    });
+  }
+
+
+  SignUp(email: string, password: string) {
+    return this.afAuth
+      .createUserWithEmailAndPassword(email, password)
+      .then((result) => {
+        /* Call the SendVerificaitonMail() function when new user sign 
+        up and returns promise */
+        this.SetUserData(result.user);
+      })
+      .catch((error) => {
+        window.alert(error.message);
+      });
+  }
 }

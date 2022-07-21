@@ -11,6 +11,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AutenticacionServiceService } from './servicesAuth/autenticacion-service.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +19,6 @@ import { AutenticacionServiceService } from './servicesAuth/autenticacion-servic
   imports: [
     BrowserModule,
     AppRoutingModuleModule,
-    // AutenticacionModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
