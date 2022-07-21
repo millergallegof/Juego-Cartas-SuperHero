@@ -13,6 +13,7 @@ import { LoginComponent } from './component/login/login.component';
 import { SingupComponent } from './component/singup/singup.component';
 import { HomeComponentComponent } from './component/home-component/home-component.component';
 import { FormsModule } from '@angular/forms';
+import { ErrorComponentComponent } from './component/error-component/error-component.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { FormsModule } from '@angular/forms';
     LoginComponent,
     SingupComponent,
     HomeComponentComponent,
+    ErrorComponentComponent
 
   ],
   imports: [
