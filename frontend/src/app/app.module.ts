@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModuleModule } from './app-routing-module.module';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -23,7 +24,7 @@ import { ErrorComponentComponent } from './component/error-component/error-compo
     LoginComponent,
     SingupComponent,
     HomeComponentComponent,
-    ErrorComponentComponent
+    ErrorComponentComponent,
 
   ],
   imports: [
@@ -35,6 +36,7 @@ import { ErrorComponentComponent } from './component/error-component/error-compo
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     FormsModule,
+    HttpClientModule
   ],
   providers: [
     AutenticacionServiceService
