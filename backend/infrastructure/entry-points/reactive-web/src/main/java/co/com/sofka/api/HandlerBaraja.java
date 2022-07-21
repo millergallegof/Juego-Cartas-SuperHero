@@ -21,13 +21,11 @@ import reactor.core.publisher.Mono;
 public class HandlerBaraja {
  private final CrearBarajaUseCase crearBarajaUseCase;
 
- private final ListarTarjetasUseCase listarTarjetasUseCase;
-
     public Mono<ServerResponse> crearBarajaGETUseCase(ServerRequest serverRequest) {
         return serverRequest.bodyToMono(Baraja.class)
                 .flatMap(e -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(crearBarajaUseCase.crearBaraja(listarTarjetasUseCase.listarTarjetas()), Baraja.class));
+                        .body(crearBarajaUseCase.crearBaraja(), Baraja.class));
     }
 
 

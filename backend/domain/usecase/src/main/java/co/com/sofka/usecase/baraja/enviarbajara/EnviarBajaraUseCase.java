@@ -11,7 +11,8 @@ public class EnviarBajaraUseCase {
     private BarajaRepository barajaRepository;
 
     public Flux<Tarjeta> enviarBaraja(){
-        return barajaRepository.enviarBaraja();
+   //     return barajaRepository.enviarBaraja();
+        return null;
     }
 
 }
