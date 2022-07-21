@@ -11,7 +11,7 @@ import * as auth from 'firebase/auth';
 })
 
 export class AutenticacionServiceService {
-  userData: any;
+  private userData: any = {};
   constructor(
     public afs: AngularFirestore,
     public afAuth: AngularFireAuth,
@@ -49,6 +49,7 @@ export class AutenticacionServiceService {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
+        console.log(result);
         this.SetUserData(result.user);
         this.router.navigate(['']);
       })
@@ -97,5 +98,7 @@ export class AutenticacionServiceService {
       merge: true,
     });
   }
+
+
 
 }

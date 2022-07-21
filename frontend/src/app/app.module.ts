@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModuleModule } from './app-routing-module.module';
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment';
@@ -15,13 +17,14 @@ import { HomeComponentComponent } from './component/home-component/home-componen
 import { FormsModule } from '@angular/forms';
 import { ErrorComponentComponent } from './component/error-component/error-component.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SingupComponent,
     HomeComponentComponent,
-    ErrorComponentComponent
+    ErrorComponentComponent,
 
   ],
   imports: [
@@ -33,10 +36,14 @@ import { ErrorComponentComponent } from './component/error-component/error-compo
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     FormsModule,
+    HttpClientModule
   ],
   providers: [
     AutenticacionServiceService
   ],
+  // providers: [
+  //   AutenticacionServiceService
+  // ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

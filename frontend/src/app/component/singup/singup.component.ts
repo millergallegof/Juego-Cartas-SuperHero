@@ -15,7 +15,6 @@ export class SingupComponent implements OnInit {
     public router: Router
   ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }
