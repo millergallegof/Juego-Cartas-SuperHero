@@ -19,3 +19,12 @@
 .content{
     height: 520px;
 }
+
+h5{
+    font-size: 14px
+}
+.cardDimencion{
+    max-width: 8rem;
+    height: 270px;
+    font-size: 13px;
+}
