@@ -5,12 +5,9 @@ import co.com.sofka.model.baraja.gateways.BarajaRepository;
 import co.com.sofka.model.tarjeta.Tarjeta;
 import co.com.sofka.model.tarjeta.gateways.TarjetaRepository;
 import lombok.RequiredArgsConstructor;
-
 import reactor.core.publisher.Mono;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @RequiredArgsConstructor
 public class CrearBarajaUseCase {
@@ -19,20 +16,23 @@ public class CrearBarajaUseCase {
     private final TarjetaRepository tarjetaRepository;
 
     public Mono<Baraja> crearBaraja() {
+        Random random = new Random();
         Set<Tarjeta> baraja = new HashSet<>();
         List<Tarjeta> barajaList = new ArrayList<Tarjeta>();
+
         tarjetaRepository.findAll()
 
 
-               // .map(elemen -> {
-                //    System.out.println(elemen);
-                 //   barajaList.add(elemen);
-                  //          return  elemen;
-              //  })
-            .collectList().subscribe(baraja::addAll);
-               // .subscribe(e -> System.out.println(e));
-        //.subscribe(element -> barajaList.add(element));
-        barajaList.forEach(System.out::println);
+                .map(elemen -> {
+                    System.out.println(elemen);
+                    barajaList.add(elemen);
+                    return elemen;
+                })
+//                .collectList().subscribe(baraja::addAll);
+                .subscribe(e -> System.out.println(e));
+//        .subscribe(element -> barajaList.add(element));
+
+
         Collections.shuffle(barajaList);
 
         // Stream
@@ -53,4 +53,5 @@ public class CrearBarajaUseCase {
 
         return barajaRepository.save(new Baraja(baraja));
     }
+
 }

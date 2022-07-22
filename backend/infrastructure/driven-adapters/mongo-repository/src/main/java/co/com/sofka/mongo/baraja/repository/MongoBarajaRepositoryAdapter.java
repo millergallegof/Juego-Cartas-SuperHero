@@ -25,7 +25,7 @@ public class MongoBarajaRepositoryAdapter extends AdapterOperations<Baraja, Bara
          *  super(repository, mapper, d -> mapper.mapBuilder(d,ObjectModel.ObjectModelBuilder.class).build());
          *  Or using mapper.map with the class of the object model
          */
-        super(repository, mapper, d -> mapper.map(d,Baraja.class));
+        super(repository, mapper, d -> mapper.map(d,  Baraja.class));
     }
 
 
