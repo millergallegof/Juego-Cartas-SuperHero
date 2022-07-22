@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AutenticacionServiceService } from 'src/app/servicesAuth/autenticacion-service.service';
 
 
+
 @Component({
   selector: 'app-singup',
   templateUrl: './singup.component.html',

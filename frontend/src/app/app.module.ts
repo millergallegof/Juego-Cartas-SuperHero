@@ -10,12 +10,13 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { AutenticacionServiceService } from './servicesAuth/autenticacion-service.service';
+
 import { LoginComponent } from './component/login/login.component';
 import { SingupComponent } from './component/singup/singup.component';
 import { HomeComponentComponent } from './component/home-component/home-component.component';
 import { FormsModule } from '@angular/forms';
 import { ErrorComponentComponent } from './component/error-component/error-component.component';
+import { AutenticacionServiceService } from './servicesAuth/autenticacion-service.service';
 
 
 @NgModule({
