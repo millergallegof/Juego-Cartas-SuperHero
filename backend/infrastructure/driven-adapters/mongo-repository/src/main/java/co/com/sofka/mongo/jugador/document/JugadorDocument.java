@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 public class JugadorDocument {
     @Id
-    private String identificador;
+    private String id;
 
     private String nickName;
 
@@ -26,16 +26,16 @@ public class JugadorDocument {
 
     private Boolean estado;
 
-    public JugadorDocument(String identificador, String nickName, Integer puntos, Baraja baraja, Boolean estado) {
-        this.identificador = identificador;
+    public JugadorDocument(String id, String nickName, Integer puntos, Baraja baraja, Boolean estado) {
+        this.id = id;
         this.nickName = nickName;
         this.puntos = puntos;
         this.baraja = baraja;
         this.estado = estado;
     }
 
-    public JugadorDocument(String identificador, String nickName, Integer puntos, Boolean estado) {
-        this.identificador = identificador;
+    public JugadorDocument(String id, String nickName, Integer puntos, Boolean estado) {
+        this.id = id;
         this.nickName = nickName;
         this.puntos = puntos;
         this.estado = estado;
