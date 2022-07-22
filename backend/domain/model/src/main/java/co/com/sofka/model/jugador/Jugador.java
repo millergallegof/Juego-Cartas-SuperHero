@@ -23,6 +23,7 @@ public class Jugador {
 
     public Jugador(String id, String nickName, Integer puntos, Boolean estado) {
         this.id = id;
+
         this.nickName = nickName;
         this.puntos = puntos;
         this.estado = estado;
