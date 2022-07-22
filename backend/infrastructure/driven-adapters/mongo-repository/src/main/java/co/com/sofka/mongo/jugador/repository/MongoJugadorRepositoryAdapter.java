@@ -32,14 +32,4 @@ public class MongoJugadorRepositoryAdapter extends AdapterOperations<Jugador, Ju
                 .flatMap(x -> Mono.just(jugador));
     }
 
-    @Override
-    public Mono<Jugador> restirarse(JugadorId idJugador, Jugador jugador) {
-        jugador.setJugadorId(idJugador);
-        jugador.setEstado(false);
-        return repository
-                .save(new JugadorDocument(jugador.getJugadorId().getClass().getName(), jugador.getNickName(), jugador.getPuntos(), jugador.getBaraja(), jugador.getEstado()))
-                .flatMap(x -> Mono.just(jugador));
-    }
-
-
 }

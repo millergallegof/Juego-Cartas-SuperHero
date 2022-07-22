@@ -5,17 +5,24 @@ import co.com.sofka.model.jugador.gateways.JugadorRepository;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
+import java.util.function.BiFunction;
+
 @RequiredArgsConstructor
-public class RetirarseUseCase {
+public class RetirarseUseCase implements BiFunction<Jugador, String, Mono<Jugador>> {
 
     private final JugadorRepository jugadorRepository;
 
-    public Mono<Jugador> restirarse(String idJugador, Jugador jugador){
-    //    return jugadorRepository.restirarse(idJugador, jugador);
-
-//        var jugadorId =
-
-//        return jugadorRepository.restirarse(idJugador);
-    return null;
+    @Override
+    public Mono<Jugador> apply(Jugador jugador, String jugadorId) {
+        return this.jugadorRepository.findById(jugadorId)
+                .switchIfEmpty(Mono.error(new Exception("No se encontro")))
+                .map(player -> player.toBuilder()
+                        .jugadorId(player.getJugadorId())
+                        .nickName(player.getNickName())
+                        .puntos(player.getPuntos())
+                        .baraja(player.getBaraja())
+                        .estado(player.getEstado())
+                        .build())
+                .flatMap(this.jugadorRepository::save);
     }
 }
