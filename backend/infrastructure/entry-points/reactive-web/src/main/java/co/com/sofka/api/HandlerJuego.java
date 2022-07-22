@@ -31,10 +31,11 @@ public class HandlerJuego {
     }
 
     public Mono<ServerResponse> asignarGanadorPOSTUseCase(ServerRequest serverRequest) {
+        var id = serverRequest.pathVariable("id");
         return serverRequest.bodyToMono(Juego.class)
                 .flatMap(element -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(asignarGanadorUseCase.asignarGanador(element.getJugadores()), Juego.class));
+                        .body(asignarGanadorUseCase.asignarGanador(id,element.getJugadores()), Juego.class));
     }
 
     public Mono<ServerResponse> aumentaRondaPOSTUseCase(ServerRequest serverRequest) {
