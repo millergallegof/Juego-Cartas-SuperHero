@@ -39,6 +39,7 @@ public class HandlerJugador {
         return ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(aumentarPuntosUseCase.aumentarPuntos(id), Jugador.class);
+
     }
 
     public Mono<ServerResponse> cambiarEstadoGETUseCase(ServerRequest serverRequest) {
