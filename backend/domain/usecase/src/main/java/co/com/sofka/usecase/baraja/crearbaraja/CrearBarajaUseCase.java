@@ -24,14 +24,13 @@ public class CrearBarajaUseCase {
         List<Tarjeta> barajaList = new ArrayList<>();
         Set<Tarjeta> baraja = new HashSet<>();
 
-        List<Tarjeta> barajaList = new ArrayList<Tarjeta>();
         var baraja2 =  tarjetaRepository.findAll()
                 .map(elemen -> {
                     System.out.println(elemen);
                     barajaList.add(elemen);
                             return  elemen;
                 })
-                .subscribe(e -> System.out.println(e));
+                .collectList().block();
         //.subscribe(element -> barajaList.add(element));
         System.out.println(barajaList);
         Collections.shuffle(barajaList);

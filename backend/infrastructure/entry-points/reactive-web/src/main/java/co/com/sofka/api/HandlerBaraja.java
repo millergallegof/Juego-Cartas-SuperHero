@@ -33,7 +33,7 @@ public class HandlerBaraja {
     public Mono<ServerResponse> listarTarjetasGETUseCase(ServerRequest serverRequest) {
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(enviarBajaraUseCase.enviarBaraja(), Tarjeta.class);
+                .body(enviarBajaraUseCase.enviarBaraja(), Baraja.class);
     }
 
 
