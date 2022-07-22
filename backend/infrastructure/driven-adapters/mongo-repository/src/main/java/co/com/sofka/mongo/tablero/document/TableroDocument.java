@@ -18,5 +18,6 @@ public class TableroDocument {
     @Id
     private String id;
     private Map<String, Tarjeta> apuesta;
+    private String ganadorId;
     private Integer tiempo;
 }

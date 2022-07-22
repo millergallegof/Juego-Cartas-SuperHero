@@ -15,28 +15,15 @@ import java.util.Set;
 
 @Document
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class JuegoDocument {
     @Id
     private String id;
     private Integer ronda;
+    private List<Tarjeta> mazoJuego;
     private String ganador;
     private String tableroId;
     private List<Jugador> jugadores;
 
-    public JuegoDocument(String id, Integer ronda, String ganador, String tableroId, List<Jugador> jugadores) {
-        this.id = id;
-        this.ronda = ronda;
-        this.ganador = ganador;
-        this.tableroId = tableroId;
-        this.jugadores = jugadores;
-    }
-
-    public JuegoDocument(String id, Integer ronda, String tableroId, List<Jugador> jugadores) {
-        this.id = id;
-        this.ronda = ronda;
-        this.tableroId = tableroId;
-        this.jugadores = jugadores;
-        this.ganador = "";
-    }
 }
