@@ -10,6 +10,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Document
@@ -21,9 +22,9 @@ public class JuegoDocument {
     private Integer ronda;
     private String ganador;
     private String tableroId;
-    private Set<Jugador> jugadores;
+    private List<Jugador> jugadores;
 
-    public JuegoDocument(String id, Integer ronda, String ganador, String tableroId, Set<Jugador> jugadores) {
+    public JuegoDocument(String id, Integer ronda, String ganador, String tableroId, List<Jugador> jugadores) {
         this.id = id;
         this.ronda = ronda;
         this.ganador = ganador;
@@ -31,7 +32,7 @@ public class JuegoDocument {
         this.jugadores = jugadores;
     }
 
-    public JuegoDocument(String id, Integer ronda, String tableroId, Set<Jugador> jugadores) {
+    public JuegoDocument(String id, Integer ronda, String tableroId, List<Jugador> jugadores) {
         this.id = id;
         this.ronda = ronda;
         this.tableroId = tableroId;

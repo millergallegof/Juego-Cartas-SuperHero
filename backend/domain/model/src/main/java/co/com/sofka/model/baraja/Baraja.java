@@ -4,17 +4,16 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Builder(toBuilder = true)
 public class Baraja {
-    private String barajaId;
+    private String id;
     private List<Tarjeta> tarjetas;
 
 
-    public Baraja(String barajaId, List<Tarjeta> tarjetas) {
-        this.barajaId = barajaId;
+    public Baraja(String id, List<Tarjeta> tarjetas) {
+        this.id = id;
         this.tarjetas = tarjetas;
     }
 

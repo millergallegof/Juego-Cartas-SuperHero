@@ -23,7 +23,8 @@ public class CrearBarajaUseCase {
                     return cartas;
                 })
                 .map(cartas -> cartas.subList(0, 5))
-                .map(cartas -> Baraja.builder().tarjetas(cartas).build()).flatMap(barajaRepository::save);
+                .map(cartas -> Baraja.builder().tarjetas(cartas).build())
+                .flatMap(barajaRepository::save);
     }
 
 }

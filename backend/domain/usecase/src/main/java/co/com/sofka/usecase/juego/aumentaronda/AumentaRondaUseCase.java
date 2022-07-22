@@ -9,8 +9,11 @@ import reactor.core.publisher.Mono;
 public class AumentaRondaUseCase {
     private final JuegoRepository juegoRepository;
 
-    public Mono<Juego> aumentaRonda() {
-    //    return juegoRepository.findAll();
-        return null;
+    public Mono<Juego> aumentarRonda(String idJuego) {
+        return juegoRepository.findById(idJuego)
+                .map(element -> {
+                    element.setRonda(element.getRonda()+1);
+                    return element;
+                }).flatMap(juegoRepository::save);
     }
 }

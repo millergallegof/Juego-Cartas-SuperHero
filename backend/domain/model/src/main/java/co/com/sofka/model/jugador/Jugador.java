@@ -13,16 +13,16 @@ public class Jugador {
     private Baraja baraja;
     private Boolean estado;
 
-    public Jugador(String jugadorId, String nickName, Integer puntos, Baraja baraja, Boolean estado) {
-        this.id = jugadorId;
+    public Jugador(String id, String nickName, Integer puntos, Baraja baraja, Boolean estado) {
+        this.id = id;
         this.nickName = nickName;
         this.puntos = puntos;
         this.baraja = baraja;
         this.estado = estado;
     }
 
-    public Jugador(String jugadorId, String nickName, Integer puntos, Boolean estado) {
-        this.id = jugadorId;
+    public Jugador(String id, String nickName, Integer puntos, Boolean estado) {
+        this.id = id;
         this.nickName = nickName;
         this.puntos = puntos;
         this.estado = estado;

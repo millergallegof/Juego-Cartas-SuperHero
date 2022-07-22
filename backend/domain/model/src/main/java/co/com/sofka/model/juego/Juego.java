@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -16,9 +17,9 @@ public class Juego {
     private Integer ronda;
     private String ganador;
     private String tableroId;
-    private Set<Jugador> jugadores;
+    private List<Jugador> jugadores;
 
-    public Juego(String id, Integer ronda, String ganador, String tableroId, Set<Jugador> jugadores) {
+    public Juego(String id, Integer ronda, String ganador, String tableroId, List<Jugador> jugadores) {
         this.id = id;
         this.ronda = ronda;
         this.ganador = ganador;
@@ -26,7 +27,7 @@ public class Juego {
         this.jugadores = jugadores;
     }
 
-    public Juego(String id, Integer ronda, String tableroId, Set<Jugador> jugadores) {
+    public Juego(String id, Integer ronda, String tableroId, List<Jugador> jugadores) {
         this.id = id;
         this.ronda = ronda;
         this.tableroId = tableroId;

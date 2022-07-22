@@ -6,6 +6,7 @@ import co.com.sofka.model.jugador.Jugador;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -14,7 +15,7 @@ public class AsignarGanadorUseCase {
 
     private final JuegoRepository juegoRepository;
 
-    public Mono<Juego> asignarGanador(String idJuego,Set<Jugador> jugadores) {
+    public Mono<Juego> asignarGanador(String idJuego, List<Jugador> jugadores) {
         var juego = juegoRepository.findById(idJuego);
         var cartasTotales = jugadores.size() * 5;
        /* var ganadorlist = jugadores.stream()

@@ -18,7 +18,7 @@ public RouterFunction<ServerResponse> routerFunction(HandlerTarjeta handlerTarje
             (GET("/api/tarjeta/listar"), handlerTarjeta::listarTarjetasGETUseCase).andRoute
             (POST("/api/juego/crear"), handlerJuego::crearJuegoPOSTUseCase).andRoute
             (POST("/api/juego/ganador/{id}"), handlerJuego::asignarGanadorPOSTUseCase).andRoute
-            (POST("/api/juego/cartas/{id}"), handlerJuego::aumentaRondaPOSTUseCase).andRoute
+            (GET("/api/juego/rondas/{id}"), handlerJuego::aumentaRondaPOSTUseCase).andRoute
             (POST("/api/jugador/carta/{id}"), handlerJugador::apostaCartaPutUseCase).andRoute
             (POST("/api/jugador/crear"), handlerJugador::guardarJugadorPostUseCase).andRoute
             (POST("/api/jugador/retirarse/{id}"), handlerJugador::retirarsePOSTUseCase).andRoute
