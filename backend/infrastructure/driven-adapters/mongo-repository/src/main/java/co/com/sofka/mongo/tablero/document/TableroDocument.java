@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDateTime;
 import java.util.Map;
 
 @Document
@@ -18,6 +17,6 @@ import java.util.Map;
 public class TableroDocument {
     @Id
     private String id;
-    private Map<JugadorId, Tarjeta> apuesta;
+    private Map<String, Tarjeta> apuesta;
     private Integer tiempo;
 }

@@ -11,13 +11,13 @@ import java.util.Map;
 @Data
 @Builder(toBuilder = true)
 public class Tablero {
-    private String idTablero;
-    private Map<JugadorId, Tarjeta> apuesta;
+    private String id;
+    private Map<String, Tarjeta> apuesta;
     private Integer tiempo;
 
 
-    public Tablero(String idTablero, Map<JugadorId, Tarjeta> apuesta, Integer tiempo) {
-        this.idTablero = idTablero;
+    public Tablero(String id, Map<String, Tarjeta> apuesta, Integer tiempo) {
+        this.id = id;
         this.apuesta = apuesta;
         this.tiempo = tiempo;
     }
