@@ -18,23 +18,24 @@ public class AsignarGanadorUseCase {
     public Mono<Juego> asignarGanador(String idJuego, List<Jugador> jugadores) {
         var juego = juegoRepository.findById(idJuego);
         var cartasTotales = jugadores.size() * 5;
-       /* var ganadorlist = jugadores.stream()
+        var jug =jugadores.stream()
                 .map(ganador -> {
-                   if (ganador.getBaraja().size() == cartasTotales){
+                   if (ganador.getBaraja().getTarjetas().size()  == cartasTotales){
                        return ganador;
                    }else {
                        return null;
                    }
                 }).collect(Collectors.toList());
-        var ganador =ganadorlist.stream()
-                .reduce((acumulador, winner) -> {
-                    if (acumulador == null){
-                        return winner;
-                    }else {
-                        return acumulador;
-                    }
-                }).get();*/
-             //return juego.map(element -> new Juego(element.getId(),element.getRonda(),ganador.getNickName(),element.getTableroId(),element.getJugadores()));
-        return null;
+        System.out.println(jug);
+//       var ganador =ganadorlist.stream()
+//                .reduce((acumulador, winner) -> {
+//                    if (acumulador == null){
+//                        return winner;
+//                    }else {
+//                        return acumulador;
+//                    }
+//                }).get();
+//             return juego.map(element -> new Juego(element.getId(),element.getRonda(),ganador.getNickName(),element.getTableroId(),element.getJugadores()));
+return null;
     }
 }
