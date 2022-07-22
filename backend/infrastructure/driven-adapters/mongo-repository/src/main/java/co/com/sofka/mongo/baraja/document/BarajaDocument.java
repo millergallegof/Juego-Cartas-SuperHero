@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
 import java.util.Set;
 
 @Document
@@ -16,9 +17,9 @@ public class BarajaDocument {
     @Id
     private String barajaId;
 
-    private Set<Tarjeta> tarjetas;
+    private List<Tarjeta> tarjetas;
 
-    public BarajaDocument(String barajaId, Set<Tarjeta> tarjetas) {
+    public BarajaDocument(String barajaId, List<Tarjeta> tarjetas) {
         this.barajaId = barajaId;
         this.tarjetas = tarjetas;
     }

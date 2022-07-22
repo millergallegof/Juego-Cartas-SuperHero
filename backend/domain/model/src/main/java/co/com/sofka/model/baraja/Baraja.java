@@ -3,21 +3,22 @@ import co.com.sofka.model.tarjeta.Tarjeta;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
 @Builder(toBuilder = true)
 public class Baraja {
     private String barajaId;
-    private Set<Tarjeta> tarjetas;
+    private List<Tarjeta> tarjetas;
 
 
-    public Baraja(String barajaId, Set<Tarjeta> tarjetas) {
+    public Baraja(String barajaId, List<Tarjeta> tarjetas) {
         this.barajaId = barajaId;
         this.tarjetas = tarjetas;
     }
 
-    public Baraja(Set<Tarjeta> tarjetas) {
+    public Baraja(List<Tarjeta> tarjetas) {
         this.tarjetas = tarjetas;
     }
 
