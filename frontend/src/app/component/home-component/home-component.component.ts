@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AutenticacionServiceService } from 'src/app/servicesAuth/autenticacion-service.service';
 
+
 @Component({
   selector: 'app-home-component',
   templateUrl: './home-component.component.html',

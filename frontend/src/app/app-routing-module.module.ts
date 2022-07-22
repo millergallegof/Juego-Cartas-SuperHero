@@ -11,6 +11,7 @@ import { ListarTarjetasComponentComponent } from './component/listar-tarjetas-co
 
 
 const routesChildrens: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: '',
     component: HomeComponentComponent,
@@ -19,7 +20,7 @@ const routesChildrens: Routes = [
   { path: 'juego', component: ListarTarjetasComponentComponent, canActivate: [AngularFireAuthGuard] },
   { path: 'singup', component: SingupComponent },
   { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+
   { path: '**', component: ErrorComponentComponent },
 
 ]
