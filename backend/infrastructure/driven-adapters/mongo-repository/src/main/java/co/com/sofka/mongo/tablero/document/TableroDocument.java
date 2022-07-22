@@ -19,5 +19,5 @@ public class TableroDocument {
     @Id
     private String id;
     private Map<JugadorId, TarjetaDocument> apuesta;
-    private LocalDateTime tiempo;
+    private Integer tiempo;
 }

@@ -12,8 +12,8 @@ public interface JuegoRepository {
 
 
     Mono<Juego> save(Juego juego);
-    Mono<Juego> asignarGanador(Set<Jugador> jugadores);
-    Mono<Juego> aumentaRonda();
     Flux<Juego> findAll();
+    Mono<Void> deleteById(String id);
+    Mono<Juego> findById(String id);
 
 }

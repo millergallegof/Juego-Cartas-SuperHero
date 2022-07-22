@@ -9,5 +9,5 @@ public interface BarajaRepository {
 
     Mono<Baraja> save(Baraja baraja);
 
-   // Flux<Tarjeta> findAll();
+    Flux<Baraja> findAll();
 }

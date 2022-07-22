@@ -22,6 +22,7 @@ public RouterFunction<ServerResponse> routerFunction(HandlerTarjeta handlerTarje
             (POST("/api/jugador/carta/{id}"), handlerJugador::apostaCartaPutUseCase).andRoute
             (POST("/api/jugador/retirarse/{id}"), handlerJugador::retirarsePOSTUseCase).andRoute
             (GET("/api/juego/listar"), handlerJuego::listarJuegosGETUseCase).andRoute
-            (GET("/api/baraja/crear"), handlerBaraja::crearBarajaGETUseCase);
+            (GET("/api/baraja/crear"), handlerBaraja::crearBarajaGETUseCase).andRoute
+            (GET("/api/baraja/listar"), handlerBaraja::listarBarajaGETUseCase);
     }
 }

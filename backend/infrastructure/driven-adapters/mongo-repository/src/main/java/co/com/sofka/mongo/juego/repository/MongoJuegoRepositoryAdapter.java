@@ -28,14 +28,4 @@ public class MongoJuegoRepositoryAdapter extends AdapterOperations<Juego, JuegoD
         super(repository, mapper, d -> mapper.map(d, Juego.class));
     }
 
-
-    @Override
-    public Mono<Juego> asignarGanador(Set<Jugador> jugadores) {
-        return null;
-    }
-
-    @Override
-    public Mono<Juego> aumentaRonda() {
-        return null;
-    }
 }

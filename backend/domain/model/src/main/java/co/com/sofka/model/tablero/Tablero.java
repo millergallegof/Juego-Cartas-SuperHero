@@ -13,10 +13,10 @@ import java.util.Map;
 public class Tablero {
     private String idTablero;
     private Map<JugadorId, Tarjeta> apuesta;
-    private LocalDateTime tiempo;
+    private Integer tiempo;
 
 
-    public Tablero(String idTablero, Map<JugadorId, Tarjeta> apuesta, LocalDateTime tiempo) {
+    public Tablero(String idTablero, Map<JugadorId, Tarjeta> apuesta, Integer tiempo) {
         this.idTablero = idTablero;
         this.apuesta = apuesta;
         this.tiempo = tiempo;

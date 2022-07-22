@@ -10,6 +10,7 @@ public class AumentaRondaUseCase {
     private final JuegoRepository juegoRepository;
 
     public Mono<Juego> aumentaRonda() {
-        return juegoRepository.aumentaRonda();
+    //    return juegoRepository.findAll();
+        return null;
     }
 }
