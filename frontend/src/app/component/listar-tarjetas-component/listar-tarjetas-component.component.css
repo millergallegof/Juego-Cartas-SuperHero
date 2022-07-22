@@ -28,3 +28,8 @@ h5{
     height: 270px;
     font-size: 13px;
 }
+
+.anyClass {
+    height:450px;
+    overflow-y: scroll;
+  }
