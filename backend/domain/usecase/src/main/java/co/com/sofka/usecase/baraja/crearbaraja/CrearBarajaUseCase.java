@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
 import java.util.*;
-
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -20,19 +19,20 @@ public class CrearBarajaUseCase {
     private final TarjetaRepository tarjetaRepository;
 
     public Mono<Baraja> crearBaraja() {
-
-        List<Tarjeta> barajaList = new ArrayList<>();
         Set<Tarjeta> baraja = new HashSet<>();
+        List<Tarjeta> barajaList = new ArrayList<Tarjeta>();
+        tarjetaRepository.findAll()
 
-        var baraja2 =  tarjetaRepository.findAll()
-                .map(elemen -> {
-                    System.out.println(elemen);
-                    barajaList.add(elemen);
-                            return  elemen;
-                })
-                .collectList().block();
+
+               // .map(elemen -> {
+                //    System.out.println(elemen);
+                 //   barajaList.add(elemen);
+                  //          return  elemen;
+              //  })
+            .collectList().subscribe(baraja::addAll);
+               // .subscribe(e -> System.out.println(e));
         //.subscribe(element -> barajaList.add(element));
-        System.out.println(barajaList);
+        barajaList.forEach(System.out::println);
         Collections.shuffle(barajaList);
 
         // Stream
