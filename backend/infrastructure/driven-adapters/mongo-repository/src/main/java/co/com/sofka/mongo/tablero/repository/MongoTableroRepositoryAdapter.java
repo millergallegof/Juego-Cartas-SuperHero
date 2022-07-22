@@ -28,8 +28,5 @@ public class MongoTableroRepositoryAdapter extends AdapterOperations<Tablero, Ta
     }
 
 
-    @Override
-    public Mono<Jugador> elegirGanador() {
-        return null;
-    }
+
 }

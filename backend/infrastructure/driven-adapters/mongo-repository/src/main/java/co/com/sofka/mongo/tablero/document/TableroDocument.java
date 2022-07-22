@@ -1,7 +1,7 @@
 package co.com.sofka.mongo.tablero.document;
 
 import co.com.sofka.model.jugador.JugadorId;
-import co.com.sofka.mongo.tarjeta.document.TarjetaDocument;
+import co.com.sofka.model.tarjeta.Tarjeta;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +18,6 @@ import java.util.Map;
 public class TableroDocument {
     @Id
     private String id;
-    private Map<JugadorId, TarjetaDocument> apuesta;
+    private Map<JugadorId, Tarjeta> apuesta;
     private Integer tiempo;
 }

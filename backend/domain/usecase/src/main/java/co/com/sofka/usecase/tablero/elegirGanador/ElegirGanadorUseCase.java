@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 public class ElegirGanadorUseCase {
     private final TableroRepository tableroRepository;
 
-    Mono<Jugador> elegirGanador() {
-        return tableroRepository.elegirGanador();
-    }
+//    Mono<Jugador> elegirGanador() {
+//        return tableroRepository.elegirGanador();
+//    }
 }

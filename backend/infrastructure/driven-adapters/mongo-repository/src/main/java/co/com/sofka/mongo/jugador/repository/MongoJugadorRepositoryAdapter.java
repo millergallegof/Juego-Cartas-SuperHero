@@ -32,4 +32,13 @@ public class MongoJugadorRepositoryAdapter extends AdapterOperations<Jugador, Ju
                 .flatMap(x -> Mono.just(jugador));
     }
 
+    @Override
+    public Mono<Jugador> findById(String jugadorId, Jugador jugador) {
+        jugador.setJugadorId(new JugadorId(jugadorId));
+        return repository
+                .save(new JugadorDocument(jugadorId,jugador.getNickName(), jugador.getPuntos(), jugador.getBaraja(), jugador.getEstado()))
+                .flatMap(x -> Mono.just(jugador));
+    }
+
+
 }

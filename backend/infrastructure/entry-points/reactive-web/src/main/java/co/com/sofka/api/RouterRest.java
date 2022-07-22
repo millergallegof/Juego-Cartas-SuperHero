@@ -11,7 +11,7 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 @Configuration
 public class RouterRest {
 @Bean
-public RouterFunction<ServerResponse> routerFunction(HandlerTarjeta handlerTarjeta, HandlerJuego handlerJuego, HandlerJugador handlerJugador, HandlerBaraja handlerBaraja)  {
+public RouterFunction<ServerResponse> routerFunction(HandlerTarjeta handlerTarjeta, HandlerJuego handlerJuego, HandlerJugador handlerJugador, HandlerBaraja handlerBaraja, HandlerTablero handlerTablero)  {
     return route(POST("/api/tarjeta/crear"), handlerTarjeta::crearTarjetaPOSTUseCase).andRoute
             (DELETE("/api/tarjeta/eliminar/{id}"), handlerTarjeta::eliminarTarjetaDELETEUseCase).andRoute
             (POST("/api/tarjeta/actualizar/{id}"), handlerTarjeta::actualizarPOSTUseCase).andRoute
@@ -24,6 +24,7 @@ public RouterFunction<ServerResponse> routerFunction(HandlerTarjeta handlerTarje
             (POST("/api/jugador/retirarse/{id}"), handlerJugador::retirarsePOSTUseCase).andRoute
             (GET("/api/juego/listar"), handlerJuego::listarJuegosGETUseCase).andRoute
             (GET("/api/baraja/crear"), handlerBaraja::crearBarajaGETUseCase).andRoute
-            (GET("/api/baraja/listar"), handlerBaraja::listarBarajaGETUseCase);
+            (GET("/api/baraja/listar"), handlerBaraja::listarBarajaGETUseCase).andRoute
+            (GET("/api/tablero/crear"), handlerTablero::crearTableroPOSTUseCase);
     }
 }
