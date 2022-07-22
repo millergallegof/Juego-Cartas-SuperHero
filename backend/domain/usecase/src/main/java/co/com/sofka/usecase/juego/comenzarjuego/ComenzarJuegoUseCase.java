@@ -19,6 +19,7 @@ public class ComenzarJuegoUseCase {
                     juego.setJugadores(jugadores);
                     juego.setTableroId(tableroid);
                     return juego;
-                });
+                })
+                .flatMap(juegoRepository::save);
     }
 }
