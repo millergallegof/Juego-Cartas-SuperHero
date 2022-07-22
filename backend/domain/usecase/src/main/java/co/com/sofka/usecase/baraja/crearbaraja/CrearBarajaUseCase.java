@@ -21,16 +21,19 @@ public class CrearBarajaUseCase {
     public Mono<Baraja> crearBaraja() {
         Set<Tarjeta> baraja = new HashSet<>();
         List<Tarjeta> barajaList = new ArrayList<Tarjeta>();
-        var barajalist =  tarjetaRepository.findAll()
-                .map(elemen -> {
-                    System.out.println(elemen);
-                    barajaList.add(elemen);
-                            return  elemen;
-                })
-                        .collectList().block();
-//                .subscribe(e -> System.out.println(e));
+
+        tarjetaRepository.findAll()
+
+
+               // .map(elemen -> {
+                //    System.out.println(elemen);
+                 //   barajaList.add(elemen);
+                  //          return  elemen;
+              //  })
+            .collectList().subscribe(baraja::addAll);
+               // .subscribe(e -> System.out.println(e));
         //.subscribe(element -> barajaList.add(element));
-        System.out.println(barajaList);
+        barajaList.forEach(System.out::println);
         Collections.shuffle(barajaList);
 
         // Stream
