@@ -17,7 +17,7 @@ public class AsignarGanadorUseCase {
     public Mono<Juego> asignarGanador(String idJuego,Set<Jugador> jugadores) {
         var juego = juegoRepository.findById(idJuego);
         var cartasTotales = jugadores.size() * 5;
-        var ganadorlist = jugadores.stream()
+       /* var ganadorlist = jugadores.stream()
                 .map(ganador -> {
                    if (ganador.getBaraja().size() == cartasTotales){
                        return ganador;
@@ -32,7 +32,8 @@ public class AsignarGanadorUseCase {
                     }else {
                         return acumulador;
                     }
-                }).get();
-             return juego.map(element -> new Juego(element.getId(),element.getRonda(),ganador.getNickName(),element.getTablero(),element.getJugadores()));
+                }).get();*/
+             //return juego.map(element -> new Juego(element.getId(),element.getRonda(),ganador.getNickName(),element.getTableroId(),element.getJugadores()));
+        return null;
     }
 }

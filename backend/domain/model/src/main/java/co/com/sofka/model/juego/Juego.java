@@ -14,24 +14,22 @@ public class Juego {
 
     private String id;
     private Integer ronda;
-
     private String ganador;
-
-    private Tablero tablero;
+    private String tableroId;
     private Set<Jugador> jugadores;
 
-    public Juego(String id, Integer ronda, String ganador, Tablero tablero, Set<Jugador> jugadores) {
+    public Juego(String id, Integer ronda, String ganador, String tableroId, Set<Jugador> jugadores) {
         this.id = id;
         this.ronda = ronda;
         this.ganador = ganador;
-        this.tablero = tablero;
+        this.tableroId = tableroId;
         this.jugadores = jugadores;
     }
 
-    public Juego(String id, Integer ronda, Tablero tablero, Set<Jugador> jugadores) {
+    public Juego(String id, Integer ronda, String tableroId, Set<Jugador> jugadores) {
         this.id = id;
         this.ronda = ronda;
-        this.tablero = tablero;
+        this.tableroId = tableroId;
         this.jugadores = jugadores;
         this.ganador = "";
     }

@@ -1,5 +1,6 @@
 package co.com.sofka.mongo.jugador.document;
 
+import co.com.sofka.model.baraja.Baraja;
 import co.com.sofka.model.tarjeta.Tarjeta;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,11 +22,11 @@ public class JugadorDocument {
 
     private Integer puntos;
 
-    private List<Tarjeta> baraja;
+    private Baraja baraja;
 
     private Boolean estado;
 
-    public JugadorDocument(String identificador, String nickName, Integer puntos, List<Tarjeta> baraja, Boolean estado) {
+    public JugadorDocument(String identificador, String nickName, Integer puntos, Baraja baraja, Boolean estado) {
         this.identificador = identificador;
         this.nickName = nickName;
         this.puntos = puntos;
@@ -38,6 +39,6 @@ public class JugadorDocument {
         this.nickName = nickName;
         this.puntos = puntos;
         this.estado = estado;
-        this.baraja = new ArrayList<>();
+        this.baraja = null;
     }
 }
