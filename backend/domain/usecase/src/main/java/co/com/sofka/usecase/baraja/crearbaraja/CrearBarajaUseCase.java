@@ -16,7 +16,7 @@ public class CrearBarajaUseCase {
     private final TarjetaRepository tarjetaRepository;
 
     public Mono<Baraja> crearBaraja() {
-        return  tarjetaRepository.findAll()
+        return tarjetaRepository.findAll()
                 .collectList()
                 .map(cartas -> {
                     Collections.shuffle(cartas);
