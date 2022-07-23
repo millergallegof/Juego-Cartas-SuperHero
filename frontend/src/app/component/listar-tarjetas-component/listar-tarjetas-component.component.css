@@ -1,0 +1,35 @@
+.container{
+    background-image: url("../../../assets/img/background.jpg");
+    background-size: 100%;
+    height: 100vh ;
+    max-width: 100%;
+}   
+
+.userImg{
+    width: 70px;
+    clip-path:circle();
+    
+}
+
+.colorUsers{
+   background-color: transparent;
+   border-color: white;
+}
+
+.content{
+    height: 520px;
+}
+
+h5{
+    font-size: 14px
+}
+.cardDimencion{
+    max-width: 8rem;
+    height: 270px;
+    font-size: 13px;
+}
+
+.anyClass {
+    height:450px;
+    overflow-y: scroll;
+  }

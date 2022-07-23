@@ -9,6 +9,7 @@ import { Tarjeta } from '../../models/Itarjetas';
 })
 export class ListarTarjetasComponentComponent implements OnInit {
 
+  
   tarjetas: Tarjeta[] = [];
 
   constructor(public httpService : HTTPServiceGameService) { }
