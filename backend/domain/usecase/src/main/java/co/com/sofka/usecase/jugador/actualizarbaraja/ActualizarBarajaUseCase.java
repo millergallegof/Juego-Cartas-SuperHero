@@ -11,7 +11,6 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class ActualizarBarajaUseCase {
     private final BarajaRepository barajaRepository;
-
     public Flux<Baraja> actualizarBaraja(String id, Baraja baraja) {
         return barajaRepository.update();
     }

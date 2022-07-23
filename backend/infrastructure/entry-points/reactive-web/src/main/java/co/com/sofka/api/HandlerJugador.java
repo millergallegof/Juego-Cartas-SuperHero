@@ -1,12 +1,16 @@
 package co.com.sofka.api;
 
+import co.com.sofka.model.baraja.Baraja;
 import co.com.sofka.model.jugador.Jugador;
+import co.com.sofka.model.tarjeta.Tarjeta;
 import co.com.sofka.model.tarjeta.TarjetaId;
+import co.com.sofka.usecase.jugador.actualizarbaraja.ActualizarBarajaUseCase;
 import co.com.sofka.usecase.jugador.apostarcarta.ApostarCartaUseCase;
 import co.com.sofka.usecase.jugador.aumentarpuntos.AumentarPuntosUseCase;
 import co.com.sofka.usecase.jugador.cambiarestado.CambiarEstadoUseCase;
 import co.com.sofka.usecase.jugador.retirarse.RetirarseUseCase;
 import co.com.sofka.usecase.jugador.savejugador.SaveJugadorUseCase;
+import co.com.sofka.usecase.tarjeta.actualizartarjeta.ActualizarTarjetaUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -27,6 +31,16 @@ public class HandlerJugador {
 
     private final AumentarPuntosUseCase aumentarPuntosUseCase;
 
+    private final ActualizarBarajaUseCase actualizarBarajaUseCase;
+
+
+    public Mono<ServerResponse> actualizarBarajaPOSTUseCase(ServerRequest serverRequest) {
+        var id = serverRequest.pathVariable("id");
+        return serverRequest.bodyToMono(Baraja.class)
+                .flatMap(element -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(actualizarBarajaUseCase.actualizarBaraja(id, element), Tarjeta.class));
+    }
 
     public Mono<ServerResponse> apostaCartaPutUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
