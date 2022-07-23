@@ -21,7 +21,6 @@ public class AsignarCartaRetiroJugadorUseCase {
                             .map(e -> {
                                 if (e.getId().equals(idJugador)) {
                                     e.setEstado(false);
-
                                     return e;
                                 } else {
                                     return e;

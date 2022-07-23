@@ -1,13 +1,11 @@
 package co.com.sofka.mongo.jugador.repository;
 
 import co.com.sofka.model.jugador.Jugador;
-import co.com.sofka.model.jugador.JugadorId;
 import co.com.sofka.model.jugador.gateways.JugadorRepository;
 import co.com.sofka.mongo.helper.AdapterOperations;
 import co.com.sofka.mongo.jugador.document.JugadorDocument;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
-import reactor.core.publisher.Mono;
 
 @Repository
 public class MongoJugadorRepositoryAdapter extends AdapterOperations<Jugador, JugadorDocument, String, MongoDBJugadorRepository>
