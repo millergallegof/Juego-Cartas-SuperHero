@@ -10,6 +10,7 @@ import co.com.sofka.usecase.juego.comenzarjuego.ComenzarJuegoUseCase;
 import co.com.sofka.usecase.juego.crearjuego.CrearJuegoUseCase;
 import co.com.sofka.usecase.juego.asignarganador.AsignarGanadorUseCase;
 import co.com.sofka.usecase.juego.aumentaronda.AumentaRondaUseCase;
+import co.com.sofka.usecase.juego.finalizarjuego.FinalizarJuegoUseCase;
 import co.com.sofka.usecase.juego.listarjuego.ListarJuegoUseCase;
 import co.com.sofka.usecase.juego.repartirbaraja.RepartirBarajaUseCase;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,8 @@ public class HandlerJuego {
     private final RepartirBarajaUseCase repartirBarajaUseCase;
     private final ActualizarGanadorRondaUseCase actualizarGanadorRondaUseCase;
     private final AsignarCartaRetiroJugadorUseCase asignarCartaRetiroJugadorUseCase;
+
+    private final FinalizarJuegoUseCase finalizarJuegoUseCase;
 
     public Mono<ServerResponse> crearJuegoPOSTUseCase(ServerRequest serverRequest) {
         return serverRequest.bodyToMono(Juego.class)
@@ -75,6 +78,12 @@ public class HandlerJuego {
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(repartirBarajaUseCase.repartirBaraja(id), Juego.class);
+    }
+    public Mono<ServerResponse> finalizarJuegoGETUseCase(ServerRequest serverRequest) {
+        var id = serverRequest.pathVariable("id");
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(finalizarJuegoUseCase.finalizaJuego(id), Juego.class);
     }
 
     public Mono<ServerResponse> actuaLizarBarajaGanadorRondaPOSTUseCase(ServerRequest serverRequest) {

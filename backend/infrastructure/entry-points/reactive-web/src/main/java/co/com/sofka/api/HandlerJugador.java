@@ -26,17 +26,6 @@ public class HandlerJugador {
 
     private final AumentarPuntosUseCase aumentarPuntosUseCase;
 
-    private final ActualizarBarajaUseCase actualizarBarajaUseCase;
-
-
-    public Mono<ServerResponse> actualizarBarajaPOSTUseCase(ServerRequest serverRequest) {
-        var id = serverRequest.pathVariable("id");
-        return serverRequest.bodyToMono(Baraja.class)
-                .flatMap(element -> ServerResponse.ok()
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(actualizarBarajaUseCase.actualizarBaraja(id, element), Tarjeta.class));
-    }
-
     public Mono<ServerResponse> apostaCartaPutUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
         return serverRequest
