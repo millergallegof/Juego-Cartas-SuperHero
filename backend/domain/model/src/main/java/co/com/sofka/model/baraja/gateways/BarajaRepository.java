@@ -10,4 +10,6 @@ public interface BarajaRepository {
     Mono<Baraja> save(Baraja baraja);
 
     Flux<Baraja> findAll();
+
+    Flux<Baraja> update();
 }
