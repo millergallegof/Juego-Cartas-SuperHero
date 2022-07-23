@@ -1,7 +1,8 @@
 package co.com.sofka.api;
 
+import co.com.sofka.model.baraja.Baraja;
 import co.com.sofka.model.jugador.Jugador;
-import co.com.sofka.model.tarjeta.TarjetaId;
+import co.com.sofka.model.tarjeta.Tarjeta;
 import co.com.sofka.usecase.jugador.apostarcarta.ApostarCartaUseCase;
 import co.com.sofka.usecase.jugador.aumentarpuntos.AumentarPuntosUseCase;
 import co.com.sofka.usecase.jugador.cambiarestado.CambiarEstadoUseCase;
@@ -14,8 +15,6 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
-import java.util.stream.Stream;
-
 @Component
 @RequiredArgsConstructor
 public class HandlerJugador {
@@ -26,7 +25,6 @@ public class HandlerJugador {
     private final CambiarEstadoUseCase cambiarEstadoUseCase;
 
     private final AumentarPuntosUseCase aumentarPuntosUseCase;
-
 
     public Mono<ServerResponse> apostaCartaPutUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
