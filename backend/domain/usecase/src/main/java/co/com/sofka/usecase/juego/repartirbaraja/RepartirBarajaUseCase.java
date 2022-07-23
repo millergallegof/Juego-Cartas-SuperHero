@@ -24,22 +24,23 @@ public class RepartirBarajaUseCase {
                             .map(jugador -> {
                                 var cartasRandom = juego.getMazoJuego();
                                 Collections.shuffle(cartasRandom);
-                                cartasRandom.subList(0, 5);
-                                jugador.setBaraja(new Baraja(cartasRandom));
 
-                                Set<String> tarjetaSet =
-                                        new HashSet<>(juego.getMazoJuego().stream()
-                                                .map(Tarjeta::getId)
-                                                .collect(Collectors.toList()));
-                                var listActualizada = cartasRandom.stream()
-                                        .filter(e -> !tarjetaSet.contains(e.getId()))
+                                var listajugadores = cartasRandom.subList(0, 5);
+                                jugador.setBaraja(new Baraja(listajugadores));
+
+
+                                var listActualizada = juego.getMazoJuego().stream()
+                                        .filter(e -> !listajugadores.contains(e))
                                         .collect(Collectors.toList());
+
                                 juego.setMazoJuego(listActualizada);
                                 return jugador;
                             }).collect(Collectors.toList());
                     juego.setJugadores(player);
                     return juego;
-                });
+                }).
+
+                flatMap(juegoRepository::save);
     }
 
 
