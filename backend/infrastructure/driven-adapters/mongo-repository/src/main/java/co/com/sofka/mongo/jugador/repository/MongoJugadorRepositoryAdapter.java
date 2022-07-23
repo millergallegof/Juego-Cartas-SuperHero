@@ -24,21 +24,4 @@ public class MongoJugadorRepositoryAdapter extends AdapterOperations<Jugador, Ju
     }
 
 
-    @Override
-    public Mono<Jugador> apostarCarta(String idJugador, Jugador jugador) {
-        jugador.setId(idJugador);
-        return repository
-                .save(new JugadorDocument(jugador.getId(), jugador.getNickName(), jugador.getPuntos(), jugador.getBaraja(), jugador.getEstado()))
-                .flatMap(x -> Mono.just(jugador));
-    }
-
-    @Override
-    public Mono<Jugador> retirarse(String idJugador, Jugador jugador) {
-        jugador.setId(idJugador);
-        return repository
-                .save(new JugadorDocument(jugador.getId(), jugador.getNickName(), jugador.getPuntos(), jugador.getBaraja(), jugador.getEstado()))
-                .flatMap(x -> Mono.just(jugador));
-    }
-
-
 }
