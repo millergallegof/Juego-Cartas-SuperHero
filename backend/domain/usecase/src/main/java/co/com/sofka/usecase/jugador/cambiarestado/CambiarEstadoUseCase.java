@@ -1,27 +1,24 @@
-package co.com.sofka.usecase.jugador.retirarse;
+package co.com.sofka.usecase.jugador.cambiarestado;
 
-import co.com.sofka.model.baraja.gateways.BarajaRepository;
 import co.com.sofka.model.jugador.Jugador;
-import co.com.sofka.model.jugador.JugadorId;
 import co.com.sofka.model.jugador.gateways.JugadorRepository;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
-public class RetirarseUseCase {
+public class CambiarEstadoUseCase {
 
     private final JugadorRepository jugadorRepository;
 
-    private final BarajaRepository barajaRepository;
-
-    public Mono<Jugador> retirarse(String jugadorId) {
+    public Mono<Jugador> cambiarEstado(String jugadorId) {
         return jugadorRepository.findById(jugadorId)
                 .map(element -> {
-                    element.setEstado(false);
+                    if (element.getEstado()==false){
+                        element.setEstado(true);
+                    } else if (element.getEstado()==true) {
+                        element.setEstado(false);
+                    }
                     return element;
                 }).flatMap(jugadorRepository::save);
     }
-
-
 }
-
