@@ -10,12 +10,12 @@ import { Tarjeta } from '../../models/Itarjetas';
 export class ListarTarjetasComponentComponent implements OnInit {
 
   
-  tarjetas:Tarjeta[] = [];
+  // tarjetas:Tarjeta[] = [];
   tarjetImgUser:any[] = [
     '../../../assets/img/icon-user.png'
   ]
-  data: any;
-  informationTarjeta:Array<any> = [
+  // data: any;
+  informationTarjeta:any[] = [
     {
       link:'https://firebasestorage.googleapis.com/v0/b/marvel-game-9a665.appspot.com/o/CartasImg%2F044.jpg?alt=media&token=fa1ef60e-1a2b-4723-a4e6-5b302f7469e1',
       nombre:"Hombre Lata",
@@ -43,26 +43,38 @@ export class ListarTarjetasComponentComponent implements OnInit {
     }
   ];
 
-  constructor(public httpService : HTTPServiceGameService) { 
-    this.informationTarjeta = [];
 
-    this.data = Object.values(this.informationTarjeta);
-  }
+  minutos: number;
+  segundos: number;
+  constructor(public httpService : HTTPServiceGameService) {
+    this.minutos = 0;
+    this.segundos = 59;
+    setInterval(() => this.descontar(), 1000);
+   }
 
   ngOnInit(): void {
 
-    this.asignarTarjetas();
+    // this.asignarTarjetas();
    }
 
-  asignarTarjetas(){
-    this.httpService
-    .getTarjetas()
-    .subscribe(
-      data => {
-        this.tarjetas = data
-        console.log(data);
-        
-      },
-      error => {console.log(error)});    
+   descontar(): void {
+    if(--this.segundos < 0){
+      this.segundos == 59;
+      if(--this.minutos < 0){
+        this.minutos = 0;
+        this.segundos = 59;
+      }
     }
+   }
+  // asignarTarjetas(){
+  //   this.httpService
+  //   .getTarjetas()
+  //   .subscribe(
+  //     data => {
+  //       this.tarjetas = data
+  //       console.log(data);
+        
+  //     },
+  //     error => {console.log(error)});    
+  //   }
 }

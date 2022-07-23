@@ -1,14 +1,13 @@
 .container{
     background-image: url("../../../assets/img/background.jpg");
     background-size: 100%;
-    height: 100vh ;
+    height: 100vh;
     max-width: 100%;
 }   
 
 .userImg{
     width: 70px;
     clip-path:circle();
-    
 }
 
 .colorUsers{
@@ -32,4 +31,15 @@ h5{
 .anyClass {
     height:450px;
     overflow-y: scroll;
-  }
+}
+
+.anyClass::-webkit-scrollbar {
+    width: 3.5px;
+    background-color: white;
+    /* display: none; */
+}
+
+.anyClass::-webkit-scrollbar-thumb{
+    background: rgb(141, 121, 121);
+    border-radius: 2px;   
+}
