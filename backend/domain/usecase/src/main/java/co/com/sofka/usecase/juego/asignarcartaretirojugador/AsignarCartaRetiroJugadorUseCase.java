@@ -33,6 +33,11 @@ public class AsignarCartaRetiroJugadorUseCase {
                                     return acum;
                                 }
                             }).get();
+                    System.out.println(jugadorRetirado.getBaraja().getTarjetas());
+                    var tarjetasActualizadas = Stream.concat(jugadorRetirado.getBaraja().getTarjetas().stream(), juego.getMazoJuego().stream()).collect(Collectors.toList());
+                    
+                    juego.setMazoJuego(tarjetasActualizadas);
+
                     var jugadoresActualizados = juego.getJugadores().stream()
                             .map(element -> {
                                 if (element.getId().equals(idJugador)) {
@@ -42,8 +47,6 @@ public class AsignarCartaRetiroJugadorUseCase {
                                     return element;
                                 }
                             }).collect(Collectors.toList());
-                    var tarjetasActualizadas = Stream.concat(jugadorRetirado.getBaraja().getTarjetas().stream(), juego.getMazoJuego().stream()).collect(Collectors.toList());
-                    juego.setMazoJuego(tarjetasActualizadas);
                     juego.setJugadores(jugadoresActualizados);
                     return juego;
                 }).flatMap(juegoRepository::save);
