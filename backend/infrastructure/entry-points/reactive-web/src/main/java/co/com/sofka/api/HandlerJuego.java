@@ -9,6 +9,7 @@ import co.com.sofka.usecase.juego.crearjuego.CrearJuegoUseCase;
 import co.com.sofka.usecase.juego.asignarganador.AsignarGanadorUseCase;
 import co.com.sofka.usecase.juego.aumentaronda.AumentaRondaUseCase;
 import co.com.sofka.usecase.juego.listarjuego.ListarJuegoUseCase;
+import co.com.sofka.usecase.juego.repartirbaraja.RepartirBarajaUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
@@ -29,6 +30,7 @@ public class HandlerJuego {
 
     private final ListarJuegoUseCase listarJuegoUseCase;
     private final ComenzarJuegoUseCase comenzarJuegoUseCase;
+    private final RepartirBarajaUseCase repartirBarajaUseCase;
 
 
     public Mono<ServerResponse> crearJuegoPOSTUseCase(ServerRequest serverRequest) {
@@ -66,6 +68,13 @@ public class HandlerJuego {
                 .flatMap(element -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(comenzarJuegoUseCase.comenzarJuego(id, element.getJugadores(), element.getIdTablero()), Juego.class));
+    }
+
+    public Mono<ServerResponse> repartirBarajaGETUseCase(ServerRequest serverRequest) {
+        var id = serverRequest.pathVariable("id");
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(repartirBarajaUseCase.repartirBaraja(id), Juego.class);
     }
 
 }
