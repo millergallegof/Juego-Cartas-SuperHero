@@ -10,7 +10,6 @@ public class Tarjeta {
     private Integer poderXp;
     private String imagen;
 
-
     public Tarjeta(String id, String descripcion, Integer poderXp, String imagen) {
         this.id = id;
         this.descripcion = descripcion;

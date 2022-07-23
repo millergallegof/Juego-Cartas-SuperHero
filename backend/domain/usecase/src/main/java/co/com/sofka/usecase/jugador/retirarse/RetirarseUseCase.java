@@ -1,5 +1,6 @@
 package co.com.sofka.usecase.jugador.retirarse;
 
+import co.com.sofka.model.baraja.gateways.BarajaRepository;
 import co.com.sofka.model.jugador.Jugador;
 import co.com.sofka.model.jugador.JugadorId;
 import co.com.sofka.model.jugador.gateways.JugadorRepository;
@@ -11,6 +12,8 @@ public class RetirarseUseCase {
 
     private final JugadorRepository jugadorRepository;
 
+    private final BarajaRepository barajaRepository;
+
     public Mono<Jugador> retirarse(String jugadorId) {
         return jugadorRepository.findById(jugadorId)
                 .map(element -> {
@@ -18,6 +21,7 @@ public class RetirarseUseCase {
                     return element;
                 }).flatMap(jugadorRepository::save);
     }
+
 
 }
 

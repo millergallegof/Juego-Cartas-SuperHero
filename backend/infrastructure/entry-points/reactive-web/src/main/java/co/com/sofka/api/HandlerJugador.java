@@ -1,6 +1,7 @@
 package co.com.sofka.api;
 
 import co.com.sofka.model.jugador.Jugador;
+import co.com.sofka.model.tarjeta.TarjetaId;
 import co.com.sofka.usecase.jugador.apostarcarta.ApostarCartaUseCase;
 import co.com.sofka.usecase.jugador.aumentarpuntos.AumentarPuntosUseCase;
 import co.com.sofka.usecase.jugador.cambiarestado.CambiarEstadoUseCase;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
+
+import java.util.stream.Stream;
 
 @Component
 @RequiredArgsConstructor
@@ -28,10 +31,10 @@ public class HandlerJugador {
     public Mono<ServerResponse> apostaCartaPutUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
         return serverRequest
-                .bodyToMono(Jugador.class)
-                .flatMap(e -> ServerResponse.ok()
+                .bodyToMono(String.class)
+                .flatMap(element -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(apostarCartaUseCase.apostarCarta(id, e), Jugador.class));
+                        .body(apostarCartaUseCase.apostarCarta(id,element), Jugador.class));
     }
 
     public Mono<ServerResponse> asignarPuntosGETUseCase(ServerRequest serverRequest) {
