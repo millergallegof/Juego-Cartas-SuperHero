@@ -1,7 +1,10 @@
+import { Tarjeta } from './Itarjetas';
+import { Jugador } from './Ijugador';
 export interface Juego{
     id: string;
     ronda: number;
-    tarjetas: [];
-    jugadores: [];
+    mazoJuego: Tarjeta[];
     ganador: string;
+    tableroId: string;
+    jugadores: Jugador[];
 }

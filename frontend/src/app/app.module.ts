@@ -17,6 +17,7 @@ import { HomeComponentComponent } from './component/home-component/home-componen
 import { FormsModule } from '@angular/forms';
 import { ErrorComponentComponent } from './component/error-component/error-component.component';
 import { AutenticacionServiceService } from './servicesAuth/autenticacion-service.service';
+import { ListarTarjetasComponentComponent } from './component/listar-tarjetas-component/listar-tarjetas-component.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { AutenticacionServiceService } from './servicesAuth/autenticacion-servic
     SingupComponent,
     HomeComponentComponent,
     ErrorComponentComponent,
+    ListarTarjetasComponentComponent
 
   ],
   imports: [
