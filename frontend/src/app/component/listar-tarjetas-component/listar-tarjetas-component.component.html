@@ -2,22 +2,21 @@
     <div class="col-2 d-flex justify-content-center align-items-center minh-100">
         <div class="col-sm-8 p-2">
             <h5 class="card-header text-white text-center p-2">Jugadores</h5>
-            <div class="card text-center
-             colorUsers anyClass">
+            <div class="card text-center colorUsers anyClass">
                 <div class="card-body">
-                    <img src="../../../assets/img/icon-user.png" alt="" class="userImg">
+                    <img src="{{ tarjetImgUser }}" alt="" class="userImg">
                 </div>
                 <div class="card-body">
-                    <img src="../../../assets/img/icon-user.png" alt="" class="userImg">
+                    <img src="{{ tarjetImgUser }}" alt="" class="userImg">
                 </div>
                 <div class="card-body">
-                    <img src="../../../assets/img/icon-user.png" alt="" class="userImg">
+                    <img src="{{ tarjetImgUser }}" alt="" class="userImg">
                 </div>
                 <div class="card-body">
-                    <img src="../../../assets/img/icon-user.png" alt="" class="userImg">
+                    <img src="{{ tarjetImgUser }}" alt="" class="userImg">
                 </div>
                 <div class="card-body">
-                    <img src="../../../assets/img/icon-user.png" alt="" class="userImg">
+                    <img src="{{ tarjetImgUser }}" alt="" class="userImg">
                 </div>
                 <div class="card-body">
                     <img src="../../../assets/img/icon-user.png" alt="" class="userImg">
@@ -32,17 +31,18 @@
                 <p class="text-start text-white">Ronda: #1</p>
                 <p class="text-end text-white">Tiempo: <span>00:35</span></p>
             </div>
-            <div class="text-center content d-flex justify-content-around align-items-center minh-100">
+            <div *ngFor="let item of informationTarjeta"
+                class="text-center content d-flex justify-content-around align-items-center minh-100">
+
                 <div class="card text-bg-dark mb-3 cardDimencion">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/marvel-game-9a665.appspot.com/o/CartasImg%2F044.jpg?alt=media&token=fa1ef60e-1a2b-4723-a4e6-5b302f7469e1"
-                        class="card-header">
+                    <img src="{{item.link }}" class="card-img" alt="img/carta">
                     <div class="card-body">
-                        <h5 class="card-title">Hombre Lata</h5>
-                        <p class="card-text">Poder XP: 120.</p>
+                        <h5 class="card-title">{{ item.nombre }}</h5>
+                        <p class="btn btn-primary ">Poder XP:{{item.poder}}.</p>
                     </div>
                 </div>
 
-                <div class="card text-bg-dark mb-3 cardDimencion">
+                <!-- <div class="card text-bg-dark mb-3 cardDimencion">
                     <img src="https://firebasestorage.googleapis.com/v0/b/marvel-game-9a665.appspot.com/o/CartasImg%2F1AE.jpg?alt=media&token=4d9c5620-0899-4658-b868-e4e8a5a47a72"
                         class="card-header">
                     <div class="card-body">
@@ -76,7 +76,7 @@
                         <h5 class="card-title">Tiro Fijo</h5>
                         <p class="card-text">Poder XP: 100.</p>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 
