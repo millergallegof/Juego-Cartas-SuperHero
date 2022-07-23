@@ -11,5 +11,4 @@ public interface BarajaRepository {
 
     Flux<Baraja> findAll();
 
-    Flux<Baraja> update();
 }

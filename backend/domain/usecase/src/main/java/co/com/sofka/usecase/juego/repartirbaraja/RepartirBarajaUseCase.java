@@ -3,14 +3,10 @@ package co.com.sofka.usecase.juego.repartirbaraja;
 import co.com.sofka.model.baraja.Baraja;
 import co.com.sofka.model.juego.Juego;
 import co.com.sofka.model.juego.gateways.JuegoRepository;
-import co.com.sofka.model.tarjeta.Tarjeta;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -39,7 +35,6 @@ public class RepartirBarajaUseCase {
                     juego.setJugadores(player);
                     return juego;
                 }).
-
                 flatMap(juegoRepository::save);
     }
 
