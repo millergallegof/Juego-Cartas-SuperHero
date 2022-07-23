@@ -3,6 +3,7 @@ package co.com.sofka.api;
 import co.com.sofka.model.juego.ElementosJuego;
 import co.com.sofka.model.juego.ElementosJugadorJuego;
 import co.com.sofka.model.juego.Juego;
+import co.com.sofka.model.jugador.Identificacion;
 import co.com.sofka.usecase.juego.actualizarganador.ActualizarGanadorRondaUseCase;
 import co.com.sofka.usecase.juego.asignarcartaretirojugador.AsignarCartaRetiroJugadorUseCase;
 import co.com.sofka.usecase.juego.comenzarjuego.ComenzarJuegoUseCase;
@@ -86,10 +87,10 @@ public class HandlerJuego {
 
     public Mono<ServerResponse> asignarCartasMazoPOSTUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
-        return serverRequest.bodyToMono(String.class)
+        return serverRequest.bodyToMono(Identificacion.class)
                 .flatMap(element -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(asignarCartaRetiroJugadorUseCase.asignarCartasMazo(id, element), Juego.class));
+                        .body(asignarCartaRetiroJugadorUseCase.asignarCartasMazo(id, element.getId()), Juego.class));
     }
 
 }
