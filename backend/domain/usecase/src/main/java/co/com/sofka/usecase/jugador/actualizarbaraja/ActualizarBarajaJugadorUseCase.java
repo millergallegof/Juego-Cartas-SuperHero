@@ -1,18 +1,15 @@
 package co.com.sofka.usecase.jugador.actualizarbaraja;
 
 import co.com.sofka.model.baraja.Baraja;
-import co.com.sofka.model.baraja.gateways.BarajaRepository;
-import co.com.sofka.model.tarjeta.Tarjeta;
-import co.com.sofka.model.tarjeta.gateways.TarjetaRepository;
+import co.com.sofka.model.jugador.gateways.JugadorRepository;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
-public class ActualizarBarajaUseCase {
-    private final BarajaRepository barajaRepository;
+public class ActualizarBarajaJugadorUseCase {
+    private final JugadorRepository jugadorRepository;
 
-    public Flux<Baraja> actualizarBaraja(String id, Baraja baraja) {
-        return barajaRepository.update();
+    public Flux<Baraja> actualizarBarajaJugador(String id, Baraja baraja) {
+        return null;
     }
 }
