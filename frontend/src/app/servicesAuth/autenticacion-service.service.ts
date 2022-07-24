@@ -12,6 +12,7 @@ import * as auth from 'firebase/auth';
 
 export class AutenticacionServiceService {
   private userData: any = {};
+
   constructor(
     public afs: AngularFirestore,
     public afAuth: AngularFireAuth,

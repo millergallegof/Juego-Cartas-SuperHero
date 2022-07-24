@@ -25,15 +25,15 @@
         </div>
     </div>
 
-    <div class="col col-lg-8 d-flex align-items-center  minh-100 ">
+    <div class="col col-lg-8 d-flex align-items-center minh-100 ">
         <div class="card col-sm-8 w-100 p-2 colorUsers content">
             <div class="d-flex justify-content-between">
                 <p class="text-start text-white">Ronda: #1</p>
                 <p class="text-end text-white">Tiempo: <span>{{minutos}}:{{segundos}}</span></p>
             </div>
-            <div *ngFor="let item of informationTarjeta"
-                class="text-center content d-flex justify-content-around align-items-center minh-100">
-                <div class="card text-bg-dark mb-3 cardDimencion ">
+
+            <div class="text-center content d-flex justify-content-around align-items-center minh-100">
+                <div *ngFor="let item of informationTarjeta" class="card text-bg-dark mb-3 cardDimencion ">
                     <img src="{{ item.link }}" class="card-header" alt="img/carta">
                     <div class="card-body">
                         <h5 class="card-title">{{ item.nombre }}</h5>
@@ -48,49 +48,11 @@
         <div class="col-sm-8 p-2">
             <h5 class="card-header text-white text-center p-2">Usuario</h5>
             <div class="card text-center colorUsers anyClass p-2">
-                <div class="card text-bg-dark mb-3 cardDimencion">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/marvel-game-9a665.appspot.com/o/CartasImg%2F168.jpg?alt=media&token=70873d38-e333-4608-8535-b952042c4518"
-                        class="card-header">
+                <div *ngFor="let item of informationTarjeta" class="card text-bg-dark mb-3 cardDimencion">
+                    <img src="{{item.link}}" class="card-header">
                     <div class="card-body">
-                        <h5 class="card-title">Tiro Fijo</h5>
-                        <p class="card-text">Poder XP: 100.</p>
-                    </div>
-                </div>
-
-                <div class="card text-bg-dark mb-3 cardDimencion">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/marvel-game-9a665.appspot.com/o/CartasImg%2F168.jpg?alt=media&token=70873d38-e333-4608-8535-b952042c4518"
-                        class="card-header">
-                    <div class="card-body">
-                        <h5 class="card-title">Tiro Fijo</h5>
-                        <p class="card-text">Poder XP: 100.</p>
-                    </div>
-                </div>
-
-
-                <div class="card text-bg-dark mb-3 cardDimencion">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/marvel-game-9a665.appspot.com/o/CartasImg%2F168.jpg?alt=media&token=70873d38-e333-4608-8535-b952042c4518"
-                        class="card-header">
-                    <div class="card-body">
-                        <h5 class="card-title">Tiro Fijo</h5>
-                        <p class="card-text">Poder XP: 100.</p>
-                    </div>
-                </div>
-
-                <div class="card text-bg-dark mb-3 cardDimencion">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/marvel-game-9a665.appspot.com/o/CartasImg%2F168.jpg?alt=media&token=70873d38-e333-4608-8535-b952042c4518"
-                        class="card-header">
-                    <div class="card-body">
-                        <h5 class="card-title">Tiro Fijo</h5>
-                        <p class="card-text">Poder XP: 100.</p>
-                    </div>
-                </div>
-
-                <div class="card text-bg-dark mb-3 cardDimencion">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/marvel-game-9a665.appspot.com/o/CartasImg%2F168.jpg?alt=media&token=70873d38-e333-4608-8535-b952042c4518"
-                        class="card-header">
-                    <div class="card-body">
-                        <h5 class="card-title">Tiro Fijo</h5>
-                        <p class="card-text">Poder XP: 100.</p>
+                        <h5 class="card-title">{{ item.nombre }}</h5>
+                        <p class="btn btn-primary">Poder XP: {{item.poder}}.</p>
                     </div>
                 </div>
 
@@ -105,5 +67,3 @@
             </li>
         </div>
     </div>
-
-</div>

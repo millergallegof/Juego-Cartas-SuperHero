@@ -10,7 +10,7 @@ import { Tarjeta } from '../../models/Itarjetas';
 export class ListarTarjetasComponentComponent implements OnInit {
 
   
-  // tarjetas:Tarjeta[] = [];
+  tarjetas:Tarjeta[] = [];
   tarjetImgUser:any[] = [
     '../../../assets/img/icon-user.png'
   ]
@@ -54,7 +54,7 @@ export class ListarTarjetasComponentComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.asignarTarjetas();
+    this.asignarTarjetas();
    }
 
    descontar(): void {
@@ -66,15 +66,16 @@ export class ListarTarjetasComponentComponent implements OnInit {
       }
     }
    }
-  // asignarTarjetas(){
-  //   this.httpService
-  //   .getTarjetas()
-  //   .subscribe(
-  //     data => {
-  //       this.tarjetas = data
-  //       console.log(data);
+   
+  asignarTarjetas(){
+    this.httpService
+    .getTarjetas()
+    .subscribe(
+      data => {
+        this.tarjetas = data
+        console.log(data);
         
-  //     },
-  //     error => {console.log(error)});    
-  //   }
+      },
+      error => {console.log(error)});    
+    }
 }

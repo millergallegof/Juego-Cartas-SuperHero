@@ -20,7 +20,7 @@
       <div class="w-100 text-white">
         <h1 class="display-3">Ingrese su nombre de usuario</h1>
         <div class="input-group col-md-12">
-          <input type="text" class="form-control input-lg" placeholder="NickName" />
+          <input type="text" class="form-control input-lg" placeholder="NickName" #nickName/>
         </div>
       </div>
     </div>
@@ -29,8 +29,8 @@
 <div class="container">
   <div class="d-flex justify-content-center">
     <ul class="ds-btn">
-      <li>
-        <a class="btn btn-lg btn-success" routerLink="/juego">
+      <li> <!--routerLink="/juego"-->
+        <a class="btn btn-lg btn-success" (click)="aceptarJuego(nickName.value)" >
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-robot"
             viewBox="0 0 16 16">
             <path
