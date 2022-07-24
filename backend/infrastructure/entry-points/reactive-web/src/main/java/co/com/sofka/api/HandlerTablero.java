@@ -50,7 +50,6 @@ public class HandlerTablero {
     public Mono<ServerResponse> recibirTarjetaPOSTUseCase(ServerRequest serverRequest) {
         ParameterizedTypeReference<Map<String, Tarjeta>> modeloPeticion = new ParameterizedTypeReference<Map<String, Tarjeta>>() {
         };
-
         var id = serverRequest.pathVariable("id");
         return serverRequest.bodyToMono(modeloPeticion)
                 .flatMap(element -> ServerResponse.ok()
