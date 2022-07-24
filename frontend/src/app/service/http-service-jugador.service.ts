@@ -41,10 +41,10 @@ export class ServicioJugadorService {
     (`${PathRest.getApiJugador}/actualizar/${idjugador}`, baraja);
   }
 
-  apostarTarjeta(idjugador:string, tarjeta:Tarjeta): Observable<Jugador> {
+  apostarTarjeta(idjugador:string, idTarjeta:string): Observable<Jugador> {
     return this.httpJugador
     .post<Jugador>
-    (`${PathRest.getApiJugador}/apostarcarta/${idjugador}`, tarjeta)
+    (`${PathRest.getApiJugador}/apostarcarta/${idjugador}`, idTarjeta)
   }
 
 

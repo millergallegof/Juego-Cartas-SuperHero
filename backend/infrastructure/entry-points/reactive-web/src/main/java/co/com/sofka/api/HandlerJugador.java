@@ -33,10 +33,10 @@ public class HandlerJugador {
     public Mono<ServerResponse> apostaCartaPutUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
         return serverRequest
-                .bodyToMono(Identificacion.class)
+                .bodyToMono(String.class)
                 .flatMap(element -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(apostarCartaUseCase.apostarCarta(id, element.getId()), Jugador.class));
+                        .body(apostarCartaUseCase.apostarCarta(id, element), Jugador.class));
     }
 
     public Mono<ServerResponse> asignarPuntosGETUseCase(ServerRequest serverRequest) {
