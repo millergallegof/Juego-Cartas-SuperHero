@@ -13,15 +13,7 @@ import { ServicioJuegoService } from '../../service/servicio-juego.service';
   styleUrls: ['./home-component.component.css']
 })
 export class HomeComponentComponent implements OnInit {
-  jugador: Jugador[] = [
-    {
-      id: "a0GqjysrmRMtJk9aCdGvR2Mldtz4",
-      nickName: "s",
-      puntos: 0,
-      baraja: null,
-      estado: true
-    }
-  ];
+  jugador: Jugador[] = [];
   constructor(
     public autenticacionService: AutenticacionServiceService,
     public peticionesApi: ServicioJugadorService,
