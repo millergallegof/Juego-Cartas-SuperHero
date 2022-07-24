@@ -30,10 +30,10 @@ export class HTTPServiceGameService {
       .get(`${PathRest.getApiTarjeta}/listar`);
   }
 
-  crearJugador(information: Jugador): Observable<Jugador> {
+  crearJugador(information: Jugador): Observable<any> {
     return this.http
-      .post<Jugador>
-      (`${PathRest.getApiJugador}/crear`, information, this.httpOptions);
+      .post
+      (`${PathRest.getApiJugador}/crear`, information);
   }
   
   /**
