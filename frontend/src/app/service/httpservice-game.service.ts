@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/compat/firestore';
 
-import { Observable } from 'rxjs';
+import { noop, Observable } from 'rxjs';
 import { Tarjeta } from '../models/Itarjetas';
 import { PathRest } from '../static/hostbackend';
 import { Jugador } from '../models/Ijugador';
@@ -51,14 +51,17 @@ export class HTTPServiceGameService {
   crearJuego(informacionJuego: Juego): Observable<Juego> {
     return this.http
       .post<Juego>
-      (`${PathRest.getApiBaraja}/crear`, informacionJuego, this.httpOptions);
+      (`${PathRest.getApiJuego}/crear`, informacionJuego, this.httpOptions);
   }
-
-  // crearBaraja(): Observable<Bajara> {
-  //   return this.http
-  //     .get<Bajara>
-  //     (`${PathRest.getApiTarjeta}/crear`);
-  // }
+  /**
+   * Metodo encargado de obtener la baraja de la base de datos
+   * @returns 
+   */
+  crearBaraja(): Observable<Bajara> {
+    return this.http
+      .get<Bajara>
+      (`${PathRest.getApiBaraja}/crear`);
+  }
 
   /**
    * Metodo encarcado de validar la informacion que pasara en el 
@@ -75,10 +78,9 @@ export class HTTPServiceGameService {
    * @param data recibe los parametros a modificar en el documento
    * @returns el documento actualizado
    */
-  updateInformacion<T>(ref: DocumentPredicate<T>, data: {}) {
+  updateInformacion<T>(ref: DocumentPredicate<T>, data:{}) {
     return this.doc(ref).update({
       ...data
     })
   }
-
 }
