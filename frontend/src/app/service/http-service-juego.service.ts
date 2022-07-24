@@ -42,4 +42,23 @@ export class HTTPServiceGameService {
       .post<Juego>
       (`${PathRest.getApiJuego}/comenzar/${idJuego}`, infoJuego, this.httpOptions);
   }
+
+  repartirBaraja(idJuego: string): Observable<Juego>{
+    return this.httpJuego
+     .post<Juego>
+     (`${PathRest.getApiJuego}/baraja/${idJuego}`, idJuego, this.httpOptions);
+  }
+
+  asignarCartasMazo(idJugador: string, ): Observable<Juego>{
+    return this.httpJuego
+     .post<Juego>
+     (`${PathRest.getApiJuego}/baraja/${idJugador}`, idJugador, this.httpOptions);
+  }
+
+  listarJuego(): Observable<Juego> {
+    return this.httpJuego
+      .get<Juego>
+      (`${PathRest.getApiTablero}/listar/`)
+  }
+
 }
