@@ -6,6 +6,7 @@ import { PathRest } from '../static/hostbackend';
 import { Jugador } from '../models/Ijugador';
 import { Juego } from '../models/Ijuego';
 import { Bajara } from '../models/Ibaraja';
+import { Tarjeta } from '../models/Itarjetas';
 
 type DocumentPredicate<T> = string | AngularFirestoreDocument;
 @Injectable({
@@ -21,36 +22,44 @@ export class ServicioJugadorService {
 
   constructor(
     private afs: AngularFirestore,
-    private jugador: HttpClient,) { }
-
-  getTarjetas(): Observable<any> {
-    return this.jugador
-      .get(`${PathRest.getApiTarjeta}/listar`);
-  }
+    private httpJugador: HttpClient,) { }
 
   /**
    * Metodo encargaado de realizadr el registro de del jugador en MongongoDb
    * @param information del usuario para registrarla en la base de datos
    * @returns la informacionguardada.
    */
-   crearJugador(information: Jugador): Observable<Jugador> {
-    return this.jugador
+  crearJugador(information: Jugador): Observable<Jugador> {
+    return this.httpJugador
       .post<Jugador>
       (`${PathRest.getApiJugador}/crear`, information, this.httpOptions);
   }
 
-
-
-  /**
-   * Metodo encargado de obtener la baraja de la base de datos
-   * @returns 
-   */
-  crearBaraja(): Observable<Bajara> {
-    return this.jugador
-      .get<Bajara>
-      (`${PathRest.getApiBaraja}/crear`);
+  actulizarBaraja(idjugador: string, baraja: Bajara): Observable<Jugador> {
+    return this.httpJugador
+      .post<Jugador>
+      (`${PathRest.getApiJugador}/actualizar/${idjugador}`, baraja);
   }
 
+  apostarTarjeta(idjugador: string, idTarjeta: string): Observable<Jugador> {
+    return this.httpJugador
+      .post<Jugador>
+      (`${PathRest.getApiJugador}/apostarcarta/${idjugador}`, idTarjeta)
+  }
+
+  cambiarEstado(idjugador: string): Observable<Jugador> {
+    return this.httpJugador
+      .get<Jugador>
+      (`${PathRest.getApiJugador}/cambiarestado/${idjugador}`)
+  }
+
+  aumentarPuntos(idjugador: string): Observable<Jugador> {
+    return this.httpJugador
+      .get<Jugador>
+      (`${PathRest.getApiJugador}/aumentarpuntos/${idjugador}`)
+  }
+
+  //  METODOS FIREBASE TRAER INFORMACION
   /**
    * Metodo encarcado de validar la informacion que pasara en el 
    * si la referencia es valida o no.
@@ -65,9 +74,10 @@ export class ServicioJugadorService {
    * @param data recibe los parametros a modificar en el documento
    * @returns el documento actualizado
    */
-  updateInformacion<T>(ref: DocumentPredicate<T>, data:{}) {
+  updateInformacion<T>(ref: DocumentPredicate<T>, data: {}) {
     return this.doc(ref).update({
       ...data
     })
+
   }
 }

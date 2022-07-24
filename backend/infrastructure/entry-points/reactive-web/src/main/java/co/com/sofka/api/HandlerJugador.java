@@ -1,8 +1,10 @@
 package co.com.sofka.api;
 
 import co.com.sofka.model.baraja.Baraja;
+import co.com.sofka.model.jugador.Identificacion;
 import co.com.sofka.model.jugador.Jugador;
 import co.com.sofka.model.tarjeta.Tarjeta;
+import co.com.sofka.usecase.jugador.actualizarbaraja.ActualizarBarajaJugadorUseCase;
 import co.com.sofka.usecase.jugador.apostarcarta.ApostarCartaUseCase;
 import co.com.sofka.usecase.jugador.aumentarpuntos.AumentarPuntosUseCase;
 import co.com.sofka.usecase.jugador.cambiarestado.CambiarEstadoUseCase;
@@ -26,28 +28,30 @@ public class HandlerJugador {
 
     private final AumentarPuntosUseCase aumentarPuntosUseCase;
 
+    private final ActualizarBarajaJugadorUseCase actualizarBarajaJugadorUseCase;
+
     public Mono<ServerResponse> apostaCartaPutUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
         return serverRequest
                 .bodyToMono(String.class)
                 .flatMap(element -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(apostarCartaUseCase.apostarCarta(id,element), Jugador.class));
+                        .body(apostarCartaUseCase.apostarCarta(id, element), Jugador.class));
     }
 
     public Mono<ServerResponse> asignarPuntosGETUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
         return ServerResponse.ok()
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(aumentarPuntosUseCase.aumentarPuntos(id), Jugador.class);
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(aumentarPuntosUseCase.aumentarPuntos(id), Jugador.class);
 
     }
 
     public Mono<ServerResponse> cambiarEstadoGETUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
         return ServerResponse.ok()
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(cambiarEstadoUseCase.cambiarEstado(id), Jugador.class);
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(cambiarEstadoUseCase.cambiarEstado(id), Jugador.class);
     }
 
     public Mono<ServerResponse> retirarseGETUseCase(ServerRequest serverRequest) {
@@ -63,5 +67,13 @@ public class HandlerJugador {
                 .flatMap(e -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(saveJugadorUseCase.SaveJugadorUseCase(e), Jugador.class));
+    }
+
+    public Mono<ServerResponse> actualizarBarajaJugadorPOSTUseCase(ServerRequest serverRequest) {
+        var id = serverRequest.pathVariable("id");
+        return serverRequest.bodyToMono(Baraja.class)
+                .flatMap(element -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(actualizarBarajaJugadorUseCase.actualizarBarajaJugador(id, element), Jugador.class));
     }
 }

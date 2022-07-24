@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AutenticacionServiceService } from 'src/app/servicesAuth/autenticacion-service.service';
-import { HTTPServiceGameService } from '../../service/httpservice-game.service';
+import { HTTPServiceGameService } from '../../service/http-service-juego.service';
 import { Tarjeta } from '../../models/Itarjetas';
 import { Jugador } from '../../models/Ijugador';
-import { ServicioJugadorService } from 'src/app/service/servicio-jugador.service';
-import { ServicioJuegoService } from '../../service/servicio-juego.service';
+import { ServicioJugadorService } from 'src/app/service/http-service-jugador.service';
+import { ServicioJuegoService } from '../../service/http-servicio-juego.service';
 
 
 @Component({

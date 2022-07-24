@@ -25,11 +25,7 @@ public class ApostarCartaUseCase {
                                     return acumulador;
                                 }
                             }).get();
-                    var listarTarjetaActualizar = player.getBaraja().getTarjetas().stream()
-                            .filter(element -> tarjetaAEnviar.getId().contains(element.getId()))
-                            .collect(Collectors.toList());
-                    System.out.println(listarTarjetaActualizar);
-                    player.setBaraja(new Baraja(listarTarjetaActualizar));
+                    player.getBaraja().getTarjetas().remove(tarjetaAEnviar);
                     return player;
                 })
                 .flatMap(jugadorRepository::save);

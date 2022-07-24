@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HTTPServiceGameService } from '../../service/httpservice-game.service';
+import { HTTPServiceGameService } from '../../service/http-service-juego.service';
 import { Tarjeta } from '../../models/Itarjetas';
-import { ServicioJugadorService } from '../../service/servicio-jugador.service';
+import { ServicioJugadorService } from '../../service/http-service-jugador.service';
 
 @Component({
   selector: 'app-listar-tarjetas-component',

@@ -11,7 +11,7 @@ import co.com.sofka.usecase.juego.crearjuego.CrearJuegoUseCase;
 import co.com.sofka.usecase.juego.asignarganador.AsignarGanadorUseCase;
 import co.com.sofka.usecase.juego.aumentaronda.AumentaRondaUseCase;
 import co.com.sofka.usecase.juego.finalizarjuego.FinalizarJuegoUseCase;
-import co.com.sofka.usecase.juego.listarjuego.ListarJuegoUseCase;
+import co.com.sofka.usecase.juego.listarjuegos.ListarJuegosUseCase;
 import co.com.sofka.usecase.juego.repartirbaraja.RepartirBarajaUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -28,7 +28,7 @@ public class HandlerJuego {
     private final AsignarGanadorUseCase asignarGanadorUseCase;
     private final AumentaRondaUseCase aumentaRondaUseCase;
 
-    private final ListarJuegoUseCase listarJuegoUseCase;
+    private final ListarJuegosUseCase listarJuegoUseCase;
     private final ComenzarJuegoUseCase comenzarJuegoUseCase;
     private final RepartirBarajaUseCase repartirBarajaUseCase;
     private final ActualizarGanadorRondaUseCase actualizarGanadorRondaUseCase;
