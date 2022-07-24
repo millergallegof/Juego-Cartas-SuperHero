@@ -35,18 +35,29 @@ export class ServicioJugadorService {
       (`${PathRest.getApiJugador}/crear`, information, this.httpOptions);
   }
 
-  actulizarBaraja(idjugador:string, baraja: Bajara): Observable<Jugador> {
+  actulizarBaraja(idjugador: string, baraja: Bajara): Observable<Jugador> {
     return this.httpJugador
-    .post<Jugador>
-    (`${PathRest.getApiJugador}/actualizar/${idjugador}`, baraja);
+      .post<Jugador>
+      (`${PathRest.getApiJugador}/actualizar/${idjugador}`, baraja);
   }
 
-  apostarTarjeta(idjugador:string, idTarjeta:string): Observable<Jugador> {
+  apostarTarjeta(idjugador: string, idTarjeta: string): Observable<Jugador> {
     return this.httpJugador
-    .post<Jugador>
-    (`${PathRest.getApiJugador}/apostarcarta/${idjugador}`, idTarjeta)
+      .post<Jugador>
+      (`${PathRest.getApiJugador}/apostarcarta/${idjugador}`, idTarjeta)
   }
 
+  cambiarEstado(idjugador: string): Observable<Jugador> {
+    return this.httpJugador
+      .get<Jugador>
+      (`${PathRest.getApiJugador}/cambiarestado/${idjugador}`)
+  }
+
+  aumentarPuntos(idjugador: string): Observable<Jugador> {
+    return this.httpJugador
+      .get<Jugador>
+      (`${PathRest.getApiJugador}/aumentarpuntos/${idjugador}`)
+  }
 
   //  METODOS FIREBASE TRAER INFORMACION
   /**
