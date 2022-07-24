@@ -61,3 +61,5 @@ Jbackend/domain/model/src/main/java/co/com/sofka/model/jugador/Jugador.java,2\9
 ~backend/infrastructure/driven-adapters/mongo-repository/src/main/java/co/com/sofka/mongo/tarjeta/document/TarjetaDocument.java,d\1\d142d8ed68016d0287d7b5d71d7d65a21937610e
 ¿
 Žbackend/infrastructure/driven-adapters/mongo-repository/src/main/java/co/com/sofka/mongo/tarjeta/repository/MongoTarjetaRepositoryAdapter.java,b\1\b104b8f1171b7f801e6c784fd9258c5e0aa8f7a9
+¿
+Žbackend/infrastructure/driven-adapters/mongo-repository/src/main/java/co/com/sofka/mongo/jugador/repository/MongoJugadorRepositoryAdapter.java,b\2\b2c86d3546f6cd157bc5c34535d2d09efffc1b9b

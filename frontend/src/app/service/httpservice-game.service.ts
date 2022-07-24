@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/compat/firestore';
 
-import { Observable } from 'rxjs';
+import { noop, Observable } from 'rxjs';
 import { Tarjeta } from '../models/Itarjetas';
 import { PathRest } from '../static/hostbackend';
 import { Jugador } from '../models/Ijugador';
+import { Juego } from '../models/Ijuego';
+import { Bajara } from '../models/Ibaraja';
 
 
 type DocumentPredicate<T> = string | AngularFirestoreDocument;
@@ -30,10 +32,35 @@ export class HTTPServiceGameService {
       .get(`${PathRest.getApiTarjeta}/listar`);
   }
 
+  /**
+   * Metodo encargaado de realizadr el registro de del jugador en MongongoDb
+   * @param information del usuario para registrarla en la base de datos
+   * @returns la informacionguardada.
+   */
   crearJugador(information: Jugador): Observable<Jugador> {
     return this.http
       .post<Jugador>
       (`${PathRest.getApiJugador}/crear`, information, this.httpOptions);
+  }
+
+  /**
+   * Metodo encargad de crear el campo de juego para los jugadores
+   * @param informacionJuego para crear el campo de juego  
+   * @returns el campo de juego creado.
+   */
+  crearJuego(informacionJuego: Juego): Observable<Juego> {
+    return this.http
+      .post<Juego>
+      (`${PathRest.getApiJuego}/crear`, informacionJuego, this.httpOptions);
+  }
+  /**
+   * Metodo encargado de obtener la baraja de la base de datos
+   * @returns 
+   */
+  crearBaraja(): Observable<Bajara> {
+    return this.http
+      .get<Bajara>
+      (`${PathRest.getApiBaraja}/crear`);
   }
 
   /**
@@ -51,10 +78,9 @@ export class HTTPServiceGameService {
    * @param data recibe los parametros a modificar en el documento
    * @returns el documento actualizado
    */
-  updateInformacion<T>(ref: DocumentPredicate<T>, data: {}) {
+  updateInformacion<T>(ref: DocumentPredicate<T>, data:{}) {
     return this.doc(ref).update({
       ...data
     })
   }
-
 }
