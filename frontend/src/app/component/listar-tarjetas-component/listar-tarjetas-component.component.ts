@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HTTPServiceGameService } from '../../service/httpservice-game.service';
 import { Tarjeta } from '../../models/Itarjetas';
+import { ServicioJugadorService } from '../../service/servicio-jugador.service';
 
 @Component({
   selector: 'app-listar-tarjetas-component',
@@ -9,7 +10,6 @@ import { Tarjeta } from '../../models/Itarjetas';
 })
 export class ListarTarjetasComponentComponent implements OnInit {
 
-  
   tarjetas:Tarjeta[] = [];
   tarjetImgUser:any[] = [
     '../../../assets/img/icon-user.png'
@@ -46,7 +46,7 @@ export class ListarTarjetasComponentComponent implements OnInit {
 
   minutos: number;
   segundos: number;
-  constructor(public httpService : HTTPServiceGameService) {
+  constructor(public httpService : ServicioJugadorService) {
     this.minutos = 0;
     this.segundos = 59;
     setInterval(() => this.descontar(), 1000);
