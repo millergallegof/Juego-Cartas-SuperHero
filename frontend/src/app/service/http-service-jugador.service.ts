@@ -23,11 +23,6 @@ export class ServicioJugadorService {
     private afs: AngularFirestore,
     private jugador: HttpClient,) { }
 
-  getTarjetas(): Observable<any> {
-    return this.jugador
-      .get(`${PathRest.getApiTarjeta}/listar`);
-  }
-
   /**
    * Metodo encargaado de realizadr el registro de del jugador en MongongoDb
    * @param information del usuario para registrarla en la base de datos
@@ -39,18 +34,10 @@ export class ServicioJugadorService {
       (`${PathRest.getApiJugador}/crear`, information, this.httpOptions);
   }
 
+  
 
 
-  /**
-   * Metodo encargado de obtener la baraja de la base de datos
-   * @returns 
-   */
-  crearBaraja(): Observable<Bajara> {
-    return this.jugador
-      .get<Bajara>
-      (`${PathRest.getApiBaraja}/crear`);
-  }
-
+  //  METODOS FIREBASE TRAER INFORMACION
   /**
    * Metodo encarcado de validar la informacion que pasara en el 
    * si la referencia es valida o no.
@@ -69,5 +56,6 @@ export class ServicioJugadorService {
     return this.doc(ref).update({
       ...data
     })
+
   }
 }
