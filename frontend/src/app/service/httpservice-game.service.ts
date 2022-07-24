@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { Tarjeta } from '../models/Itarjetas';
 import { PathRest } from '../static/hostbackend';
 import { Jugador } from '../models/Ijugador';
+import { Juego } from '../models/Ijuego';
+import { Bajara } from '../models/Ibaraja';
 
 
 type DocumentPredicate<T> = string | AngularFirestoreDocument;
@@ -30,12 +32,34 @@ export class HTTPServiceGameService {
       .get(`${PathRest.getApiTarjeta}/listar`);
   }
 
+  /**
+   * Metodo encargaado de realizadr el registro de del jugador en MongongoDb
+   * @param information del usuario para registrarla en la base de datos
+   * @returns la informacionguardada.
+   */
   crearJugador(information: Jugador): Observable<Jugador> {
     return this.http
       .post<Jugador>
       (`${PathRest.getApiJugador}/crear`, information, this.httpOptions);
   }
-  
+
+  /**
+   * Metodo encargad de crear el campo de juego para los jugadores
+   * @param informacionJuego para crear el campo de juego  
+   * @returns el campo de juego creado.
+   */
+  crearJuego(informacionJuego: Juego): Observable<Juego> {
+    return this.http
+      .post<Juego>
+      (`${PathRest.getApiBaraja}/crear`, informacionJuego, this.httpOptions);
+  }
+
+  // crearBaraja(): Observable<Bajara> {
+  //   return this.http
+  //     .get<Bajara>
+  //     (`${PathRest.getApiTarjeta}/crear`);
+  // }
+
   /**
    * Metodo encarcado de validar la informacion que pasara en el 
    * si la referencia es valida o no.
