@@ -8,6 +8,7 @@ import { PathRest } from '../static/hostbackend';
 import { Jugador } from '../models/Ijugador';
 import { Juego } from '../models/Ijuego';
 import { Bajara } from '../models/Ibaraja';
+import { JugadoresTablero } from '../models/jugadoresTablero';
 
 
 
@@ -27,13 +28,18 @@ export class HTTPServiceGameService {
 
   /**
  * Metodo encargad de crear el campo de juego para los jugadores
- * @param informacionJuego para crear el campo de juego  
+ * @param juego para crear el campo de juego
  * @returns el campo de juego creado.
  */
-  crearJuego(informacionJuego: Juego): Observable<Juego> {
+  crearJuego(juego: Juego): Observable<Juego> {
     return this.httpJuego
       .post<Juego>
-      (`${PathRest.getApiJuego}/crear`, informacionJuego, this.httpOptions);
+      (`${PathRest.getApiJuego}/crear`, juego, this.httpOptions);
   }
 
+  comenzarJuego(idJuego: string, infoJuego: JugadoresTablero ): Observable<Juego>{
+    return this.httpJuego
+      .post<Juego>
+      (`${PathRest.getApiJuego}/comenzar/${idJuego}`, infoJuego, this.httpOptions);
+  }
 }
