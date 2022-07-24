@@ -30,12 +30,12 @@ export class HTTPServiceGameService {
       .get(`${PathRest.getApiTarjeta}/listar`);
   }
 
-  crearJugador(information: Jugador): Observable<any> {
+  crearJugador(information: Jugador): Observable<Jugador> {
     return this.http
-      .post
-      (`${PathRest.getApiJugador}/crear`, information);
+      .post<Jugador>
+      (`${PathRest.getApiJugador}/crear`, information, this.httpOptions);
   }
-  
+
   /**
    * Metodo encarcado de validar la informacion que pasara en el 
    * si la referencia es valida o no.
