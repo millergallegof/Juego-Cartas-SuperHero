@@ -6,6 +6,7 @@ import { PathRest } from '../static/hostbackend';
 import { Jugador } from '../models/Ijugador';
 import { Juego } from '../models/Ijuego';
 import { Bajara } from '../models/Ibaraja';
+import { Tarjeta } from '../models/Itarjetas';
 
 type DocumentPredicate<T> = string | AngularFirestoreDocument;
 @Injectable({
@@ -21,20 +22,30 @@ export class ServicioJugadorService {
 
   constructor(
     private afs: AngularFirestore,
-    private jugador: HttpClient,) { }
+    private httpJugador: HttpClient,) { }
 
   /**
    * Metodo encargaado de realizadr el registro de del jugador en MongongoDb
    * @param information del usuario para registrarla en la base de datos
    * @returns la informacionguardada.
    */
-   crearJugador(information: Jugador): Observable<Jugador> {
-    return this.jugador
+  crearJugador(information: Jugador): Observable<Jugador> {
+    return this.httpJugador
       .post<Jugador>
       (`${PathRest.getApiJugador}/crear`, information, this.httpOptions);
   }
 
-  
+  actulizarBaraja(idjugador:string, baraja: Bajara): Observable<Jugador> {
+    return this.httpJugador
+    .post<Jugador>
+    (`${PathRest.getApiJugador}/actualizar/${idjugador}`, baraja);
+  }
+
+  apostarTarjeta(idjugador:string, tarjeta:Tarjeta): Observable<Jugador> {
+    return this.httpJugador
+    .post<Jugador>
+    (`${PathRest.getApiJugador}/apostarcarta/${idjugador}`, tarjeta)
+  }
 
 
   //  METODOS FIREBASE TRAER INFORMACION
@@ -52,7 +63,7 @@ export class ServicioJugadorService {
    * @param data recibe los parametros a modificar en el documento
    * @returns el documento actualizado
    */
-  updateInformacion<T>(ref: DocumentPredicate<T>, data:{}) {
+  updateInformacion<T>(ref: DocumentPredicate<T>, data: {}) {
     return this.doc(ref).update({
       ...data
     })

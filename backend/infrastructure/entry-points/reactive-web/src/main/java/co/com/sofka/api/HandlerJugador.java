@@ -1,6 +1,7 @@
 package co.com.sofka.api;
 
 import co.com.sofka.model.baraja.Baraja;
+import co.com.sofka.model.jugador.Identificacion;
 import co.com.sofka.model.jugador.Jugador;
 import co.com.sofka.model.tarjeta.Tarjeta;
 import co.com.sofka.usecase.jugador.actualizarbaraja.ActualizarBarajaJugadorUseCase;
@@ -32,10 +33,10 @@ public class HandlerJugador {
     public Mono<ServerResponse> apostaCartaPutUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
         return serverRequest
-                .bodyToMono(String.class)
+                .bodyToMono(Identificacion.class)
                 .flatMap(element -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(apostarCartaUseCase.apostarCarta(id, element), Jugador.class));
+                        .body(apostarCartaUseCase.apostarCarta(id, element.getId()), Jugador.class));
     }
 
     public Mono<ServerResponse> asignarPuntosGETUseCase(ServerRequest serverRequest) {
