@@ -41,7 +41,9 @@ export class HomeComponentComponent implements OnInit {
       .subscribe(retorno => this.jugador.push(retorno));
 
 
-    this.peticionesJuego.crearJuego({ ronda: 1, mazoJuego: tarjetas, ganador: "", tableroId: "", jugadores: this.jugador }).subscribe();
+    this.peticionesJuego
+    .crearJuego({ ronda: 1, mazoJuego: tarjetas, ganador: "", tableroId: "", jugadores: this.jugador })
+    .subscribe();
     console.log(this.peticionesApi.crearBaraja().subscribe());
 
     this.peticionesApi.updateInformacion(`users/${uid}`, { displayName: nickName })
