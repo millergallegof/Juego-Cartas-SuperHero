@@ -23,12 +23,14 @@ export class HTTPServiceGameService {
     })
   }
   constructor(
-    private http: HttpClient,
-    private afs: AngularFirestore) { }
+    private afs: AngularFirestore,
+    private jugador: HttpClient,
+    private juego :HttpClient,
+    private tablero: HttpClient) { }
 
 
   getTarjetas(): Observable<any> {
-    return this.http
+    return this.jugador
       .get(`${PathRest.getApiTarjeta}/listar`);
   }
 
@@ -38,7 +40,7 @@ export class HTTPServiceGameService {
    * @returns la informacionguardada.
    */
   crearJugador(information: Jugador): Observable<Jugador> {
-    return this.http
+    return this.jugador
       .post<Jugador>
       (`${PathRest.getApiJugador}/crear`, information, this.httpOptions);
   }
@@ -49,7 +51,7 @@ export class HTTPServiceGameService {
    * @returns el campo de juego creado.
    */
   crearJuego(informacionJuego: Juego): Observable<Juego> {
-    return this.http
+    return this.jugador
       .post<Juego>
       (`${PathRest.getApiJuego}/crear`, informacionJuego, this.httpOptions);
   }
@@ -58,7 +60,7 @@ export class HTTPServiceGameService {
    * @returns 
    */
   crearBaraja(): Observable<Bajara> {
-    return this.http
+    return this.jugador
       .get<Bajara>
       (`${PathRest.getApiBaraja}/crear`);
   }
@@ -70,7 +72,6 @@ export class HTTPServiceGameService {
   private doc<T>(ref: DocumentPredicate<T>): AngularFirestoreDocument {
     return typeof ref === "string" ? this.afs.doc(ref) : ref;
   }
-
   /**
    * Metodo encargado de hacer el envio de la informacion del documento alojado en FireStore Database
    * Aljado en firebase

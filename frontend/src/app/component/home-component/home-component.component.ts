@@ -17,16 +17,16 @@ export class HomeComponentComponent implements OnInit {
     public peticionesApi: HTTPServiceGameService) {
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
 
   aceptarJuego(nickName: string): void {
     let { uid } = JSON.parse(localStorage.getItem('user')!);
     let tarjetas: Tarjeta[] = [];
     let jugadores: Jugador[] = [];
-    this.peticionesApi.crearJugador({ id: uid, nickName: nickName, puntos: 0, baraja: null, estado: true }).subscribe();
+    let jugador = this.peticionesApi.crearJugador({ id: uid, nickName: nickName, puntos: 0, baraja: null, estado: true }).subscribe();
     this.peticionesApi.crearJuego({ ronda: 1, mazoJuego: tarjetas, ganador: "", tableroId: "", jugadores: jugadores }).subscribe();
-    // console.log(this.peticionesApi.crearBaraja().subscribe());
+    console.log(this.peticionesApi.crearBaraja().subscribe());
     
     this.peticionesApi.updateInformacion(`users/${uid}`, { displayName: nickName })
       .then(() => console.log('Actualizado'))
