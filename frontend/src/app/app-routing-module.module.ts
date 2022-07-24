@@ -8,6 +8,7 @@ import { HomeComponentComponent } from './component/home-component/home-componen
 import { AngularFireAuthGuard, } from '@angular/fire/compat/auth-guard';
 import { ErrorComponentComponent } from './component/error-component/error-component.component';
 import { ListarTarjetasComponentComponent } from './component/listar-tarjetas-component/listar-tarjetas-component.component';
+import { WaitingRoomComponetComponent } from './component/waiting-room-componet/waiting-room-componet.component';
 
 
 const routesChildrens: Routes = [
@@ -16,7 +17,16 @@ const routesChildrens: Routes = [
     component: HomeComponentComponent,
     canActivate: [AngularFireAuthGuard],
   },
-  { path: 'juego', component: ListarTarjetasComponentComponent, canActivate: [AngularFireAuthGuard] },
+  { 
+    path: 'juego', 
+    component: ListarTarjetasComponentComponent, 
+    canActivate: [AngularFireAuthGuard] 
+  },
+  { 
+    path:'salaespera',
+    component: WaitingRoomComponetComponent,
+    canActivate:[AngularFireAuthGuard]
+  },
   { path: 'singup', component: SingupComponent },
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
