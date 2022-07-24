@@ -18,14 +18,8 @@ export class ServicioJuegoService {
     private juego: HttpClient,
   ) { }
 
-  /**
-   * Metodo encargad de crear el campo de juego para los jugadores
-   * @param informacionJuego para crear el campo de juego  
-   * @returns el campo de juego creado.
-   */
-  crearJuego(informacionJuego: Juego): Observable<Juego> {
-    return this.juego
-      .post<Juego>
-      (`${PathRest.getApiJuego}/crear`, informacionJuego, this.httpOptions);
+  getTablero() {
+    
   }
+
 }
