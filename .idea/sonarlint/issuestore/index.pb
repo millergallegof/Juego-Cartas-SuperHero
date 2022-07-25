@@ -53,8 +53,6 @@ abackend/domain/usecase/src/main/java/co/com/sofka/usecase/jugador/retirarse/Ret
 ebackend/domain/usecase/src/main/java/co/com/sofka/usecase/jugador/savejugador/SaveJugadorUseCase.java,b\9\b9526eb6e4ea01206e6c5e2ef60336ea6889467a
 “
 cbackend/infrastructure/entry-points/reactive-web/src/main/java/co/com/sofka/api/HandlerJugador.java,8\6\861b8eb7649ff6321a11bccc6d5034ef3d3b1e3a
-“
-cbackend/infrastructure/entry-points/reactive-web/src/main/java/co/com/sofka/api/HandlerTarjeta.java,2\c\2ca724b97efb2623dc060ff2d2c61926d82acdb9
 z
 Jbackend/domain/model/src/main/java/co/com/sofka/model/jugador/Jugador.java,2\9\298dc65bd9700a47353e27f8806b85dbecf25268
 ®
