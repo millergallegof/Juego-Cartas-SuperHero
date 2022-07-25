@@ -29,7 +29,7 @@ export class WaitingRoomComponetComponent implements OnInit {
     let idtemJuego = JSON.parse(localStorage.getItem('informacionJuego')!);
     this.juegoHttpService
       .repartirBaraja(idtemJuego)
-      .subscribe(data => {
+      .subscribe(() => {
         localStorage.setItem('informacionJuego', 'null');
         JSON.parse(localStorage.getItem('informacionJuego')!);
       }).unsubscribe();
