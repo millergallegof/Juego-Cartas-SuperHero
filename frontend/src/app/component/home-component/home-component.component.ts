@@ -80,7 +80,7 @@ export class HomeComponentComponent implements OnInit {
   }
 
   crearJuego(): void {
-    let tarjetas: Tarjeta[] = [];
+    let tarjetas: Tarjeta[] = []; 
     this.servicioHttpJuego
       .crearJuego({ id: null, ronda: 1, mazoJuego: tarjetas, ganador: "", tableroId: "", jugadores: this.jugadores })
       .subscribe(data => {

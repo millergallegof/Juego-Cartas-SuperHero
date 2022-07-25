@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Prueba } from 'src/app/models/Iprueba';
 import { Tarjeta } from '../../models/Itarjetas';
-
+import { interval, timer} from 'rxjs';
 
 type formatemporal = {
   id?: string;
@@ -62,17 +61,15 @@ export class ListarTarjetasComponentComponent implements OnInit {
   segundos: number;
   constructor() {
     this.minutos = 0;
-    this.segundos = 59;
+    this.segundos = 10;
     setInterval(() => this.descontar(), 1000);
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
   descontar(): void {
     if (--this.segundos < 0) {
-      this.segundos == 59;
+      this.segundos == 10;
       if (--this.minutos < 0) {
         this.minutos = 0;
         this.segundos = 59;
