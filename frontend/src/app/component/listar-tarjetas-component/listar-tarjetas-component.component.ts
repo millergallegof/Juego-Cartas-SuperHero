@@ -85,9 +85,8 @@ export class ListarTarjetasComponentComponent implements OnInit {
 
     this.servicioHttpJugador.apostarTarjeta(uid, idTarjeta)
       .subscribe(data => {
-        console.log(data);
-    //    this.servicioHttpJuego.actualizarJugadores(idJuego, data)
-    //      .subscribe(data => { console.log(data) })
+        this.servicioHttpJuego.actualizarBarajaJugador(idJuego, {idJugador: uid, baraja: data.baraja!})
+        .subscribe(data => { data})
       });
 
     this.eliminarCartaBaraja(idTarjeta);
