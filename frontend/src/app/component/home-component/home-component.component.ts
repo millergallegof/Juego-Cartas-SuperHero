@@ -43,7 +43,7 @@ export class HomeComponentComponent implements OnInit {
     this.crearJugador(nickName);
     this.crearTablero();
     this.comenzarJuego(this.idJuego)
-    
+
 
   }
 
@@ -66,7 +66,10 @@ export class HomeComponentComponent implements OnInit {
     let tarjetas: Tarjeta[] = [];
     this.servicioHttpJuego
       .crearJuego({ id: null, ronda: 1, mazoJuego: tarjetas, ganador: "", tableroId: "", jugadores: this.jugadores })
-      .subscribe(data => this.idJuego = data.id!)
+      .subscribe(data => {
+        console.log(data);
+        this.idJuego = data.id!
+      })
   }
 
   crearTablero(): void {
