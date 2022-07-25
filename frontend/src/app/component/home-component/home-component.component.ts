@@ -16,7 +16,9 @@ import { ServiceHttpTablero } from '../../service/http-service-tablero.service';
 export class HomeComponentComponent implements OnInit {
   jugadores: Jugador[] = [];
   juegos: Juego[] = [];
-  idTablero: string = ""
+  idTablero: string = "";
+  idJuego: string = "";
+  idHost: string = "";
 
   constructor(
     public autenticacionService: AutenticacionServiceService,
@@ -30,25 +32,18 @@ export class HomeComponentComponent implements OnInit {
     this.comenzarJuego("62dda5b016bc021316dc0032")
   }
 
-
   listarJuegos(): void {
     this.servicioHttpJuego
       .listarJuego()
       .subscribe(data => this.juegos.push(data));
   }
 
-  aceptarJuego(nickName: string): void {
-
-    let tarjetas: Tarjeta[] = [];
-
-
+  crearSala(nickName: string): void {
+    this.crearJuego()
     this.crearJugador(nickName);
     this.crearTablero();
-    // this.comenzarJuego();
-    this.servicioHttpJuego
-      .crearJuego({ id: null, ronda: 1, mazoJuego: tarjetas, ganador: "", tableroId: "", jugadores: this.jugadores })
-      .subscribe();
-    // console.log(this.serviciosHttpJuego.repartirBaraja().subscribe());
+    this.comenzarJuego(this.idJuego)
+
 
   }
 
@@ -57,27 +52,39 @@ export class HomeComponentComponent implements OnInit {
     this.servicioHttpJugador
       .crearJugador
       ({ id: uid, nickName: nickName, puntos: 0, baraja: null, estado: true })
-      .subscribe(retorno => this.jugadores.push(retorno));
+      .subscribe(data => {
+        this.jugadores.push(data)
+        this.idHost = data.id
+      });
 
     this.servicioHttpJugador.updateInformacion(`users/${uid}`, { displayName: nickName })
       .then(() => console.log('Actualizado'))
       .catch(err => console.log(err));
   }
 
+  crearJuego(): void {
+    let tarjetas: Tarjeta[] = [];
+    this.servicioHttpJuego
+      .crearJuego({ id: null, ronda: 1, mazoJuego: tarjetas, ganador: "", tableroId: "", jugadores: this.jugadores })
+      .subscribe(data => {
+        console.log(data);
+        this.idJuego = data.id!
+      })
+  }
 
-  crearTablero():void{
+  crearTablero(): void {
     this.servicioHttpTablero
-    .crearTablero({id:null, apuesta:null, ganadorId:"", tiempo: 30})
-    .subscribe(data => this.idTablero = data.id! );
+      .crearTablero({ id: null, apuesta: null, ganadorId: "", tiempo: 30 })
+      .subscribe(data => this.idTablero = data.id!);
   }
 
   comenzarJuego(idJuego: string): void {
     let tableroJugadores = {
       jugadores: this.jugadores,
-      idTablero:this.idTablero
+      idTablero: this.idTablero
     }
     this.servicioHttpJuego
-    .comenzarJuego(idJuego, tableroJugadores)
-    .subscribe(data => this.juegos.push(data));
+      .comenzarJuego(idJuego, tableroJugadores)
+      .subscribe(data => this.juegos.push(data));
   }
 }
