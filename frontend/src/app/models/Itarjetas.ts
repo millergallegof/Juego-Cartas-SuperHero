@@ -1,7 +1,6 @@
 export interface Tarjeta {
     id : string;
-    caracteristicas:string;
-    image:string;
+    imagen:string;
     poderXp: number;
     descripcion:string;
 }

@@ -35,10 +35,10 @@ export class ServiceHttpJugador {
       (`${PathRest.getApiJugador}/crear`, information, this.httpOptions);
   }
 
-  actulizarBaraja(idjugador: string, baraja: Bajara): Observable<Jugador> {
+  actualizarBaraja(idjugador: string, baraja: Bajara): Observable<Jugador> {
     return this.httpJugador
       .post<Jugador>
-      (`${PathRest.getApiJugador}/actualizar/${idjugador}`, baraja);
+      (`${PathRest.getApiJugador}/actualizar/baraja/${idjugador}`, baraja);
   }
 
   apostarTarjeta(idjugador: string, idTarjeta: string): Observable<Jugador> {
@@ -61,7 +61,7 @@ export class ServiceHttpJugador {
 
   //  METODOS FIREBASE TRAER INFORMACION
   /**
-   * Metodo encarcado de validar la informacion que pasara en el 
+   * Metodo encarcado de validar la informacion que pasara en el
    * si la referencia es valida o no.
    */
   private doc<T>(ref: DocumentPredicate<T>): AngularFirestoreDocument {
