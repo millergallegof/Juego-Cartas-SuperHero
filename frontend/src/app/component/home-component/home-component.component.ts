@@ -62,15 +62,15 @@ export class HomeComponentComponent implements OnInit {
   }
 
   agregarJugador(nickName: string, idJuego: string): void {
-    console.log(idJuego);
+
     let { uid } = JSON.parse(localStorage.getItem('user')!);
     this.servicioHttpJugador
       .crearJugador
       ({ id: uid, nickName: nickName, puntos: 0, baraja: null, estado: true })
       .subscribe(data => {
-
+        console.log(idJuego);
         console.log(data);
-        this.servicioHttpJuego.actualizarJugadores(idJuego, data)
+        this.servicioHttpJuego.actualizarJugadores(idJuego, data).subscribe()
         this.jugadores.push(data)
       });
 
