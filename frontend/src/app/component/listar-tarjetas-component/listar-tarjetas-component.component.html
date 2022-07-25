@@ -25,7 +25,8 @@
         </div>
     </div>
 
-    <div class="col col-lg-8 d-flex align-items-center minh-100 ">
+    <app-tablero-component [tarjeta]="{{1 }}"></app-tablero-component>
+    <!-- <div class="col col-lg-8 d-flex align-items-center minh-100 ">
         <div class="card col-sm-8 w-100 p-2 colorUsers content">
             <div class="d-flex justify-content-between">
                 <p class="text-start text-white">Ronda: #1</p>
@@ -42,7 +43,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="col-2 d-flex justify-content-center align-items-center minh-100">
         <div class="col-sm-8 p-2">
@@ -52,7 +53,8 @@
                     <img src={{item.imagen}} class="card-header">
                     <div class="card-body">
                         <h5 class="card-title">{{ item.descripcion }}</h5>
-                        <button class="btn btn-primary" [disabled]="disabledButton" (click)="actualizarEstadoCarta(item.id)">Poder XP: {{item.poderXp}}.</button>
+                        <button class="btn btn-primary" [disabled]="disabledButton"
+                            (click)="actualizarEstadoCarta(item.id)">Poder XP: {{item.poderXp}}.</button>
                     </div>
                 </div>
 
