@@ -53,7 +53,7 @@ export class HomeComponentComponent implements OnInit {
       .crearJugador
       ({ id: uid, nickName: nickName, puntos: 0, baraja: null, estado: true })
       .subscribe(data => {
-        this.servicioHttpJuego.actualizarJugadores(uid, data).subscribe()
+        this.servicioHttpJuego.actualizarJugadores(data.id, data).subscribe(juego => console.log(juego))
         this.jugadores.push(data)
       });
 
