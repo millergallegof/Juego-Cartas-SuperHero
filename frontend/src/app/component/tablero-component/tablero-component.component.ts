@@ -14,6 +14,7 @@ type formatemporal = {
   styleUrls: ['./tablero-component.component.css']
 })
 export class TableroComponentComponent implements OnInit {
+  @Input() idTarjeta: string;
   @Input() tarjeta: Tarjeta;
   minutos: number;
   segundos: number;
@@ -26,7 +27,8 @@ export class TableroComponentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    console.log(this.idTarjeta);
+    console.log(this.tarjeta);
   }
 
   descontar(): void {
