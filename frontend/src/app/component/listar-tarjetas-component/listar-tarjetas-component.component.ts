@@ -20,7 +20,7 @@ type formatemporal = {
   styleUrls: ['./listar-tarjetas-component.component.css']
 })
 export class ListarTarjetasComponentComponent implements OnInit {
-
+  @ViewChild("idTarjeta") idTarjeta: string;
   tarjetas: Tarjeta[] = [];
   tarjetImgUser: any[] = [
     '../../../assets/img/icon-user.png'
@@ -76,7 +76,7 @@ export class ListarTarjetasComponentComponent implements OnInit {
         this.informationTarjetas = data.tarjetas;
         this.servicioHttpJugador.actualizarBaraja(uid, data)
           .subscribe(data => {
-            console.log(data);
+            data;
           })
       });
   }
@@ -86,9 +86,9 @@ export class ListarTarjetasComponentComponent implements OnInit {
     let idJuego = JSON.parse(localStorage.getItem('informacionJuego')!);
     console.log();
     this.servicioHttpJugador.traerTarjetaApostadaJugador(uid, idTarjeta)
-    .subscribe(data => {
-      this.tarjetaEnviada = data;
-    });
+      .subscribe(data => {
+        this.tarjetaEnviada = data;
+      });
     this.servicioHttpJugador.apostarTarjeta(uid, idTarjeta)
       .subscribe(jugador => {
         this.servicioHttpJuego.actualizarBarajaJugador(idJuego, { idJugador: uid, baraja: jugador.baraja! })
