@@ -40,8 +40,8 @@
     <tbody>
       <tr *ngFor="let juego of juegos">
         <th scope="row">{{ juego.id }}</th>
-        <td> {{ idHost }} </td>
-        <td> {{juego.jugadores}} </td>
+        <td> {{ juego.jugadores[0].id}} </td>
+        <td> {{ juego.jugadores.length }} </td>
         <td>
           <!--routerLink="/juego"-->
           <a class="btn btn-sm  btn-success boton">

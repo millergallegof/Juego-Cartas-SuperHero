@@ -19,6 +19,7 @@ export class HomeComponentComponent implements OnInit {
   idTablero: string = "";
   idJuego: string = "";
   idHost: string = "";
+  numJugadores: number = 0;
 
   constructor(
     public autenticacionService: AutenticacionServiceService,
@@ -28,22 +29,24 @@ export class HomeComponentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.listarJuegos()
-    this.comenzarJuego("62dda5b016bc021316dc0032")
+
   }
 
   listarJuegos(): void {
     this.servicioHttpJuego
       .listarJuego()
-      .subscribe(data => this.juegos.push(data));
+      .subscribe(data => {
+        this.juegos = data
+      });
+
   }
 
   crearSala(nickName: string): void {
     this.crearJuego()
     this.crearJugador(nickName);
     this.crearTablero();
-    this.comenzarJuego(this.idJuego)
-
 
   }
 
@@ -68,7 +71,7 @@ export class HomeComponentComponent implements OnInit {
       .crearJuego({ id: null, ronda: 1, mazoJuego: tarjetas, ganador: "", tableroId: "", jugadores: this.jugadores })
       .subscribe(data => {
         console.log(data);
-        this.idJuego = data.id!
+        this.comenzarJuego(data.id!)
       })
   }
 
@@ -85,6 +88,8 @@ export class HomeComponentComponent implements OnInit {
     }
     this.servicioHttpJuego
       .comenzarJuego(idJuego, tableroJugadores)
-      .subscribe(data => this.juegos.push(data));
+      .subscribe(data => {
+        this.juegos.push(data)
+      });
   }
 }
