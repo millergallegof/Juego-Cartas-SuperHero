@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Tarjeta } from '../../models/Itarjetas';
-import { interval, timer} from 'rxjs';
+import { interval, timer } from 'rxjs';
 
 type formatemporal = {
   id?: string;
-  [link:string]: any;
+  [link: string]: any;
   nombre?: string;
   poder?: number;
 }
@@ -69,7 +69,7 @@ export class ListarTarjetasComponentComponent implements OnInit {
 
   descontar(): void {
     if (--this.segundos < 0) {
-      this.segundos == 10;
+      this.segundos = 10;
       if (--this.minutos < 0) {
         this.minutos = 0;
         this.segundos = 59;
@@ -83,17 +83,17 @@ export class ListarTarjetasComponentComponent implements OnInit {
   }
 
   eliminarCartaMazo(idCarta: string): void {
-   var temporal = this.informationTarjeta.filter(element => element.id !== idCarta);
-   this.informationTarjeta = temporal;
+    var temporal = this.informationTarjeta.filter(element => element.id !== idCarta);
+    this.informationTarjeta = temporal;
 
   }
 
   agregarCartaCampo(idCarta: string): void {
-  let temporal: formatemporal;
-  temporal = this.informationTarjeta.filter(element => element.id == idCarta);
-  this.disabledButton = true;
-  temporal['link'] ='../../.././assets/img/revezCarta.jpg';
-   this.cartasCampo.push(temporal);
+    let temporal: formatemporal;
+    temporal = this.informationTarjeta.filter(element => element.id == idCarta);
+    this.disabledButton = true;
+    temporal['link'] = '../../.././assets/img/revezCarta.jpg';
+    this.cartasCampo.push(temporal);
 
   }
 }
