@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ServiceHttJuego } from '../../service/http-service-juego.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-waiting-room-componet',
@@ -7,23 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WaitingRoomComponetComponent implements OnInit {
 
-  minutos: number;
+ 
   segundos: number;
-  constructor() {
-    this.minutos = 0;
-    this.segundos = 30;
+  constructor(
+    private router: Router
+  ) {
+    this.segundos = 10; 
+  }
+
+  ngOnInit(): void { 
+    setTimeout(() => {
+      this.router.navigate(['juego']);
+    }, 10000)
     setInterval(() => this.descontar(), 1000);
   }
 
-  ngOnInit(): void {}
+
 
   descontar(): void {
-    if (--this.segundos < 0) {
-      this.segundos == 30;
-      if (--this.minutos < 0) {
-        this.minutos = 0;
-        this.segundos = 30;
-      }
-    }
+    --this.segundos;
   }
 }

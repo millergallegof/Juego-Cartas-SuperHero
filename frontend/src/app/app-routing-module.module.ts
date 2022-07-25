@@ -29,7 +29,7 @@ const routesChildrens: Routes = [
   },
   { path: 'singup', component: SingupComponent },
   { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/login', pathMatch: 'full' },
   
   { path: '**', component: ErrorComponentComponent },
 

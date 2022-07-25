@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/compat/firestore';
 
 import { noop, Observable } from 'rxjs';
 import { Tarjeta } from '../models/Itarjetas';
