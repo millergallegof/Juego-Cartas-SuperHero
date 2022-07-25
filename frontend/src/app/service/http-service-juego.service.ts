@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/compat/firestore';
 
 import { noop, Observable } from 'rxjs';
 import { Tarjeta } from '../models/Itarjetas';
@@ -91,6 +90,12 @@ export class ServiceHttJuego {
     return this.httpJuego
       .post<Juego>
       (`${PathRest.getApiJuego}/retiro/${idJugador}`, identificacionJugador, this.httpOptions);
+  }
+
+  listarBarajaJugador(idJuego: string, identificacionJugador: IdentificacionJugador): Observable<Juego> {
+    return this.httpJuego
+      .post<Juego>
+      (`${PathRest.getApiJuego}/listar/baraja/jugador/${idJuego}`, identificacionJugador, this.httpOptions);
   }
 
 }

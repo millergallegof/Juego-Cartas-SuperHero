@@ -28,9 +28,7 @@ export class HomeComponentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.listarJuegos()
-
   }
 
   listarJuegos(): void {
@@ -48,7 +46,7 @@ export class HomeComponentComponent implements OnInit {
   }
 
   crearSala(nickName: string): void {
-    this.crearJuego()
+    this.crearJuego();
     this.crearJugador(nickName);
     this.crearTablero();
     this.listarJuegos();
@@ -89,11 +87,13 @@ export class HomeComponentComponent implements OnInit {
 
   crearJuego(): void {
     let tarjetas: Tarjeta[] = [];
-    this.servicioHttpJuego
-      .crearJuego({ id: null, ronda: 1, mazoJuego: tarjetas, ganador: "", tableroId: "", jugadores: this.jugadores })
-      .subscribe(data => {
-        this.comenzarJuego(data.id!)
-      })
+      this.servicioHttpJuego
+        .crearJuego({ id: null, ronda: 1, mazoJuego: tarjetas, ganador: "", tableroId: "", jugadores: this.jugadores })
+        .subscribe(data => {
+          this.comenzarJuego(data.id!)
+          localStorage.setItem('informacionJuego', JSON.stringify(data.id))
+          JSON.parse(localStorage.getItem('informacionJuego')!);
+        })
   }
 
   crearTablero(): void {
