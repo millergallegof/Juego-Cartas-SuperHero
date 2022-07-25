@@ -49,10 +49,10 @@
             <h5 class="card-header text-white text-center p-2">Usuario</h5>
             <div class="card text-center colorUsers anyClass p-2">
                 <div *ngFor="let item of informationTarjeta" class="card text-bg-dark mb-3 cardDimencion">
-                    <img src="{{item.link}}" class="card-header">
+                    <img src={{item.imagen}} class="card-header">
                     <div class="card-body">
-                        <h5 class="card-title">{{ item.nombre }}</h5>
-                        <button class="btn btn-primary" [disabled]="disabledButton" (click)="actualizarEstadoCarta(item.id)">Poder XP: {{item.poder}}.</button>
+                        <h5 class="card-title">{{ item.descripcion }}</h5>
+                        <button class="btn btn-primary" [disabled]="disabledButton" (click)="actualizarEstadoCarta(item.id)">Poder XP: {{item.poderXp}}.</button>
                     </div>
                 </div>
 
