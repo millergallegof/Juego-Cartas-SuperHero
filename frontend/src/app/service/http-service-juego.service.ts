@@ -39,52 +39,52 @@ export class ServiceHttJuego {
       (`${PathRest.getApiJuego}/crear`, juego, this.httpOptions);
   }
 
-  comenzarJuego(idJuego: string, infoJuego: JugadoresTablero ): Observable<Juego>{
+  comenzarJuego(idJuego: string, infoJuego: JugadoresTablero): Observable<Juego> {
     return this.httpJuego
       .post<Juego>
-      (`${PathRest.getApiJuego}/comenzar/${idJuego}`, infoJuego, this.httpOptions);
+      (`${PathRest.getApiJuego}/comenzar/${idJuego}`, infoJuego);
   }
 
-  repartirBaraja(idJuego: string): Observable<Juego>{
-    return this.httpJuego
-     .get<Juego>
-     (`${PathRest.getApiJuego}/baraja/${idJuego}`);
-  }
-
-  listarJuego(): Observable<Juego> {
+  repartirBaraja(idJuego: string): Observable<Juego> {
     return this.httpJuego
       .get<Juego>
-      (`${PathRest.getApiTablero}/listar/`)
+      (`${PathRest.getApiJuego}/baraja/${idJuego}`);
+  }
+
+  listarJuego(): Observable<Juego[]> {
+    return this.httpJuego
+      .get<Juego[]>
+      (`${PathRest.getApiJuego}/listar`)
   }
 
   finalizarJuego(idJuego: string): Observable<Juego> {
     return this.httpJuego
       .get<Juego>
-      (`${PathRest.getApiTablero}/finalizar/${idJuego}`)
+      (`${PathRest.getApiJuego}/finalizar/${idJuego}`)
   }
 
-  asignarGanador(idJuego: string,juego: Juego):Observable<Juego>{
+  asignarGanador(idJuego: string, juego: Juego): Observable<Juego> {
     return this.httpJuego
-    .post<Juego>
-    (`${PathRest.getApiTablero}/ganador/${idJuego}`, juego, this.httpOptions)
+      .post<Juego>
+      (`${PathRest.getApiJuego}/ganador/${idJuego}`, juego, this.httpOptions)
   }
 
-  aumentaRondaPOSTUseCase(idJuego: string):Observable<Juego>{
+  aumentaRondaPOSTUseCase(idJuego: string): Observable<Juego> {
     return this.httpJuego
-    .get<Juego>
-    (`${PathRest.getApiTablero}/rondas/${idJuego}`)
+      .get<Juego>
+      (`${PathRest.getApiJuego}/rondas/${idJuego}`)
   }
 
-  actuaLizarBarajaGanadorRonda(idJugador: string, elementosJuego: ElementosJugadorJuego ):Observable<Juego>{
+  actuaLizarBarajaGanadorRonda(idJugador: string, elementosJuego: ElementosJugadorJuego): Observable<Juego> {
     return this.httpJuego
-    .post<Juego>
-    (`${PathRest.getApiTablero}/ganador/ronda/${idJugador}`, elementosJuego, this.httpOptions)
+      .post<Juego>
+      (`${PathRest.getApiJuego}/ganador/ronda/${idJugador}`, elementosJuego, this.httpOptions)
   }
 
-  asignarCartasMazo(idJugador: string, identificacionJugador: IdentificacionJugador):Observable<Juego>{
+  asignarCartasMazo(idJugador: string, identificacionJugador: IdentificacionJugador): Observable<Juego> {
     return this.httpJuego
-    .post<Juego>
-     (`${PathRest.getApiJuego}/retiro/${idJugador}`,identificacionJugador , this.httpOptions);
+      .post<Juego>
+      (`${PathRest.getApiJuego}/retiro/${idJugador}`, identificacionJugador, this.httpOptions);
   }
 
 }
