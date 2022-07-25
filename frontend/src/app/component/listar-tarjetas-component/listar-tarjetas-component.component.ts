@@ -40,7 +40,6 @@ export class ListarTarjetasComponentComponent implements OnInit {
 
   ngOnInit(): void {
     this.repatirBaraja();
-    
   }
 
   descontar(): void {
