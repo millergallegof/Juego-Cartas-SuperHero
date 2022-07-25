@@ -12,7 +12,7 @@ type DocumentPredicate<T> = string | AngularFirestoreDocument;
 @Injectable({
   providedIn: 'root'
 })
-export class ServicioJugadorService {
+export class ServiceHttpJugador {
 
   private httpOptions = {
     headers: new HttpHeaders({

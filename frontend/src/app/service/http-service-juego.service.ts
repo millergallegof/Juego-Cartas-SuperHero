@@ -16,7 +16,7 @@ import { JugadoresTablero } from '../models/jugadoresTablero';
 @Injectable({
   providedIn: 'root'
 })
-export class HTTPServiceGameService {
+export class ServiceHttJuego {
 
   private httpOptions = {
     headers: new HttpHeaders({

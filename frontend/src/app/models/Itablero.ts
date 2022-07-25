@@ -1,8 +1,8 @@
 import { Tarjeta } from './Itarjetas';
 
 export interface Tablero {
-    id: string;
-    apuesta: Map<string, Tarjeta>;
+    id: string | null;
+    apuesta: Map<string, Tarjeta> | null;
     ganadorId: string;
     tiempo: number;
 }
