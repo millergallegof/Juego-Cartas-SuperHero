@@ -44,7 +44,7 @@ export class HomeComponentComponent implements OnInit {
     this.crearJuego();
     this.crearJugador(nickName);
     this.crearTablero();
-    this.listarJuegos();
+
   }
 
   crearJugador(nickName: string): void {
@@ -53,6 +53,7 @@ export class HomeComponentComponent implements OnInit {
       .crearJugador
       ({ id: uid, nickName: nickName, puntos: 0, baraja: null, estado: true })
       .subscribe(data => {
+        this.servicioHttpJuego.actualizarJugadores(uid, data).subscribe()
         this.jugadores.push(data)
       });
 
