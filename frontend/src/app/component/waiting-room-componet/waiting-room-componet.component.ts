@@ -9,37 +9,24 @@ import { Router } from '@angular/router';
 })
 export class WaitingRoomComponetComponent implements OnInit {
 
-  minutos: number;
+ 
   segundos: number;
   constructor(
-    private juegoHttpService: ServiceHttJuego,
     private router: Router
   ) {
-    this.minutos = 0;
-    this.segundos = 30;
-    
+    this.segundos = 10; 
   }
 
   ngOnInit(): void { 
+    setTimeout(() => {
+      this.router.navigate(['juego']);
+    }, 10000)
     setInterval(() => this.descontar(), 1000);
   }
 
 
-  repatirBaraja(): void {
-    let idtemJuego = JSON.parse(localStorage.getItem('informacionJuego')!);
-    this.juegoHttpService
-      .repartirBaraja(idtemJuego)
-      .subscribe(() => {
-        localStorage.setItem('informacionJuego', 'null');
-        JSON.parse(localStorage.getItem('informacionJuego')!);
-      }).unsubscribe();
-  }
-
 
   descontar(): void {
-    if (--this.segundos < 0) {
-      this.repatirBaraja();
-      this.router.navigate(['juego']);
-    }
+    --this.segundos;
   }
 }

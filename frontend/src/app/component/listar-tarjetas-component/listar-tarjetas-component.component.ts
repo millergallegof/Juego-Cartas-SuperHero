@@ -35,10 +35,11 @@ export class ListarTarjetasComponentComponent implements OnInit {
     this.minutos = 0;
     this.segundos = 10;
     setInterval(() => this.descontar(), 1000);
-    
+
   }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
+    this.repatirBaraja();
     this.obtenerCartas()
   }
 
@@ -52,15 +53,16 @@ export class ListarTarjetasComponentComponent implements OnInit {
     }
   }
 
-
-  rendirse(): void {
-    
+  repatirBaraja(): void {
+    let idtemJuego = JSON.parse(localStorage.getItem('informacionJuego')!);
+    this.servicioHttpJuego
+      .repartirBaraja(idtemJuego)
+      .subscribe();
   }
 
   obtenerCartas(): void {
     this.servicioHttpJuego
-    .listarJuego()
-    .subscribe(data => console.log(data))
+      
   }
 
   actualizarEstadoCarta(idCarta: string): void {
