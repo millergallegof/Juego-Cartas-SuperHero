@@ -1,0 +1,15 @@
+
+        <div class="d-flex justify-content-between">
+            <p class="text-start text-white">Ronda: #1</p>
+            <p class="text-end text-white">Tiempo: <span>{{minutos}}:{{segundos}}</span></p>
+        </div>
+
+        <div class="text-center content d-flex justify-content-around align-items-center minh-100">
+            <div *ngFor="let item of tarjetasTablero" class="card text-bg-dark mb-3 cardDimencion ">
+                <img src="{{ item.link }}" class="card-header" alt="img/carta">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.nombre }} </h5>
+                    <p class="card-text">Poder XP:{{item.poder}}.</p>
+                </div>
+            </div>
+        </div>

@@ -44,7 +44,7 @@ export class ServiceHttpJugador {
   apostarTarjeta(idjugador: string, idTarjeta: string): Observable<Jugador> {
     return this.httpJugador
       .post<Jugador>
-      (`${PathRest.getApiJugador}/apostarcarta/${idjugador}`, idTarjeta)
+      (`${PathRest.getApiJugador}/apostarcarta/${idjugador}`, idTarjeta, this.httpOptions)
   }
 
   cambiarEstado(idjugador: string): Observable<Jugador> {
@@ -57,6 +57,12 @@ export class ServiceHttpJugador {
     return this.httpJugador
       .get<Jugador>
       (`${PathRest.getApiJugador}/aumentarpuntos/${idjugador}`)
+  }
+
+  traerTarjetaApostadaJugador(idjugador: string, idTarjeta: string): Observable<Tarjeta> {
+    return this.httpJugador
+      .post<Tarjeta>
+      (`${PathRest.getApiJugador}/obtener/tarjeta/apostada/${idjugador}`, idTarjeta)
   }
 
   //  METODOS FIREBASE TRAER INFORMACION

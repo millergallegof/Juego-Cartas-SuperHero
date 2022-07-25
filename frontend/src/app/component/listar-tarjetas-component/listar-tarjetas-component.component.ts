@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Tarjeta } from '../../models/Itarjetas';
 import { interval, timer } from 'rxjs';
 import { Bajara } from '../../models/Ibaraja';
 import { ServiceHttJuego } from '../../service/http-service-juego.service';
 import { ServiceHttpJugador } from 'src/app/service/http-service-jugador.service';
+import { TableroComponentComponent } from '../tablero-component/tablero-component.component';
+
 
 type formatemporal = {
   id?: string;
@@ -24,9 +26,9 @@ export class ListarTarjetasComponentComponent implements OnInit {
     '../../../assets/img/icon-user.png'
   ]
 
-  cartasCampo: any[] = [];
+  tarjetaEnviada: Tarjeta;
   disabledButton: boolean = false;
-  informationTarjeta: Tarjeta[] = [];
+  informationTarjetas: Tarjeta[] = [];
 
   minutos: number;
   segundos: number;
@@ -71,7 +73,7 @@ export class ListarTarjetasComponentComponent implements OnInit {
     this.servicioHttpJuego
       .listarBarajaJugador(idJuego, { id: uid })
       .subscribe(data => {
-        this.informationTarjeta = data.tarjetas;
+        this.informationTarjetas = data.tarjetas;
         this.servicioHttpJugador.actualizarBaraja(uid, data)
           .subscribe(data => {
             console.log(data);
@@ -82,29 +84,27 @@ export class ListarTarjetasComponentComponent implements OnInit {
   actualizarEstadoCarta(idTarjeta: string): void {
     let { uid } = JSON.parse(localStorage.getItem('user')!);
     let idJuego = JSON.parse(localStorage.getItem('informacionJuego')!);
-
+    console.log();
+    this.servicioHttpJugador.traerTarjetaApostadaJugador(uid, idTarjeta)
+    .subscribe(data => {
+      this.tarjetaEnviada = data;
+    });
     this.servicioHttpJugador.apostarTarjeta(uid, idTarjeta)
-      .subscribe(data => {
-        this.servicioHttpJuego.actualizarBarajaJugador(idJuego, {idJugador: uid, baraja: data.baraja!})
-        .subscribe(data => { data})
+      .subscribe(jugador => {
+        this.servicioHttpJuego.actualizarBarajaJugador(idJuego, { idJugador: uid, baraja: jugador.baraja! })
+          .subscribe(juego => { juego })
       });
 
     this.eliminarCartaBaraja(idTarjeta);
-    this.agregarCartaCampo(idTarjeta);
   }
 
   eliminarCartaBaraja(idTarjeta: string): void {
-    let temporal = this.informationTarjeta.filter(element => element.id !== idTarjeta);
-    this.informationTarjeta = temporal;
+    let temporal = this.informationTarjetas.filter(element => element.id !== idTarjeta);
+    this.informationTarjetas = temporal;
+    this.disabledButton = true;
   }
 
-  agregarCartaCampo(idTarjeta: string): void {
-    let temporal: formatemporal;
-    temporal = this.informationTarjeta.filter(element => element.id == idTarjeta);
-    this.disabledButton = true;
-    temporal['link'] = '../../.././assets/img/revezCarta.jpg';
-    this.cartasCampo.push(temporal);
-  }
+
 
 
 }
