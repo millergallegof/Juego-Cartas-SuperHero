@@ -4,8 +4,10 @@ import co.com.sofka.model.baraja.Baraja;
 import co.com.sofka.model.juego.ElementosJuego;
 import co.com.sofka.model.juego.ElementosJugadorJuego;
 import co.com.sofka.model.juego.Juego;
+import co.com.sofka.model.juego.JugadorBaraja;
 import co.com.sofka.model.jugador.Identificacion;
 import co.com.sofka.model.jugador.Jugador;
+import co.com.sofka.usecase.juego.actualizarbarajajugadorjuego.ActualizarBarajaJugadorJuegoUseCase;
 import co.com.sofka.usecase.juego.actualizarganador.ActualizarGanadorRondaUseCase;
 import co.com.sofka.usecase.juego.actualizarjugadores.ActualizarJugadoresJuegoUseCase;
 import co.com.sofka.usecase.juego.asignarcartaretirojugador.AsignarCartaRetiroJugadorUseCase;
@@ -42,8 +44,8 @@ public class HandlerJuego {
     private final AsignarCartaRetiroJugadorUseCase asignarCartaRetiroJugadorUseCase;
     private final FinalizarJuegoUseCase finalizarJuegoUseCase;
     private final ActualizarJugadoresJuegoUseCase actualizarJugadoresJuegoUseCase;
-
     private final ListarBarajaJugadorUseCase listarBarajaJugadorUseCase;
+    private final ActualizarBarajaJugadorJuegoUseCase actualizarBarajaJugadorJuegoUseCase;
 
     public Mono<ServerResponse> crearJuegoPOSTUseCase(ServerRequest serverRequest) {
         return serverRequest.bodyToMono(Juego.class)
@@ -125,6 +127,14 @@ public class HandlerJuego {
                 .flatMap(element -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(listarBarajaJugadorUseCase.listarBarajaJugador(id, element.getId()), Baraja.class));
+    }
+
+    public Mono<ServerResponse> actualizarBarajaJugadorPOSTUSeCase(ServerRequest serverRequest) {
+        var id = serverRequest.pathVariable("id");
+        return serverRequest.bodyToMono(JugadorBaraja.class)
+                .flatMap(element -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(actualizarBarajaJugadorJuegoUseCase.actualizarBarajaJugador(id, element.getIdJugador(), element.getBaraja()), Juego.class));
     }
 
 }
