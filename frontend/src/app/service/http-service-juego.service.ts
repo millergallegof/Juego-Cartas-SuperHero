@@ -53,7 +53,7 @@ export class ServiceHttJuego {
   repartirBaraja(idJuego: string): Observable<Juego> {
     return this.httpJuego
       .get<Juego>
-      (`${PathRest.getApiBaraja}/${idJuego}`);
+      (`${PathRest.getApiJuego}/baraja/${idJuego}`);
   }
 
   listarJuego(): Observable<Juego[]> {
