@@ -33,11 +33,11 @@
             </div>
 
             <div class="text-center content d-flex justify-content-around align-items-center minh-100">
-                <div *ngFor="let item of informationTarjeta" class="card text-bg-dark mb-3 cardDimencion ">
+                <div *ngFor="let item of cartasCampo" class="card text-bg-dark mb-3 cardDimencion ">
                     <img src="{{ item.link }}" class="card-header" alt="img/carta">
                     <div class="card-body">
-                        <h5 class="card-title">{{ item.nombre }}</h5>
-                        <p class="btn btn-primary ">Poder XP:{{item.poder}}.</p>
+                        <h5 class="card-title">{{ item.nombre }} </h5>
+                        <p class="card-text">Poder XP:{{item.poder}}.</p>
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                     <img src="{{item.link}}" class="card-header">
                     <div class="card-body">
                         <h5 class="card-title">{{ item.nombre }}</h5>
-                        <p class="btn btn-primary">Poder XP: {{item.poder}}.</p>
+                        <button class="btn btn-primary" [disabled]="disabledButton" (click)="actualizarEstadoCarta(item.id)">Poder XP: {{item.poder}}.</button>
                     </div>
                 </div>
 
