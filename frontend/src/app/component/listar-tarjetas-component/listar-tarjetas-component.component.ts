@@ -22,11 +22,8 @@ export class ListarTarjetasComponentComponent implements OnInit {
     '../../../assets/img/icon-user.png'
   ]
 
-  cartasCampo: any[] = [
-
-
-  ];
-  // data: any;
+  cartasCampo: any[] = [];
+  disabledButton: boolean = false;
   informationTarjeta: any[] = [
     {
       id: "1",
@@ -97,6 +94,7 @@ export class ListarTarjetasComponentComponent implements OnInit {
   agregarCartaCampo(idCarta: string): void {
   let temporal: formatemporal;
   temporal = this.informationTarjeta.filter(element => element.id == idCarta);
+  this.disabledButton = true;
   temporal['link'] ='../../.././assets/img/revezCarta.jpg';
    this.cartasCampo.push(temporal);
 

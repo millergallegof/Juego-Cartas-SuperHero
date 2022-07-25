@@ -52,7 +52,7 @@
                     <img src="{{item.link}}" class="card-header">
                     <div class="card-body">
                         <h5 class="card-title">{{ item.nombre }}</h5>
-                        <p class="btn btn-primary" (click)="actualizarEstadoCarta(item.id)">Poder XP: {{item.poder}}.</p>
+                        <button class="btn btn-primary" [disabled]="disabledButton" (click)="actualizarEstadoCarta(item.id)">Poder XP: {{item.poder}}.</button>
                     </div>
                 </div>
 
