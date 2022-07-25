@@ -54,14 +54,13 @@ export class ListarTarjetasComponentComponent implements OnInit {
 
 
   rendirse(): void {
-
+    
   }
 
   obtenerCartas(): void {
     this.servicioHttpJuego
     .listarJuego()
     .subscribe(data => console.log(data))
-    .unsubscribe();
   }
 
   actualizarEstadoCarta(idCarta: string): void {

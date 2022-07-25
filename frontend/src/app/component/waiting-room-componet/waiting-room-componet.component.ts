@@ -32,7 +32,7 @@ export class WaitingRoomComponetComponent implements OnInit {
       .subscribe(data => {
         localStorage.setItem('informacionJuego', 'null');
         JSON.parse(localStorage.getItem('informacionJuego')!);
-      });
+      }).unsubscribe();
   }
 
 
