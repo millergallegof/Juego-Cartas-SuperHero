@@ -35,8 +35,6 @@ export class AutenticacionServiceService {
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         console.log(result.user);
-        /* Call the SendVerificaitonMail() function when new user sign
-        up and returns promise */
         // this.SetUserData(result.user);
         this.router.navigate(['']);
 
