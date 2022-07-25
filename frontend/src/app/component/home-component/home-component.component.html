@@ -33,18 +33,20 @@
       <tr>
         <th scope="col">Id Game</th>
         <th scope="col">Host</th>
+        <th scope="col">Nombre Host</th>
         <th scope="col">Num Jugadores</th>
         <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let juego of juegos">
-        <th scope="row">{{ juego.id }}</th>
+        <th scope="row"><input disabled #idJuego value={{juego.id}}></th>
         <td> {{ juego.jugadores[0].id}} </td>
+        <td> {{ juego.jugadores[0].nickName}} </td>
         <td> {{ juego.jugadores.length }} </td>
         <td>
           <!--routerLink="/juego"-->
-          <a class="btn btn-sm  btn-success boton">
+          <a (click)="agregarJugador(idJuego.value, nickName.value)" class="btn btn-sm btn-success boton">
             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-robot"
               viewBox="0 0 16 16">
               <path
@@ -65,7 +67,7 @@
   <div class="d-flex justify-content-center">
     <ul class="ds-btn">
       <li>
-        <a class="btn btn-lg btn-success" (click)="crearSala(nickName.value)">
+        <a class="btn btn-lg btn-success" routerLink="/" (click)="crearSala(nickName.value)">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle"
             viewBox="0 0 16 16">
             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />

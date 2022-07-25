@@ -18,8 +18,6 @@ export class HomeComponentComponent implements OnInit {
   juegos: Juego[] = [];
   idTablero: string = "";
   idJuego: string = "";
-  idHost: string = "";
-  numJugadores: number = 0;
 
   constructor(
     public autenticacionService: AutenticacionServiceService,
@@ -31,8 +29,6 @@ export class HomeComponentComponent implements OnInit {
   ngOnInit(): void {
 
     this.listarJuegos()
-
-
 
   }
 
@@ -49,7 +45,6 @@ export class HomeComponentComponent implements OnInit {
     this.crearJuego()
     this.crearJugador(nickName);
     this.crearTablero();
-
   }
 
   crearJugador(nickName: string): void {
@@ -59,7 +54,21 @@ export class HomeComponentComponent implements OnInit {
       ({ id: uid, nickName: nickName, puntos: 0, baraja: null, estado: true })
       .subscribe(data => {
         this.jugadores.push(data)
-        this.idHost = data.id
+      });
+
+    this.servicioHttpJugador.updateInformacion(`users/${uid}`, { displayName: nickName })
+      .then(() => console.log('Actualizado'))
+      .catch(err => console.log(err));
+  }
+
+  agregarJugador(nickName: string, idJuego: string): void {
+    let { uid } = JSON.parse(localStorage.getItem('user')!);
+    this.servicioHttpJugador
+      .crearJugador
+      ({ id: uid, nickName: nickName, puntos: 0, baraja: null, estado: true })
+      .subscribe(data => {
+        this.servicioHttpJuego.actualizarJugadores(idJuego, data)
+        this.jugadores.push(data)
       });
 
     this.servicioHttpJugador.updateInformacion(`users/${uid}`, { displayName: nickName })

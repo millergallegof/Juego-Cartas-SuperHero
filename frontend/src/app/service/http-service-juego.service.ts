@@ -45,6 +45,12 @@ export class ServiceHttJuego {
       (`${PathRest.getApiJuego}/comenzar/${idJuego}`, infoJuego);
   }
 
+  actualizarJugadores(idJuego: string, jugador: Jugador): Observable<Juego> {
+    return this.httpJuego
+      .post<Juego>
+      (`${PathRest.getApiJuego}/actualizar/jugadores/${idJuego}`, jugador)
+  }
+
   repartirBaraja(idJuego: string): Observable<Juego> {
     return this.httpJuego
       .get<Juego>

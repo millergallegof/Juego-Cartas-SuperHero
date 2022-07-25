@@ -4,7 +4,9 @@ import co.com.sofka.model.juego.ElementosJuego;
 import co.com.sofka.model.juego.ElementosJugadorJuego;
 import co.com.sofka.model.juego.Juego;
 import co.com.sofka.model.jugador.Identificacion;
+import co.com.sofka.model.jugador.Jugador;
 import co.com.sofka.usecase.juego.actualizarganador.ActualizarGanadorRondaUseCase;
+import co.com.sofka.usecase.juego.actualizarjugadores.ActualizarJugadoresJuegoUseCase;
 import co.com.sofka.usecase.juego.asignarcartaretirojugador.AsignarCartaRetiroJugadorUseCase;
 import co.com.sofka.usecase.juego.comenzarjuego.ComenzarJuegoUseCase;
 import co.com.sofka.usecase.juego.crearjuego.CrearJuegoUseCase;
@@ -14,11 +16,14 @@ import co.com.sofka.usecase.juego.finalizarjuego.FinalizarJuegoUseCase;
 import co.com.sofka.usecase.juego.listarjuegos.ListarJuegosUseCase;
 import co.com.sofka.usecase.juego.repartirbaraja.RepartirBarajaUseCase;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -33,8 +38,8 @@ public class HandlerJuego {
     private final RepartirBarajaUseCase repartirBarajaUseCase;
     private final ActualizarGanadorRondaUseCase actualizarGanadorRondaUseCase;
     private final AsignarCartaRetiroJugadorUseCase asignarCartaRetiroJugadorUseCase;
-
     private final FinalizarJuegoUseCase finalizarJuegoUseCase;
+    private final ActualizarJugadoresJuegoUseCase actualizarJugadoresJuegoUseCase;
 
     public Mono<ServerResponse> crearJuegoPOSTUseCase(ServerRequest serverRequest) {
         return serverRequest.bodyToMono(Juego.class)
@@ -100,6 +105,15 @@ public class HandlerJuego {
                 .flatMap(element -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(asignarCartaRetiroJugadorUseCase.asignarCartasMazo(id, element.getId()), Juego.class));
+    }
+
+    public Mono<ServerResponse> actualizarJugadoresPOSTUSeCase(ServerRequest serverRequest) {
+        var id = serverRequest.pathVariable("id");
+
+        return serverRequest.bodyToMono(Jugador.class)
+                .flatMap(element -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(actualizarJugadoresJuegoUseCase.actualizarJugadores(id, element), Juego.class));
     }
 
 }
