@@ -40,7 +40,6 @@ export class ListarTarjetasComponentComponent implements OnInit {
 
   ngOnInit(): void {
     this.repatirBaraja();
-    this.obtenerCartas()
   }
 
   descontar(): void {
@@ -57,20 +56,20 @@ export class ListarTarjetasComponentComponent implements OnInit {
     let idtemJuego = JSON.parse(localStorage.getItem('informacionJuego')!);
     this.servicioHttpJuego
       .repartirBaraja(idtemJuego)
-      .subscribe(() => {
-        console.log(idtemJuego);
+      .subscribe(() =>{
+        this.obtenerCartas();
       });
-    // .unsubscribe();
-  }
-
-  rendirse(): void {
-
   }
 
   obtenerCartas(): void {
+    let idtemJuego = JSON.parse(localStorage.getItem('informacionJuego')!);
+    let {uid } = JSON.parse(localStorage.getItem('user')!);
+
     this.servicioHttpJuego
-      .listarJuego()
-      .subscribe(data => console.log(data))
+    .listarBarajaJugador(idtemJuego,{id:uid})
+    .subscribe( data =>{
+      console.log(data);
+    });
   }
 
   actualizarEstadoCarta(idCarta: string): void {
