@@ -92,4 +92,10 @@ export class ServiceHttJuego {
       (`${PathRest.getApiJuego}/retiro/${idJugador}`, identificacionJugador, this.httpOptions);
   }
 
+  listarBarajaJugador(idJugador: string, identificacionJugador: IdentificacionJugador): Observable<Juego> {
+    return this.httpJuego
+      .post<Juego>
+      (`${PathRest.getApiJuego}/lista/baraja/jugador/${idJugador}`, identificacionJugador, this.httpOptions);
+  }
+
 }

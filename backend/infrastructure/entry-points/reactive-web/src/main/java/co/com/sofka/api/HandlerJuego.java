@@ -1,5 +1,6 @@
 package co.com.sofka.api;
 
+import co.com.sofka.model.baraja.Baraja;
 import co.com.sofka.model.juego.ElementosJuego;
 import co.com.sofka.model.juego.ElementosJugadorJuego;
 import co.com.sofka.model.juego.Juego;
@@ -13,6 +14,7 @@ import co.com.sofka.usecase.juego.crearjuego.CrearJuegoUseCase;
 import co.com.sofka.usecase.juego.asignarganador.AsignarGanadorUseCase;
 import co.com.sofka.usecase.juego.aumentaronda.AumentaRondaUseCase;
 import co.com.sofka.usecase.juego.finalizarjuego.FinalizarJuegoUseCase;
+import co.com.sofka.usecase.juego.listarbarajajugador.ListarBarajaJugadorUseCase;
 import co.com.sofka.usecase.juego.listarjuegos.ListarJuegosUseCase;
 import co.com.sofka.usecase.juego.repartirbaraja.RepartirBarajaUseCase;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +42,8 @@ public class HandlerJuego {
     private final AsignarCartaRetiroJugadorUseCase asignarCartaRetiroJugadorUseCase;
     private final FinalizarJuegoUseCase finalizarJuegoUseCase;
     private final ActualizarJugadoresJuegoUseCase actualizarJugadoresJuegoUseCase;
+
+    private final ListarBarajaJugadorUseCase listarBarajaJugadorUseCase;
 
     public Mono<ServerResponse> crearJuegoPOSTUseCase(ServerRequest serverRequest) {
         return serverRequest.bodyToMono(Juego.class)
@@ -109,11 +113,18 @@ public class HandlerJuego {
 
     public Mono<ServerResponse> actualizarJugadoresPOSTUSeCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
-
         return serverRequest.bodyToMono(Jugador.class)
                 .flatMap(element -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(actualizarJugadoresJuegoUseCase.actualizarJugadores(id, element), Juego.class));
+    }
+
+    public Mono<ServerResponse> listarBarajaJugadorPOSTUSeCase(ServerRequest serverRequest) {
+        var id = serverRequest.pathVariable("id");
+        return serverRequest.bodyToMono(Identificacion.class)
+                .flatMap(element -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(listarBarajaJugadorUseCase.listarBarajaJugador(id, element.getId()), Baraja.class));
     }
 
 }
