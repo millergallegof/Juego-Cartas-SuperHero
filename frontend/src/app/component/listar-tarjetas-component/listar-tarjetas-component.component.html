@@ -1,71 +1,56 @@
 <div class="container row ">
-    <div class="col-2 d-flex justify-content-center align-items-center minh-100">
-        <div class="col-sm-8 p-2">
-            <h5 class="card-header text-white text-center p-2">Jugadores</h5>
-            <div class="card text-center colorUsers anyClass">
-                <div class="card-body">
-                    <img src="{{ tarjetImgUser }}" alt="" class="userImg">
-                </div>
-                <div class="card-body">
-                    <img src="{{ tarjetImgUser }}" alt="" class="userImg">
-                </div>
-                <div class="card-body">
-                    <img src="{{ tarjetImgUser }}" alt="" class="userImg">
-                </div>
-                <div class="card-body">
-                    <img src="{{ tarjetImgUser }}" alt="" class="userImg">
-                </div>
-                <div class="card-body">
-                    <img src="{{ tarjetImgUser }}" alt="" class="userImg">
-                </div>
-                <div class="card-body">
-                    <img src="../../../assets/img/icon-user.png" alt="" class="userImg">
-                </div>
-            </div>
+  <div class="col-2 d-flex justify-content-center align-items-center minh-100">
+    <div class="col-sm-8 p-2">
+      <h5 class="card-header text-white text-center p-2">Jugadores</h5>
+      <div class="card text-center colorUsers anyClass">
+        <div class="card-body">
+          <img src="{{ tarjetImgUser }}" alt="" class="userImg">
         </div>
+        <div class="card-body">
+          <img src="{{ tarjetImgUser }}" alt="" class="userImg">
+        </div>
+        <div class="card-body">
+          <img src="{{ tarjetImgUser }}" alt="" class="userImg">
+        </div>
+        <div class="card-body">
+          <img src="{{ tarjetImgUser }}" alt="" class="userImg">
+        </div>
+        <div class="card-body">
+          <img src="{{ tarjetImgUser }}" alt="" class="userImg">
+        </div>
+        <div class="card-body">
+          <img src="../../../assets/img/icon-user.png" alt="" class="userImg">
+        </div>
+      </div>
     </div>
+  </div>
 
-    <app-tablero-component [tarjeta]="{{1 }}"></app-tablero-component>
-    <!-- <div class="col col-lg-8 d-flex align-items-center minh-100 ">
-        <div class="card col-sm-8 w-100 p-2 colorUsers content">
-            <div class="d-flex justify-content-between">
-                <p class="text-start text-white">Ronda: #1</p>
-                <p class="text-end text-white">Tiempo: <span>{{minutos}}:{{segundos}}</span></p>
-            </div>
-
-            <div class="text-center content d-flex justify-content-around align-items-center minh-100">
-                <div *ngFor="let item of cartasCampo" class="card text-bg-dark mb-3 cardDimencion ">
-                    <img src="{{ item.link }}" class="card-header" alt="img/carta">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ item.nombre }} </h5>
-                        <p class="card-text">Poder XP:{{item.poder}}.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-    <div class="col-2 d-flex justify-content-center align-items-center minh-100">
-        <div class="col-sm-8 p-2">
-            <h5 class="card-header text-white text-center p-2">Usuario</h5>
-            <div class="card text-center colorUsers anyClass p-2">
-                <div *ngFor="let item of informationTarjeta" class="card text-bg-dark mb-3 cardDimencion">
-                    <img src={{item.imagen}} class="card-header">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ item.descripcion }}</h5>
-                        <button class="btn btn-primary" [disabled]="disabledButton"
-                            (click)="actualizarEstadoCarta(item.id)">Poder XP: {{item.poderXp}}.</button>
-                    </div>
-                </div>
-
-            </div>
-            <li>
-                <a class="btn btn-lg btn-danger">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-door-open-fill" viewBox="0 0 16 16">
-                        <path
-                            d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" />
-                    </svg><span> Rendirse </span></a>
-            </li>
-        </div>
+  <div class="col col-lg-8 d-flex align-items-center minh-100 ">
+    <div class="card col-sm-8 w-100 p-2 colorUsers content">
+      <app-tablero-component [tarjeta]="tarjetaEnviada"></app-tablero-component>
     </div>
+  </div>
+  <div class="col-2 d-flex justify-content-center align-items-center minh-100">
+    <div class="col-sm-8 p-2">
+      <h5 class="card-header text-white text-center p-2">Usuario</h5>
+      <div class="card text-center colorUsers anyClass p-2">
+        <div *ngFor="let item of informationTarjetas" class="card text-bg-dark mb-3 cardDimencion">
+          <img src={{item.imagen}} class="card-header">
+          <div class="card-body">
+            <h5 class="card-title">{{ item.descripcion }}</h5>
+            <button class="btn btn-primary" [disabled]="disabledButton" (click)="actualizarEstadoCarta(item.id)">Poder
+              XP: {{item.poderXp}}.</button>
+          </div>
+        </div>
+
+      </div>
+      <li>
+        <a class="btn btn-lg btn-danger">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-door-open-fill" viewBox="0 0 16 16">
+            <path
+              d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" />
+          </svg><span> Rendirse </span></a>
+      </li>
+    </div>
+  </div>

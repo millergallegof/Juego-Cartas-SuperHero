@@ -10,6 +10,7 @@ import co.com.sofka.usecase.jugador.aumentarpuntos.AumentarPuntosUseCase;
 import co.com.sofka.usecase.jugador.cambiarestado.CambiarEstadoUseCase;
 import co.com.sofka.usecase.jugador.retirarse.RetirarseUseCase;
 import co.com.sofka.usecase.jugador.savejugador.SaveJugadorUseCase;
+import co.com.sofka.usecase.jugador.traertarjetaapostadajugador.TraerTarjetaApostadaJugadorUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -29,6 +30,8 @@ public class HandlerJugador {
     private final AumentarPuntosUseCase aumentarPuntosUseCase;
 
     private final ActualizarBarajaJugadorUseCase actualizarBarajaJugadorUseCase;
+
+    private final TraerTarjetaApostadaJugadorUseCase traerTarjetaApostadaJugadorUseCase;
 
     public Mono<ServerResponse> apostaCartaPutUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
@@ -75,5 +78,14 @@ public class HandlerJugador {
                 .flatMap(element -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(actualizarBarajaJugadorUseCase.actualizarBarajaJugador(id, element), Jugador.class));
+    }
+
+    public Mono<ServerResponse> traerTarjetaApostadaJugadorPOSTUseCase(ServerRequest serverRequest) {
+        var id = serverRequest.pathVariable("id");
+        return serverRequest
+                .bodyToMono(String.class)
+                .flatMap(element -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(traerTarjetaApostadaJugadorUseCase.TraerTarjetaApostadaJugador(id, element), Tarjeta.class));
     }
 }
