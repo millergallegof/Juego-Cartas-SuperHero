@@ -10,6 +10,7 @@ import { Bajara } from '../models/Ibaraja';
 import { JugadoresTablero } from '../models/jugadoresTablero';
 import { ElementosJugadorJuego } from '../models/IElementosJugadorJuego';
 import { IdentificacionJugador } from '../models/IIdentificacionUsuario';
+import { JugadorBaraja } from '../models/IJugadorBaraja';
 
 
 
@@ -96,6 +97,12 @@ export class ServiceHttJuego {
     return this.httpJuego
       .post<Bajara>
       (`${PathRest.getApiJuego}/listar/baraja/jugador/${idJuego}`, identificacionJugador, this.httpOptions);
+  }
+
+  actualizarBarajaJugador(idJuego: string, jugadorBaraja: JugadorBaraja): Observable<Juego> {
+    return this.httpJuego
+      .post<Juego>
+      (`${PathRest.getApiJuego}/listar/baraja/jugador/${idJuego}`, jugadorBaraja)
   }
 
 }
