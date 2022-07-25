@@ -62,11 +62,14 @@ export class HomeComponentComponent implements OnInit {
   }
 
   agregarJugador(nickName: string, idJuego: string): void {
+    console.log(idJuego);
     let { uid } = JSON.parse(localStorage.getItem('user')!);
     this.servicioHttpJugador
       .crearJugador
       ({ id: uid, nickName: nickName, puntos: 0, baraja: null, estado: true })
       .subscribe(data => {
+
+        console.log(data);
         this.servicioHttpJuego.actualizarJugadores(idJuego, data)
         this.jugadores.push(data)
       });
@@ -81,7 +84,6 @@ export class HomeComponentComponent implements OnInit {
     this.servicioHttpJuego
       .crearJuego({ id: null, ronda: 1, mazoJuego: tarjetas, ganador: "", tableroId: "", jugadores: this.jugadores })
       .subscribe(data => {
-        console.log(data);
         this.comenzarJuego(data.id!)
       })
   }
