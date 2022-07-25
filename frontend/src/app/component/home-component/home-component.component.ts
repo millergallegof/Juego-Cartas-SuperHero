@@ -13,15 +13,7 @@ import { ServicioJuegoService } from '../../service/http-servicio-juego.service'
   styleUrls: ['./home-component.component.css']
 })
 export class HomeComponentComponent implements OnInit {
-  jugador: Jugador[] = [
-    {
-      id: "a0GqjysrmRMtJk9aCdGvR2Mldtz4",
-      nickName: "s",
-      puntos: 0,
-      baraja: null,
-      estado: true
-    }
-  ];
+  jugador: Jugador[] = [];
   constructor(
     public autenticacionService: AutenticacionServiceService,
     public peticionesApi: ServicioJugadorService,
@@ -41,7 +33,9 @@ export class HomeComponentComponent implements OnInit {
       .subscribe(retorno => this.jugador.push(retorno));
 
 
-    this.peticionesJuego.crearJuego({ ronda: 1, mazoJuego: tarjetas, ganador: "", tableroId: "", jugadores: this.jugador }).subscribe();
+    this.peticionesJuego
+    .crearJuego({ ronda: 1, mazoJuego: tarjetas, ganador: "", tableroId: "", jugadores: this.jugador })
+    .subscribe();
     console.log(this.peticionesApi.crearBaraja().subscribe());
 
     this.peticionesApi.updateInformacion(`users/${uid}`, { displayName: nickName })
