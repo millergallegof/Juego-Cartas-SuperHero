@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { ErrorComponentComponent } from './component/error-component/error-component.component';
 import { AutenticacionServiceService } from './servicesAuth/autenticacion-service.service';
 import { ListarTarjetasComponentComponent } from './component/listar-tarjetas-component/listar-tarjetas-component.component';
+import { WaitingRoomComponetComponent } from './component/waiting-room-componet/waiting-room-componet.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ListarTarjetasComponentComponent } from './component/listar-tarjetas-co
     SingupComponent,
     HomeComponentComponent,
     ErrorComponentComponent,
-    ListarTarjetasComponentComponent
+    ListarTarjetasComponentComponent,
+    WaitingRoomComponetComponent
 
   ],
   imports: [

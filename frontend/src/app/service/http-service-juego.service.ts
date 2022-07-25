@@ -18,7 +18,7 @@ import { IdentificacionJugador } from '../models/IIdentificacionUsuario';
 @Injectable({
   providedIn: 'root'
 })
-export class HTTPServiceGameService {
+export class ServiceHttJuego {
 
   private httpOptions = {
     headers: new HttpHeaders({

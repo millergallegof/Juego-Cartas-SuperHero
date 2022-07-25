@@ -9,7 +9,7 @@ import { Tablero } from '../models/Itablero';
 @Injectable({
   providedIn: 'root'
 })
-export class ServicioJuegoService {
+export class ServiceHttpTablero {
 
   private httpOptions = {
     headers: new HttpHeaders({
