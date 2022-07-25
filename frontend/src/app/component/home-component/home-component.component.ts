@@ -35,12 +35,7 @@ export class HomeComponentComponent implements OnInit {
     this.servicioHttpJuego
       .listarJuego()
       .subscribe(data => {
-        // this.juegos = data
-        // console.log(this.juegos);
-
-        this.zone.run(() => {
-          this.juegos = data
-        })
+        this.juegos = data
       });
 
   }
@@ -87,13 +82,13 @@ export class HomeComponentComponent implements OnInit {
 
   crearJuego(): void {
     let tarjetas: Tarjeta[] = [];
-      this.servicioHttpJuego
-        .crearJuego({ id: null, ronda: 1, mazoJuego: tarjetas, ganador: "", tableroId: "", jugadores: this.jugadores })
-        .subscribe(data => {
-          this.comenzarJuego(data.id!)
-          localStorage.setItem('informacionJuego', JSON.stringify(data.id))
-          JSON.parse(localStorage.getItem('informacionJuego')!);
-        })
+    this.servicioHttpJuego
+      .crearJuego({ id: null, ronda: 1, mazoJuego: tarjetas, ganador: "", tableroId: "", jugadores: this.jugadores })
+      .subscribe(data => {
+        this.comenzarJuego(data.id!)
+        localStorage.setItem('informacionJuego', JSON.stringify(data.id))
+        JSON.parse(localStorage.getItem('informacionJuego')!);
+      })
   }
 
   crearTablero(): void {
