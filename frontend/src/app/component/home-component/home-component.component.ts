@@ -34,7 +34,7 @@ export class HomeComponentComponent implements OnInit {
     this.servicioHttpJuego
       .listarJuego()
       .subscribe(data => {
-        this.juegos = data
+        this.juegos = data;
       });
 
   }
