@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, NgZone, OnInit } from '@angular/core';
 import { AutenticacionServiceService } from 'src/app/servicesAuth/autenticacion-service.service';
 import { ServiceHttJuego } from '../../service/http-service-juego.service';
 import { Tarjeta } from '../../models/Itarjetas';
@@ -23,7 +23,8 @@ export class HomeComponentComponent implements OnInit {
     public autenticacionService: AutenticacionServiceService,
     public servicioHttpJugador: ServiceHttpJugador,
     public servicioHttpJuego: ServiceHttJuego,
-    public servicioHttpTablero: ServiceHttpTablero) {
+    public servicioHttpTablero: ServiceHttpTablero,
+    private zone: NgZone) {
   }
 
   ngOnInit(): void {
@@ -36,7 +37,12 @@ export class HomeComponentComponent implements OnInit {
     this.servicioHttpJuego
       .listarJuego()
       .subscribe(data => {
-        this.juegos = data
+        // this.juegos = data
+        // console.log(this.juegos);
+
+        this.zone.run(() => {
+          this.juegos = data
+        })
       });
 
   }
@@ -45,6 +51,7 @@ export class HomeComponentComponent implements OnInit {
     this.crearJuego()
     this.crearJugador(nickName);
     this.crearTablero();
+    this.listarJuegos();
   }
 
   crearJugador(nickName: string): void {
@@ -59,6 +66,7 @@ export class HomeComponentComponent implements OnInit {
     this.servicioHttpJugador.updateInformacion(`users/${uid}`, { displayName: nickName })
       .then(() => console.log('Actualizado'))
       .catch(err => console.log(err));
+
   }
 
   agregarJugador(nickName: string, idJuego: string): void {
