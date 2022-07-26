@@ -51,6 +51,7 @@ export class HomeComponentComponent implements OnInit {
 
   crearJugador(nickName: string): void {
     let { uid } = JSON.parse(localStorage.getItem('user')!);
+    console.log(uid);
     this.servicioHttpJugador
       .crearJugador
       ({ id: uid, nickName: nickName, puntos: 0, baraja: null, estado: true })
@@ -66,7 +67,6 @@ export class HomeComponentComponent implements OnInit {
   }
 
   agregarJugador(nickName: string, idJuego: string): void {
-
     let { uid } = JSON.parse(localStorage.getItem('user')!);
     this.servicioHttpJugador
       .crearJugador

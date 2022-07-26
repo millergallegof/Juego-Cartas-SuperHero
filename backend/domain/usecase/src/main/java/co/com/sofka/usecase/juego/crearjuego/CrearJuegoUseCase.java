@@ -12,7 +12,6 @@ import java.util.List;
 
 @RequiredArgsConstructor
 public class CrearJuegoUseCase {
-
     private final JuegoRepository juegoRepository;
     private final TarjetaRepository tarjetaRepository;
 
@@ -24,6 +23,5 @@ public class CrearJuegoUseCase {
                     return juego;
                 })
                 .flatMap(juegoRepository::save);
-
     }
 }
