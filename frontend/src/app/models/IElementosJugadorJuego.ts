@@ -1,4 +1,6 @@
+import { Tarjeta } from "./Itarjetas";
+
 export interface ElementosJugadorJuego {
   idJugador: string;
-  tarjetas: string;
+  tarjetas: Tarjeta[];
 }
