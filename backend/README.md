@@ -1,41 +1,47 @@
-# _Proyeto Game Hero_
-## Autores
-* Miller Gallego Forero
-* Daniel Gil Cruz
-* Hernan Velasquez Meriño
-### Sofka U
-- Trainig Ciclo 3
-- See HTML in the right
-- ✨ Sofka U
+# Proyecto Base Implementando Clean Architecture
 
-## Requisitos basicos para ejecutar el proyecto
-El presente proyecto esta desarrollado con el lenguaje de programacion Java, haciendo uso de su framework SprintBoot para el desarrollo de API usando el artefacto de arquitectura limpia de Bancolombia y conectando con la base de datos NoSql MongoDB, haciendo conexcion en mongoAtlas. El front end se desarrollo usando el Framework de desarrollo Angular el desarrollo de toda la interfaz grafica. Para abrir el proyecto y consumirlo debe tener intalado en su equipo los siguientes requisitos:
+## Antes de Iniciar
 
-- JDK (Java Development Kit) en su version 17.
-- Base de Datos MongoDB, con MongoAtlas.
-- El entorno de desarrollo IntellijIDEA 2022
-- El editor de codigo Visual Studio Code
-- Git para hacer un clonado del repositorio
-- NodeJs para instalaciones de los modulos de angular
-- El Angular CLI
+Empezaremos por explicar los diferentes componentes del proyectos y partiremos de los componentes externos, continuando con los componentes core de negocio (dominio) y por �ltimo el inicio y configuraci�n de la aplicaci�n.
 
+Lee el art�culo [Clean Architecture � Aislando los detalles](https://medium.com/bancolombia-tech/clean-architecture-aislando-los-detalles-4f9530f35d7a)
 
-Links de descargas:
-- [ JDK ](https://docs.microsoft.com/en-us/java/openjdk/download)
-- [ Server XAMPP ]( https://www.apachefriends.org/es/index.html )
-- [ IntellijIDEA 2022 Version Community ](https://www.jetbrains.com/es-es/idea/download/#section=windows)
-- [ Visual Studio Code ](https://code.visualstudio.com/)
-- [ Git ](https://git-scm.com/downloads)
-- [ NodeJs LTS ](https://nodejs.org/es/download/)
-- [ Angular CLI](https://angular.io/cli)
+# Arquitectura
 
-Con todas las intalaciones mencionadas con anterioridad se puede realizar se puede tener claro que tiene todas las instalaciones para poder empezar a ejecutar el proyecto sin generar problemas.
+![Clean Architecture](https://miro.medium.com/max/1400/1*ZdlHz8B0-qu9Y-QO3AXR_w.png)
 
-## Configuraciones
-Para el que el back-end, pueda funcionar de manera correcta, se debe realiar unas configuraciones con anterioridad. Para ello, se deben haber realizado las intalaciones mencionadas con anterioridad.
+## Domain
 
-1. Para la ejecucion correcta del proyecto, se debe tener clonado el proyecto en su maquina.
-2. Se debe ingresar en la carpeta de frontend, y para que estos funcione se deben instalar las intalaciones de los paquetes, usando uso del comando situado en la carpeta frontend
-   `npm install`.
-3. Se debe entrar en la carpeta del backend y poner a abrir el proyecto con el intelillen IDEA y poner a ejecutar el proyecto.
-4. Se debe entrar en la carpeta de frontend, y se poner en marcha el proyecto se debe usar el comando `npm start` o `npm run start`.
+Es el m�dulo m�s interno de la arquitectura, pertenece a la capa del dominio y encapsula la l�gica y reglas del negocio mediante modelos y entidades del dominio.
+
+## Usecases
+
+Este m�dulo gradle perteneciente a la capa del dominio, implementa los casos de uso del sistema, define l�gica de aplicaci�n y reacciona a las invocaciones desde el m�dulo de entry points, orquestando los flujos hacia el m�dulo de entities.
+
+## Infrastructure
+
+### Helpers
+
+En el apartado de helpers tendremos utilidades generales para los Driven Adapters y Entry Points.
+
+Estas utilidades no est�n arraigadas a objetos concretos, se realiza el uso de generics para modelar comportamientos
+gen�ricos de los diferentes objetos de persistencia que puedan existir, este tipo de implementaciones se realizan
+basadas en el patr�n de dise�o [Unit of Work y Repository](https://medium.com/@krzychukosobudzki/repository-design-pattern-bc490b256006)
+
+Estas clases no puede existir solas y debe heredarse su compartimiento en los **Driven Adapters**
+
+### Driven Adapters
+
+Los driven adapter representan implementaciones externas a nuestro sistema, como lo son conexiones a servicios rest,
+soap, bases de datos, lectura de archivos planos, y en concreto cualquier origen y fuente de datos con la que debamos
+interactuar.
+
+### Entry Points
+
+Los entry points representan los puntos de entrada de la aplicaci�n o el inicio de los flujos de negocio.
+
+## Application
+
+Este m�dulo es el m�s externo de la arquitectura, es el encargado de ensamblar los distintos m�dulos, resolver las dependencias y crear los beans de los casos de use (UseCases) de forma autom�tica, inyectando en �stos instancias concretas de las dependencias declaradas. Adem�s inicia la aplicaci�n (es el �nico m�dulo del proyecto donde encontraremos la funci�n �public static void main(String[] args)�.
+
+**Los beans de los casos de uso se disponibilizan automaticamente gracias a un '@ComponentScan' ubicado en esta capa.**

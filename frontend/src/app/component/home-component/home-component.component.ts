@@ -35,16 +35,15 @@ export class HomeComponentComponent implements OnInit {
     this.servicioHttpJuego
       .listarJuego()
       .subscribe(data => {
-        this.juegos = data;
+        this.juegos = data
       });
 
   }
 
   crearSala(nickName: string): void {
+    console.log(nickName);
     this.crearJuego();
     this.crearJugador(nickName);
-    this.crearTablero();
-
   }
 
   crearJugador(nickName: string): void {
@@ -53,12 +52,12 @@ export class HomeComponentComponent implements OnInit {
       .crearJugador
       ({ id: uid, nickName: nickName, puntos: 0, baraja: null, estado: true })
       .subscribe(data => {
-        this.servicioHttpJuego.actualizarJugadores(data.id, data).subscribe(juego => console.log(juego))
+        this.servicioHttpJuego.actualizarJugadores(data.id, data).subscribe(juego => juego)
         this.jugadores.push(data)
       });
 
     this.servicioHttpJugador.updateInformacion(`users/${uid}`, { displayName: nickName })
-      .then(() => console.log('Actualizado'))
+      .then((e) => e)
       .catch(err => console.log(err));
 
   }
@@ -86,26 +85,30 @@ export class HomeComponentComponent implements OnInit {
     this.servicioHttpJuego
       .crearJuego({ id: null, ronda: 1, mazoJuego: tarjetas, ganador: "", tableroId: "", jugadores: this.jugadores })
       .subscribe(data => {
-        this.comenzarJuego(data.id!)
+        this.crearTablero(data.id!)
         localStorage.setItem('informacionJuego', JSON.stringify(data.id))
         JSON.parse(localStorage.getItem('informacionJuego')!);
       })
   }
 
-  crearTablero(): void {
+  crearTablero(idJuego: string): void {
     this.servicioHttpTablero
-      .crearTablero({ id: null, apuesta: null, ganadorId: "", tiempo: 30 })
-      .subscribe(data => this.idTablero = data.id!);
+      .crearTablero({ id: null, apuesta: Object.create(null), ganadorId: "", tiempo: 30 })
+      .subscribe(data => {
+        localStorage.setItem('tablero', JSON.stringify(data))
+        this.comenzarJuego(idJuego, data.id!)
+      });
   }
 
-  comenzarJuego(idJuego: string): void {
+  comenzarJuego(idJuego: string, idTablero: string): void {
     let tableroJugadores = {
       jugadores: this.jugadores,
-      idTablero: this.idTablero
+      idTablero: idTablero
     }
     this.servicioHttpJuego
       .comenzarJuego(idJuego, tableroJugadores)
       .subscribe(data => {
+        console.log(data);
         this.juegos.push(data)
       });
   }
