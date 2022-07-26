@@ -41,6 +41,8 @@ public class RouterRest {
                 (POST("/api/tablero/recibir/card/{id}"), handlerTablero::recibirTarjetaPOSTUseCase).andRoute
                 (GET("/api/tablero/ganador/{id}"), handlerTablero::elegirGanadorGETUseCase).andRoute
                 (GET("/api/tablero/ganador/tarjetas/{id}"), handlerTablero::enviarTarjetasGanadorGETUseCase).andRoute
+                (GET("/api/tablero/eliminar/tarjetas/{id}"), handlerTablero::eliminarTarjetasPOSTUseCase).andRoute
+                (GET("/api/tablero/buscar/{id}"), handlerTablero::obtenerTableroGETUseCase).andRoute
                 (POST("/api/tablero/crear"), handlerTablero::crearTableroPOSTUseCase);
     }
 }

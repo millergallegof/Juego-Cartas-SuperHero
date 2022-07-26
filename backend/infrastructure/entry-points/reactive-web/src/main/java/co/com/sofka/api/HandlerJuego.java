@@ -64,10 +64,9 @@ public class HandlerJuego {
 
     public Mono<ServerResponse> aumentaRondaPOSTUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
-        return serverRequest.bodyToMono(Juego.class)
-                .flatMap(element -> ServerResponse.ok()
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(aumentaRondaUseCase.aumentarRonda(id), Juego.class));
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(aumentaRondaUseCase.aumentarRonda(id), Juego.class);
     }
 
     public Mono<ServerResponse> listarJuegosGETUseCase(ServerRequest serverRequest) {
@@ -90,6 +89,7 @@ public class HandlerJuego {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(repartirBarajaUseCase.repartirBaraja(id), Juego.class);
     }
+
     public Mono<ServerResponse> finalizarJuegoGETUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
         return ServerResponse.ok()
