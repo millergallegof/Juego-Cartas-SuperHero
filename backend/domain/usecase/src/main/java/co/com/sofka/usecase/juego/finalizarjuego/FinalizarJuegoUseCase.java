@@ -2,6 +2,7 @@ package co.com.sofka.usecase.juego.finalizarjuego;
 
 import co.com.sofka.model.juego.Juego;
 import co.com.sofka.model.juego.gateways.JuegoRepository;
+import co.com.sofka.model.jugador.Jugador;
 import co.com.sofka.model.tarjeta.gateways.TarjetaRepository;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
@@ -10,7 +11,7 @@ import reactor.core.publisher.Mono;
 public class FinalizarJuegoUseCase {
     private final JuegoRepository juegoRepository;
     private final TarjetaRepository tarjetaRepository;
-    private Long tarjetas;
+    private Jugador jugador;
 
     public Mono<Juego> finalizaJuego(String idJuego) {
         return juegoRepository.findById(idJuego)
@@ -18,21 +19,19 @@ public class FinalizarJuegoUseCase {
                     tarjetaRepository.findAll()
                             .count()
                             .subscribe(element -> {
-                                System.out.println(element);
-                                this.tarjetas = element;
+                                var idGanador = juego.getJugadores().stream()
+                                        .reduce((acum, jugador) -> {
+                                            if (juego.getMazoJuego().size() == element - jugador.getBaraja().getTarjetas().size()) {
+                                                return jugador;
+                                            } else {
+                                                return acum;
+                                            }
+                                        }).get();
+                                this.jugador = idGanador;
                             });
-                    var idGanador = juego.getJugadores().stream()
-                            .reduce((acum, jugador) -> {
-                                // if (juego.getMazoJuego().size() == 108-jugador.getBaraja().getTarjetas().size()){
-                                if (juego.getMazoJuego().size() == this.tarjetas - jugador.getBaraja().getTarjetas().size()) {
-                                    return jugador;
-                                } else {
-                                    return acum;
-                                }
-                            }).get();
-                    juego.setGanador(idGanador.getId());
+                    juego.setGanador(this.jugador.getId());
                     return juego;
-                })
+                }).retry()
                 .flatMap(juegoRepository::save);
     }
 }

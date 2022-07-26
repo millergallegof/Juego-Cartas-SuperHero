@@ -46,7 +46,11 @@ export class HomeComponentComponent implements OnInit {
 
   crearJugador(nickName: string): void {
     let { uid } = JSON.parse(localStorage.getItem('user')!);
+<<<<<<< HEAD
+    console.log(uid);
+=======
     localStorage.setItem('rolJugador', JSON.stringify("host"))
+>>>>>>> 5b95facfd854864fe2c3c34261a2233b77faf916
     this.servicioHttpJugador
       .crearJugador
       ({ id: uid, nickName: nickName, puntos: 0, baraja: null, estado: true })

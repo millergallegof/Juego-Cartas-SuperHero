@@ -61,3 +61,15 @@ Jbackend/domain/model/src/main/java/co/com/sofka/model/jugador/Jugador.java,2\9
 ébackend/infrastructure/driven-adapters/mongo-repository/src/main/java/co/com/sofka/mongo/tarjeta/repository/MongoTarjetaRepositoryAdapter.java,b\1\b104b8f1171b7f801e6c784fd9258c5e0aa8f7a9
 ø
 ébackend/infrastructure/driven-adapters/mongo-repository/src/main/java/co/com/sofka/mongo/jugador/repository/MongoJugadorRepositoryAdapter.java,b\2\b2c86d3546f6cd157bc5c34535d2d09efffc1b9b
+A
+backend/README.md,6\6\6610930c2092e0f10b89932e6e99b7645897ce85
+è
+_backend/infrastructure/entry-points/reactive-web/src/main/java/co/com/sofka/api/RouterRest.java,1\1\110c02315c006ff04984d6600a954c83d81eeef3
+™
+zbackend/infrastructure/driven-adapters/mongo-repository/src/main/java/co/com/sofka/mongo/juego/document/JuegoDocument.java,2\a\2ab755abecb29b6a7bdc700c8cd4abaa97133312
+Æ
+~backend/infrastructure/driven-adapters/mongo-repository/src/main/java/co/com/sofka/mongo/jugador/document/JugadorDocument.java,7\4\743d3b54027cbb7d14c226abe2784851db1cc55e
+¨
+|backend/infrastructure/driven-adapters/mongo-repository/src/main/java/co/com/sofka/mongo/baraja/document/BarajaDocument.java,c\2\c278a3a0aec9f40eb891db19e2bd5d5eadd4f41c
+ì
+cbackend/infrastructure/entry-points/reactive-web/src/main/java/co/com/sofka/api/HandlerTarjeta.java,2\c\2ca724b97efb2623dc060ff2d2c61926d82acdb9
