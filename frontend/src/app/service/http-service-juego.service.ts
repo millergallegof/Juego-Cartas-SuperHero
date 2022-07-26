@@ -82,9 +82,6 @@ export class ServiceHttJuego {
   }
 
   actuaLizarBarajaGanadorRonda(idJuego: string, elementosJuego: ElementosJugadorJuego): Observable<Juego> {
-    console.log(idJuego);
-    console.log(elementosJuego);
-
     return this.httpJuego
       .post<Juego>
       (`${PathRest.getApiJuego}/ganador/ronda/${idJuego}`, elementosJuego, this.httpOptions)

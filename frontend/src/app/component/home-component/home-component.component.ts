@@ -37,17 +37,16 @@ export class HomeComponentComponent implements OnInit {
       .subscribe(data => {
         this.juegos = data
       });
-
   }
 
   crearSala(nickName: string): void {
-    console.log(nickName);
     this.crearJuego();
     this.crearJugador(nickName);
   }
 
   crearJugador(nickName: string): void {
     let { uid } = JSON.parse(localStorage.getItem('user')!);
+    localStorage.setItem('rolJugador', JSON.stringify("host"))
     this.servicioHttpJugador
       .crearJugador
       ({ id: uid, nickName: nickName, puntos: 0, baraja: null, estado: true })
@@ -59,24 +58,28 @@ export class HomeComponentComponent implements OnInit {
     this.servicioHttpJugador.updateInformacion(`users/${uid}`, { displayName: nickName })
       .then((e) => e)
       .catch(err => console.log(err));
-
   }
 
   agregarJugador(nickName: string, idJuego: string): void {
-
     let { uid } = JSON.parse(localStorage.getItem('user')!);
     this.servicioHttpJugador
       .crearJugador
       ({ id: uid, nickName: nickName, puntos: 0, baraja: null, estado: true })
       .subscribe(data => {
-        console.log(idJuego);
-        console.log(data);
-        this.servicioHttpJuego.actualizarJugadores(idJuego, data).subscribe()
+        this.servicioHttpJuego.actualizarJugadores(idJuego, data)
+          .subscribe(juego => {
+            localStorage.setItem('informacionJuego', JSON.stringify(juego.id))
+            localStorage.setItem('rolJugador', JSON.stringify("player"))
+            this.servicioHttpTablero.obtenerTablero(juego.tableroId)
+              .subscribe(tablero => {
+                localStorage.setItem('tablero', JSON.stringify(tablero))
+              })
+          })
         this.jugadores.push(data)
       });
 
     this.servicioHttpJugador.updateInformacion(`users/${uid}`, { displayName: nickName })
-      .then(() => console.log('Actualizado'))
+      .then((e) => e)
       .catch(err => console.log(err));
   }
 
@@ -108,7 +111,6 @@ export class HomeComponentComponent implements OnInit {
     this.servicioHttpJuego
       .comenzarJuego(idJuego, tableroJugadores)
       .subscribe(data => {
-        console.log(data);
         this.juegos.push(data)
       });
   }
