@@ -5,6 +5,7 @@ import { Bajara } from '../../models/Ibaraja';
 import { ServiceHttJuego } from '../../service/http-service-juego.service';
 import { ServiceHttpJugador } from 'src/app/service/http-service-jugador.service';
 import { ServiceHttpTablero } from 'src/app/service/http-service-tablero.service';
+import { Route } from '@angular/router';
 
 @Component({
   selector: 'app-listar-tarjetas-component',
@@ -21,36 +22,37 @@ export class ListarTarjetasComponentComponent implements OnInit {
   informationTarjetas: Tarjeta[] = [];
   tarjetaEnviada: Tarjeta;
   disabledButton: boolean = false;
+  ronda: number = 1
 
   // VARIABLES TABLERO
   imagenTemporal = '../../../assets/img/revezCarta.jpg';
   tarjetasTablero: any[] = [];
   tarjetasTableroTemporal: any[] = [];
   interval: any;
-  ronda: number = 1;
+  esVisible: boolean = true;
 
   constructor(
     private servicioHttpJuego: ServiceHttJuego,
     private servicioHttpJugador: ServiceHttpJugador,
-    private servicioHttpTablero: ServiceHttpTablero
+    private servicioHttpTablero: ServiceHttpTablero,
+    // private route: Route
   ) {
     this.minutos = 0;
-    this.segundos = 10;
+    this.segundos = 30;
     this.interval = setInterval(() => this.asignarGanadorTimer(), 1000);
   }
 
   ngOnInit(): void {
-    this.obtenerCartas();
+    setTimeout(() => {
+      this.obtenerCartas();
+    }, 500)
     this.mostrarCartasTablero()
-
   }
-
   // ----------------------------------------------------------------------------------------------------
   // LISTAR TARJETAS JUGADOR
   // ----------------------------------------------------------------------------------------------------
-
   obtenerCartas(): void {
-    let idJuego = JSON.parse(localStorage.getItem('informacionJuego')!);
+    let { idJuego } = JSON.parse(localStorage.getItem('informacionJuego')!);
     let { uid } = JSON.parse(localStorage.getItem('user')!);
     this.servicioHttpJuego
       .listarBarajaJugador(idJuego, { id: uid })
@@ -65,7 +67,7 @@ export class ListarTarjetasComponentComponent implements OnInit {
 
   actualizarEstadoCarta(idTarjeta: string): void {
     let { uid } = JSON.parse(localStorage.getItem('user')!);
-    let idJuego = JSON.parse(localStorage.getItem('informacionJuego')!);
+    let { idJuego } = JSON.parse(localStorage.getItem('informacionJuego')!);
     this.servicioHttpJugador.traerTarjetaApostadaJugador(uid, idTarjeta)
       .subscribe(data => {
         this.enviarTarjetaTablero(data)
@@ -86,18 +88,54 @@ export class ListarTarjetasComponentComponent implements OnInit {
   }
 
   // ----------------------------------------------------------------------------------------------------
+  // FUNCIONALIDADES JUEGO
+  // ----------------------------------------------------------------------------------------------------
+  aumentarRonda(): void {
+    let { idJuego } = JSON.parse(localStorage.getItem('informacionJuego')!);
+    this.servicioHttpJuego.aumentaRonda(idJuego)
+      .subscribe(data => {
+        this.ronda = data.ronda
+        this.ngOnInit()
+      });
+  }
+
+  revisarGanadorJuego(): void {
+    let { idJuego } = JSON.parse(localStorage.getItem('informacionJuego')!);
+    this.servicioHttpJuego.finalizarJuego(idJuego)
+      .subscribe(data => {
+        if (data.ganador === "") {
+          console.log("Nadie Gano")
+        } else {
+          localStorage.setItem('informacionJuego', JSON.stringify({ idJuego: data.id, ganador: data.ganador }))
+
+        }
+      })
+  }
+
+  // ----------------------------------------------------------------------------------------------------
   // TABLERO
   // ----------------------------------------------------------------------------------------------------
   asignarGanadorTimer(): void {
     let { ganadorId } = JSON.parse(localStorage.getItem('tablero')!);
-    if (--this.segundos < 0) {
+    let rolJugador = JSON.parse(localStorage.getItem('rolJugador')!);
+    if (--this.segundos <= 0) {
       if (ganadorId !== null) {
-        
-        this.aumentarRonda()
-        this.elegirGanadorTablero()
+        if (rolJugador === "host") {
+          this.voltearTarjetasTablero()
+          setTimeout(() => {
+            this.revisarGanadorJuego()
+            this.elegirGanadorTablero()
+            this.aumentarRonda()
+            this.ngOnInit()
+          }, 5000)
+        } else {
+          this.voltearTarjetasTablero()
+          setTimeout(() => {
+            this.ngOnInit()
+          }, 5000)
+        }
         clearInterval(this.interval)
       } else {
-        console.log("hola");
         this.segundos = 10
       }
     }
@@ -119,33 +157,37 @@ export class ListarTarjetasComponentComponent implements OnInit {
     jugadorTarjeta.set(uid, tarjeta)
     this.servicioHttpTablero.enviarTarjeta(id, jugadorTarjeta)
       .subscribe(data => {
-        console.log(data);
-        this.ngOnInit()
+        this.mostrarCartasTablero()
       })
   }
 
   elegirGanadorTablero(): void {
-    let idJuego = JSON.parse(localStorage.getItem('informacionJuego')!);
+    let { idJuego } = JSON.parse(localStorage.getItem('informacionJuego')!);
     let { id } = JSON.parse(localStorage.getItem('tablero')!);
-    let { ganadorId } = JSON.parse(localStorage.getItem('tablero')!);
     this.servicioHttpTablero.elegirGanador(id)
       .subscribe(tablero => {
         localStorage.setItem('tablero', JSON.stringify(tablero))
         this.servicioHttpTablero.recibirTarjetas(id)
           .subscribe(tarjetasGanador => {
+            let { ganadorId } = JSON.parse(localStorage.getItem('tablero')!);
             this.servicioHttpJuego.actuaLizarBarajaGanadorRonda(idJuego, { idJugador: ganadorId, tarjetas: tarjetasGanador })
-              .subscribe(juego => juego)
+              .subscribe(juego => {
+                this.eliminarTarjetasTablero()
+              })
           })
       })
   }
 
-  aumentarRonda() {
-    let idJuego = JSON.parse(localStorage.getItem('informacionJuego')!);
-    this.servicioHttpJuego.aumentaRonda(idJuego)
-      .subscribe(data => {
-        this.ronda = data.ronda
+  voltearTarjetasTablero(): void {
+    this.esVisible = false
+  }
+
+  eliminarTarjetasTablero(): void {
+    let { id } = JSON.parse(localStorage.getItem('tablero')!);
+    this.servicioHttpTablero.eliminarTarjetas(id)
+      .subscribe(() => {
         this.ngOnInit()
-      });
+      })
   }
 
 }
