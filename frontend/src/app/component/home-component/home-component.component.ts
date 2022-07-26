@@ -46,11 +46,7 @@ export class HomeComponentComponent implements OnInit {
 
   crearJugador(nickName: string): void {
     let { uid } = JSON.parse(localStorage.getItem('user')!);
-<<<<<<< HEAD
-    console.log(uid);
-=======
     localStorage.setItem('rolJugador', JSON.stringify("host"))
->>>>>>> 5b95facfd854864fe2c3c34261a2233b77faf916
     this.servicioHttpJugador
       .crearJugador
       ({ id: uid, nickName: nickName, puntos: 0, baraja: null, estado: true })
@@ -72,7 +68,7 @@ export class HomeComponentComponent implements OnInit {
       .subscribe(data => {
         this.servicioHttpJuego.actualizarJugadores(idJuego, data)
           .subscribe(juego => {
-            localStorage.setItem('informacionJuego', JSON.stringify(juego.id))
+            localStorage.setItem('informacionJuego', JSON.stringify({idJuego:juego.id, ganador:juego.ganador}))
             localStorage.setItem('rolJugador', JSON.stringify("player"))
             this.servicioHttpTablero.obtenerTablero(juego.tableroId)
               .subscribe(tablero => {
@@ -93,7 +89,7 @@ export class HomeComponentComponent implements OnInit {
       .crearJuego({ id: null, ronda: 1, mazoJuego: tarjetas, ganador: "", tableroId: "", jugadores: this.jugadores })
       .subscribe(data => {
         this.crearTablero(data.id!)
-        localStorage.setItem('informacionJuego', JSON.stringify(data.id))
+        localStorage.setItem('informacionJuego', JSON.stringify({idJuego:data.id, ganador:data.ganador}))
         JSON.parse(localStorage.getItem('informacionJuego')!);
       })
   }

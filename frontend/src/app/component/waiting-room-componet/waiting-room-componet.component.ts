@@ -28,9 +28,9 @@ export class WaitingRoomComponetComponent implements OnInit {
   }
 
   repatirBaraja(): void {
-    let idtemJuego = JSON.parse(localStorage.getItem('informacionJuego')!);
+    let { idJuego } = JSON.parse(localStorage.getItem('informacionJuego')!);
     this.servicioHttpJuego
-      .repartirBaraja(idtemJuego)
+      .repartirBaraja(idJuego)
       .subscribe(() => {
 
       });
