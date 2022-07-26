@@ -18,6 +18,7 @@ public class FinalizarJuegoUseCase {
                     tarjetaRepository.findAll()
                             .count()
                             .subscribe(element -> {
+                                System.out.println(element);
                                 this.tarjetas = element;
                             });
                     var idGanador = juego.getJugadores().stream()
