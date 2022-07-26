@@ -37,13 +37,16 @@ public class FinalizarJuegoUseCase {
                                                 return acum;
                                             }
                                         }).get();
-                                if (this.contador == 1) {
+                                System.out.println(this.contador);
+                                if (this.contador == 0) {
                                     this.jugador = idGanador;
                                 }
                             });
-                    juego.setGanador(this.jugador.getId());
+                    if (this.contador == 0) {
+                        juego.setGanador(this.jugador.getId());
+                    }
                     return juego;
-                }).retry()
+                }).retry(2)
                 .flatMap(juegoRepository::save);
     }
 }
