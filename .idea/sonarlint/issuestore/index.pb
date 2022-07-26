@@ -41,8 +41,6 @@ dbackend/domain/usecase/src/main/java/co/com/sofka/usecase/baraja/crearbaraja/Cr
 [backend/domain/model/src/main/java/co/com/sofka/model/baraja/gateways/BarajaRepository.java,5\5\552971e390ffcd45e63323b3759ca6c3292dc678
 x
 Hbackend/domain/model/src/main/java/co/com/sofka/model/baraja/Baraja.java,a\7\a7977516e6ef73fc0a2d19579b52645175f887f2
-¡
-qbackend/domain/usecase/src/main/java/co/com/sofka/usecase/tarjeta/actualizartarjeta/ActualizarTarjetaUseCase.java,4\e\4e425c8752b1c5f836b9bb38ef89ab382b01af74
 ‘
 abackend/domain/usecase/src/main/java/co/com/sofka/usecase/jugador/retirarse/RetirarseUseCase.java,e\1\e1f26a652fc90fdad5bdea816a089d43cfcdd3bb
 •

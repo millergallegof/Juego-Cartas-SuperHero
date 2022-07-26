@@ -1,7 +1,8 @@
-package co.com.sofka.usecase.tarjeta.listartarjeta;
+package co.com.sofka.usecase.tarjetas.listartarjeta;
 
 import co.com.sofka.model.tarjeta.Tarjeta;
 import co.com.sofka.model.tarjeta.gateways.TarjetaRepository;
+import co.com.sofka.usecase.tarjeta.listartarjeta.ListarTarjetasUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
