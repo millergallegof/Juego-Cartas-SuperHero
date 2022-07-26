@@ -36,7 +36,7 @@ class CrearJuegoUseCaseTest {
     }
 
     @Test
-    void actualizarBarajaJugador() {
+    void creaJuegoUseCaseTest() {
         //arrange
         List<Tarjeta> listaTarjetas = new ArrayList<>();
         List<Jugador> listaJugadores = new ArrayList<>();

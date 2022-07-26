@@ -1,8 +1,6 @@
 
 H
 backend/build.gradle.kts,3\2\320c11424db1d12c421a99d6130f3d8ace21e6b9
-ç
-]backend/domain/model/src/main/java/co/com/sofka/model/tarjeta/gateways/TarjetaRepository.java,7\e\7e712b5e0109d003cbf325b0285df4a848eb09f9
 ∫
 âbackend/infrastructure/driven-adapters/mongo-repository/src/main/java/co/com/sofka/mongo/tarjeta/repository/MongoDBTarjetaRepository.java,c\7\c7b66212d0f4fd25215573ef617a5680f7aecf88
 G
@@ -41,8 +39,6 @@ ibackend/domain/usecase/src/main/java/co/com/sofka/usecase/juego/asignarganador/
 dbackend/domain/usecase/src/main/java/co/com/sofka/usecase/baraja/crearbaraja/CrearBarajaUseCase.java,4\f\4fb91fd8d9e67ba67cf62e549610ab1c501bbb56
 ã
 [backend/domain/model/src/main/java/co/com/sofka/model/baraja/gateways/BarajaRepository.java,5\5\552971e390ffcd45e63323b3759ca6c3292dc678
-z
-Jbackend/domain/model/src/main/java/co/com/sofka/model/tarjeta/Tarjeta.java,d\2\d2c84df6b00bcb038bf71082970afc8c74b75a49
 x
 Hbackend/domain/model/src/main/java/co/com/sofka/model/baraja/Baraja.java,a\7\a7977516e6ef73fc0a2d19579b52645175f887f2
 °
@@ -71,5 +67,3 @@ zbackend/infrastructure/driven-adapters/mongo-repository/src/main/java/co/com/so
 ~backend/infrastructure/driven-adapters/mongo-repository/src/main/java/co/com/sofka/mongo/jugador/document/JugadorDocument.java,7\4\743d3b54027cbb7d14c226abe2784851db1cc55e
 ¨
 |backend/infrastructure/driven-adapters/mongo-repository/src/main/java/co/com/sofka/mongo/baraja/document/BarajaDocument.java,c\2\c278a3a0aec9f40eb891db19e2bd5d5eadd4f41c
-ì
-cbackend/infrastructure/entry-points/reactive-web/src/main/java/co/com/sofka/api/HandlerTarjeta.java,2\c\2ca724b97efb2623dc060ff2d2c61926d82acdb9
