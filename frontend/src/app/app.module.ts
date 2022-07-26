@@ -19,7 +19,6 @@ import { ErrorComponentComponent } from './component/error-component/error-compo
 import { AutenticacionServiceService } from './servicesAuth/autenticacion-service.service';
 import { ListarTarjetasComponentComponent } from './component/listar-tarjetas-component/listar-tarjetas-component.component';
 import { WaitingRoomComponetComponent } from './component/waiting-room-componet/waiting-room-componet.component';
-import { TableroComponentComponent } from './component/tablero-component/tablero-component.component';
 
 
 @NgModule({
@@ -30,8 +29,7 @@ import { TableroComponentComponent } from './component/tablero-component/tablero
     HomeComponentComponent,
     ErrorComponentComponent,
     ListarTarjetasComponentComponent,
-    WaitingRoomComponetComponent,
-    TableroComponentComponent
+    WaitingRoomComponetComponent
 
   ],
   imports: [

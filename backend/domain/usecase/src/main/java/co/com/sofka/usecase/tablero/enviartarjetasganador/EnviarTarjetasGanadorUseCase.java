@@ -14,7 +14,7 @@ public class EnviarTarjetasGanadorUseCase {
     public Flux<Tarjeta> enviarTarjetasGanador(String id) {
         return tableroRepository.findById(id)
                 .map(tablero -> {
-                    var listaCartas =tablero.getApuesta().entrySet().stream()
+                    var listaCartas = tablero.getApuesta().entrySet().stream()
                             .map(apuesta -> {
                                 return apuesta.getValue();
                             }).collect(Collectors.toList());

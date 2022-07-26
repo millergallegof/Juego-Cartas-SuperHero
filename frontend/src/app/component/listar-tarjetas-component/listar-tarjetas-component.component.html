@@ -27,7 +27,21 @@
 
   <div class="col col-lg-8 d-flex align-items-center minh-100 ">
     <div class="card col-sm-8 w-100 p-2 colorUsers content">
-      <app-tablero-component [tarjeta]="tarjetaEnviada" [idTarjeta]="idTarjeta"></app-tablero-component>
+      <div class="d-flex justify-content-between">
+        <p class="text-start text-white">Ronda: # {{ronda}} </p>
+        <p class="text-end text-white">Tiempo: <span>{{minutos}}:{{segundos}}</span></p>
+      </div>
+
+      <div class="text-center content d-flex justify-content-around align-items-center minh-100">
+        <div *ngFor="let item of tarjetasTablero" class="card text-bg-dark mb-3 cardDimencion ">
+          <img src="{{ imagenTemporal }}" class="card-header" alt="img/carta">
+          <div class="card-body">
+            <h5 class="card-title">{{ "Espera.." }} </h5>
+            <p class="card-text">Poder XP: {{00}}</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
   <div class="col-2 d-flex justify-content-center align-items-center minh-100">
@@ -35,7 +49,7 @@
       <h5 class="card-header text-white text-center p-2">Usuario</h5>
       <div class="card text-center colorUsers anyClass p-2">
         <div *ngFor="let item of informationTarjetas" class="card text-bg-dark mb-3 cardDimencion">
-          <input #idTarjeta type="hidden" value="{{item.id}}" >
+          <input #idTarjetaInput type="hidden" value="{{item.id}}">
           <img src={{item.imagen}} class="card-header">
           <div class="card-body">
             <h5 class="card-title">{{ item.descripcion }}</h5>

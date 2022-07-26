@@ -15,7 +15,7 @@ public class RecibirTarjetaUseCase {
     public Mono<Tablero> recibirTarjetas(String id, Map<String, Tarjeta> tarjetaJugadores) {
         return tableroRepository.findById(id)
                 .map(tablero -> {
-                    tablero.setApuesta(tarjetaJugadores);
+                    tablero.getApuesta().putAll(tarjetaJugadores);
                     return tablero;
                 })
                 .flatMap(tableroRepository::save);

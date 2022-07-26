@@ -75,16 +75,19 @@ export class ServiceHttJuego {
       (`${PathRest.getApiJuego}/ganador/${idJuego}`, juego, this.httpOptions)
   }
 
-  aumentaRondaPOSTUseCase(idJuego: string): Observable<Juego> {
+  aumentaRonda(idJuego: string): Observable<Juego> {
     return this.httpJuego
       .get<Juego>
       (`${PathRest.getApiJuego}/rondas/${idJuego}`)
   }
 
-  actuaLizarBarajaGanadorRonda(idJugador: string, elementosJuego: ElementosJugadorJuego): Observable<Juego> {
+  actuaLizarBarajaGanadorRonda(idJuego: string, elementosJuego: ElementosJugadorJuego): Observable<Juego> {
+    console.log(idJuego);
+    console.log(elementosJuego);
+
     return this.httpJuego
       .post<Juego>
-      (`${PathRest.getApiJuego}/ganador/ronda/${idJugador}`, elementosJuego, this.httpOptions)
+      (`${PathRest.getApiJuego}/ganador/ronda/${idJuego}`, elementosJuego, this.httpOptions)
   }
 
   asignarCartasMazo(idJugador: string, identificacionJugador: IdentificacionJugador): Observable<Juego> {
