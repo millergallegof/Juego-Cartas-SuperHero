@@ -20,6 +20,7 @@ import { AutenticacionServiceService } from './servicesAuth/autenticacion-servic
 import { ListarTarjetasComponentComponent } from './component/listar-tarjetas-component/listar-tarjetas-component.component';
 import { WaitingRoomComponetComponent } from './component/waiting-room-componet/waiting-room-componet.component';
 import { GameOverComponent } from './component/game-over/game-over.component';
+import { GanadorComponent } from './component/ganador/ganador.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { GameOverComponent } from './component/game-over/game-over.component';
     ErrorComponentComponent,
     ListarTarjetasComponentComponent,
     WaitingRoomComponetComponent,
-    GameOverComponent
+    GameOverComponent,
+    GanadorComponent
   ],
   imports: [
     BrowserModule,
