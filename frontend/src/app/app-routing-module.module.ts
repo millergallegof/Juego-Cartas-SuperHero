@@ -10,6 +10,7 @@ import { ErrorComponentComponent } from './component/error-component/error-compo
 import { ListarTarjetasComponentComponent } from './component/listar-tarjetas-component/listar-tarjetas-component.component';
 import { WaitingRoomComponetComponent } from './component/waiting-room-componet/waiting-room-componet.component';
 import { GameOverComponent } from './component/game-over/game-over.component';
+import { GanadorComponent } from './component/ganador/ganador.component';
 
 
 const routesChildrens: Routes = [
@@ -24,23 +25,36 @@ const routesChildrens: Routes = [
     canActivate: [AngularFireAuthGuard]
   },
   {
-    path:'salaespera',
+    path: 'salaespera',
     component: WaitingRoomComponetComponent,
-    canActivate:[AngularFireAuthGuard]
+    canActivate: [AngularFireAuthGuard]
   },
-  { path: 'singup', component: SingupComponent ,
-  canActivate: [AngularFireAuthGuard]},
+  {
+    path: 'singup', component: SingupComponent,
+    canActivate: [AngularFireAuthGuard]
+  },
 
-  { path: 'login', component: LoginComponent ,
-  canActivate: [AngularFireAuthGuard]},
+  {
+    path: 'login', component: LoginComponent,
+    canActivate: [AngularFireAuthGuard]
+  },
 
-  { path: 'gameover', component: GameOverComponent,
-  canActivate: [AngularFireAuthGuard] },
+  {
+    path: 'gameover', component: GameOverComponent,
+    canActivate: [AngularFireAuthGuard]
+  },
+
+  {
+    path: 'ganador', component: GanadorComponent,
+    canActivate: [AngularFireAuthGuard]
+  },
 
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 
-  { path: '**', component: ErrorComponentComponent,
-  canActivate: [AngularFireAuthGuard] },
+  {
+    path: '**', component: ErrorComponentComponent,
+    canActivate: [AngularFireAuthGuard]
+  },
 
 
 ]
