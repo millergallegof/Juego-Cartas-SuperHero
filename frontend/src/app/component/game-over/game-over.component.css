@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Indie+Flower&family=Lobster&display=swap');
+
+
 .wrapper {
   background: #0f0c29;
   /* fallback for old browsers */
@@ -16,9 +19,10 @@
 h1,
 h2,
 h3 {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Indie Flower', cursive;
+  color: rgb(252, 0, 0);
   font-weight: 100;
-  font-size: 2.6em;
+  font-size: 200px;
   text-transform: uppercase;
 }
 
@@ -99,11 +103,11 @@ header .overlay {
 
 @media (pointer: coarse) and (hover: none) {
   header {
-      background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
+    background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
   }
 
   header video {
-      display: none;
+    display: none;
   }
 }
 

@@ -1,96 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Indie+Flower&family=Lobster&display=swap');
+
 .wrapper {
-    background: #0f0c29;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    font-family: Arial;
-    width: 600px;
-    margin: 50px auto;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
+  background: #0f0c29;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  font-family: Arial;
+  width: 600px;
+  margin: 50px auto;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
 }
 
 h1,
 h2,
 h3 {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 100;
-    font-size: 2.6em;
-    text-transform: uppercase;
+  font-family: 'Indie Flower', cursive;
+  color: rgb(145, 165, 255);
+  font-weight: 100;
+  font-size: 200px;
+  text-transform: uppercase;
 }
 
 #seconds,
 #tens {
-    font-size: 2em;
+  font-size: 2em;
 }
 
 button {
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    -khtml-border-radius: 5px;
-    /* background: #ffa600; */
-    color: #fff;
-    border: solid 1px #fff;
-    text-decoration: none;
-    cursor: pointer;
-    font-size: 1.2em;
-    padding: 18px 10px;
-    width: 180px;
-    margin: 10px;
-    outline: none;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -khtml-border-radius: 5px;
+  /* background: #ffa600; */
+  color: #fff;
+  border: solid 1px #fff;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  padding: 18px 10px;
+  width: 180px;
+  margin: 10px;
+  outline: none;
 }
 
 button:hover {
-    -webkit-transition: all 0.5s ease-in-out;
-    -moz-transition: all 0.5s ease-in-out;
-    transition: all 0.5s ease-in-out;
-    background: rgb(29, 5, 5);
-    border: solid 1px #fff;
-    color: #fff;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  background: rgb(29, 5, 5);
+  border: solid 1px #fff;
+  color: #fff;
 }
 
 video {
-    position: relative;
-    background-color: black;
-    height: 75vh;
-    min-height: 25rem;
-    width: 100%;
-    overflow: hidden;
+  position: relative;
+  background-color: black;
+  height: 75vh;
+  min-height: 25rem;
+  width: 100%;
+  overflow: hidden;
 }
 
 video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    z-index: 0;
-    -ms-transform: translateX(-50%) translateY(-50%);
-    -moz-transform: translateX(-50%) translateY(-50%);
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
 }
 
 header .container {
-    position: relative;
-    z-index: 2;
+  position: relative;
+  z-index: 2;
 }
 
 header .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: black;
-    opacity: 0.5;
-    z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 1;
 }
 
 /* Media Query for devices withi coarse pointers and no hover functionality */
@@ -98,34 +101,34 @@ header .overlay {
 /* This will use a fallback image instead of a video for devices that commonly do not support the HTML5 video element */
 
 @media (pointer: coarse) and (hover: none) {
-    header {
-        background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
-    }
+  header {
+    background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
+  }
 
-    header video {
-        display: none;
-    }
+  header video {
+    display: none;
+  }
 }
 
 .ds-btn li {
-    list-style: none;
-    float: left;
-    padding: 10px;
+  list-style: none;
+  float: left;
+  padding: 10px;
 }
 
 .ds-btn li a span {
-    padding-left: 15px;
-    padding-right: 5px;
-    width: 100%;
-    display: inline-block;
-    text-align: left;
+  padding-left: 15px;
+  padding-right: 5px;
+  width: 100%;
+  display: inline-block;
+  text-align: left;
 }
 
 a {
-    font-size: 25px;
+  font-size: 25px;
 }
 
 
 .text {
-    font-size: 10px;
+  font-size: 10px;
 }
