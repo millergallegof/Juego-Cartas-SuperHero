@@ -5,7 +5,7 @@ import { Bajara } from '../../models/Ibaraja';
 import { ServiceHttJuego } from '../../service/http-service-juego.service';
 import { ServiceHttpJugador } from 'src/app/service/http-service-jugador.service';
 import { ServiceHttpTablero } from 'src/app/service/http-service-tablero.service';
-import { Route } from '@angular/router';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-listar-tarjetas-component',
@@ -35,7 +35,7 @@ export class ListarTarjetasComponentComponent implements OnInit {
     private servicioHttpJuego: ServiceHttJuego,
     private servicioHttpJugador: ServiceHttpJugador,
     private servicioHttpTablero: ServiceHttpTablero,
-    // private route: Route
+    private router: Router
   ) {
     this.minutos = 0;
     this.segundos = 30;
@@ -48,6 +48,7 @@ export class ListarTarjetasComponentComponent implements OnInit {
     }, 500)
     this.mostrarCartasTablero()
   }
+
   // ----------------------------------------------------------------------------------------------------
   // LISTAR TARJETAS JUGADOR
   // ----------------------------------------------------------------------------------------------------
@@ -104,10 +105,13 @@ export class ListarTarjetasComponentComponent implements OnInit {
     this.servicioHttpJuego.finalizarJuego(idJuego)
       .subscribe(data => {
         if (data.ganador === "") {
-          console.log("Nadie Gano")
+          console.log("Nadie Gano" + data)
+          this.aumentarRonda()
         } else {
           localStorage.setItem('informacionJuego', JSON.stringify({ idJuego: data.id, ganador: data.ganador }))
-
+          setTimeout(() => {
+            this.router.navigate(['/'])
+          }, 500)
         }
       })
   }
@@ -125,7 +129,6 @@ export class ListarTarjetasComponentComponent implements OnInit {
           setTimeout(() => {
             this.revisarGanadorJuego()
             this.elegirGanadorTablero()
-            this.aumentarRonda()
             this.ngOnInit()
           }, 5000)
         } else {

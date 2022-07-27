@@ -35,7 +35,7 @@ export class HomeComponentComponent implements OnInit {
     this.servicioHttpJuego
       .listarJuego()
       .subscribe(data => {
-        this.juegos = data
+        this.juegos = data.filter(element => element.ganador === "")
       });
   }
 
@@ -68,7 +68,7 @@ export class HomeComponentComponent implements OnInit {
       .subscribe(data => {
         this.servicioHttpJuego.actualizarJugadores(idJuego, data)
           .subscribe(juego => {
-            localStorage.setItem('informacionJuego', JSON.stringify({idJuego:juego.id, ganador:juego.ganador}))
+            localStorage.setItem('informacionJuego', JSON.stringify({ idJuego: juego.id, ganador: juego.ganador }))
             localStorage.setItem('rolJugador', JSON.stringify("player"))
             this.servicioHttpTablero.obtenerTablero(juego.tableroId)
               .subscribe(tablero => {
@@ -89,7 +89,7 @@ export class HomeComponentComponent implements OnInit {
       .crearJuego({ id: null, ronda: 1, mazoJuego: tarjetas, ganador: "", tableroId: "", jugadores: this.jugadores })
       .subscribe(data => {
         this.crearTablero(data.id!)
-        localStorage.setItem('informacionJuego', JSON.stringify({idJuego:data.id, ganador:data.ganador}))
+        localStorage.setItem('informacionJuego', JSON.stringify({ idJuego: data.id, ganador: data.ganador }))
         JSON.parse(localStorage.getItem('informacionJuego')!);
       })
   }
