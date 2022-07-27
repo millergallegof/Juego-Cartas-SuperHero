@@ -40,7 +40,6 @@ export class HomeComponentComponent implements OnInit {
   }
 
   crearSala(nickName: string): void {
-    // localStorage.setItem('creacionSala', JSON.stringify("host"))
     this.crearJuego();
     this.crearJugador(nickName);
     console.log(typeof new Date().getSeconds());

@@ -17,7 +17,6 @@ public class RouterRest {
                 (POST("/api/tarjeta/actualizar/{id}"), handlerTarjeta::actualizarPOSTUseCase).andRoute
                 (GET("/api/tarjeta/listar"), handlerTarjeta::listarTarjetasGETUseCase).andRoute
                 (POST("/api/juego/crear"), handlerJuego::crearJuegoPOSTUseCase).andRoute
-                (POST("/api/juego/ganador/{id}"), handlerJuego::asignarGanadorPOSTUseCase).andRoute
                 (GET("/api/juego/rondas/{id}"), handlerJuego::aumentaRondaPOSTUseCase).andRoute
                 (GET("/api/juego/listar"), handlerJuego::listarJuegosGETUseCase).andRoute
                 (POST("/api/juego/actualizar/jugadores/{id}"), handlerJuego::actualizarJugadoresPOSTUSeCase).andRoute
