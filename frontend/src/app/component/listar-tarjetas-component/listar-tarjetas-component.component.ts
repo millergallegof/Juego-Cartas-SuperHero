@@ -102,6 +102,7 @@ export class ListarTarjetasComponentComponent implements OnInit {
 
   revisarGanadorJuego(): void {
     let { idJuego } = JSON.parse(localStorage.getItem('informacionJuego')!);
+    let { uid } = JSON.parse(localStorage.getItem('user')!);
     this.servicioHttpJuego.finalizarJuego(idJuego)
       .subscribe(data => {
         if (data.ganador === "") {
@@ -110,7 +111,11 @@ export class ListarTarjetasComponentComponent implements OnInit {
         } else {
           localStorage.setItem('informacionJuego', JSON.stringify({ idJuego: data.id, ganador: data.ganador }))
           setTimeout(() => {
-            this.router.navigate(['/'])
+            if (data.ganador == uid) {
+              this.router.navigate(['/ganador'])
+            } else {
+              this.router.navigate(['/gameover'])
+            }
           }, 500)
         }
       })
