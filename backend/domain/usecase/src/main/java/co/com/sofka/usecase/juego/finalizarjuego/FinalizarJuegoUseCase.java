@@ -6,6 +6,7 @@ import co.com.sofka.model.jugador.Jugador;
 import co.com.sofka.model.tarjeta.gateways.TarjetaRepository;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 @RequiredArgsConstructor
 public class FinalizarJuegoUseCase {
@@ -16,20 +17,20 @@ public class FinalizarJuegoUseCase {
 
     public Mono<Juego> finalizaJuego(String idJuego) {
         return juegoRepository.findById(idJuego)
+                .publishOn(Schedulers.boundedElastic())
                 .map(juego -> {
                     tarjetaRepository.findAll()
                             .count()
                             .subscribe(numTarjetas -> {
-                                juego.getJugadores().stream()
-                                        .map(jugador -> {
-                                            if (!jugador.getBaraja().getTarjetas().isEmpty()) {
-                                                this.contador += 1;
-                                                return jugador;
-                                            } else {
-                                                return jugador;
-                                            }
-                                        });
                                 var idGanador = juego.getJugadores().stream()
+                                        .map(player1 -> {
+                                            if (!player1.getBaraja().getTarjetas().isEmpty()) {
+                                                this.contador += 1;
+                                                return player1;
+                                            } else {
+                                                return player1;
+                                            }
+                                        })
                                         .reduce((acum, player) -> {
                                             if (juego.getMazoJuego().size() == numTarjetas - player.getBaraja().getTarjetas().size()) {
                                                 return player;
@@ -37,7 +38,6 @@ public class FinalizarJuegoUseCase {
                                                 return acum;
                                             }
                                         }).get();
-                                System.out.println(this.contador);
                                 if (this.contador == 0) {
                                     this.jugador = idGanador;
                                 }
