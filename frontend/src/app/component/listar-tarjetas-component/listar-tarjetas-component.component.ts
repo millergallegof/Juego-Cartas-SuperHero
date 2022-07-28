@@ -46,8 +46,6 @@ export class ListarTarjetasComponentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.secondsToDday);
-
     let { ganador } = JSON.parse(localStorage.getItem('informacionJuego')!);
     setTimeout(() => {
       this.obtenerCartas();
@@ -65,22 +63,22 @@ export class ListarTarjetasComponentComponent implements OnInit {
   ngOnDestroy() {
     this.subscription.unsubscribe()
     let rolJugador = JSON.parse(localStorage.getItem('rolJugador')!);
+    let limiteRonda = JSON.parse(localStorage.getItem('limiteRonda')!);
     if (rolJugador === "host") {
       this.elegirGanadorTablero()
     }
-    localStorage.setItem('limiteRonda', JSON.stringify(JSON.parse(localStorage.getItem('limiteRonda')!) + 33000))
+    localStorage.setItem('limiteRonda', JSON.stringify(limiteRonda + 30000))
     this.revisarGanadorJuego()
     this.disabledButton = false;
-    this.ngOnInit()
   }
 
   timerRonda() {
-
     this.fechaFinal = new Date(JSON.parse(localStorage.getItem('limiteRonda')!))
     this.subscription = interval(1000)
       .subscribe(x => {
         this.getTimeDifference();
-        if (this.secondsToDday <= 0) {
+        if (this.secondsToDday == 0) {
+          this.mostrarCartasTablero()
           this.voltearTarjetasTablero()
         }
         if (this.secondsToDday <= -5) {
@@ -170,6 +168,7 @@ export class ListarTarjetasComponentComponent implements OnInit {
             }
           }, 500)
         }
+        this.ngOnInit()
       })
   }
 

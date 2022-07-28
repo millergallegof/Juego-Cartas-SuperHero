@@ -30,7 +30,12 @@ export class WaitingRoomComponetComponent implements OnInit, OnDestroy {
   ngOnInit() {
     setTimeout(() => {
       let { fechaLimiteComenzar } = JSON.parse(localStorage.getItem('informacionJuego')!);
-      localStorage.setItem('limiteRonda', JSON.stringify(fechaLimiteComenzar + 32000))
+      let rolJugador = JSON.parse(localStorage.getItem('rolJugador')!);
+      if (rolJugador === "host") {
+        localStorage.setItem('limiteRonda', JSON.stringify(fechaLimiteComenzar + 32000))
+      } else {
+        localStorage.setItem('limiteRonda', JSON.stringify(fechaLimiteComenzar + 34000))
+      }
       this.fechaFinal = new Date(fechaLimiteComenzar)
       this.subscription = interval(1000).pipe(retry(2))
         .subscribe(x => {
@@ -43,12 +48,12 @@ export class WaitingRoomComponetComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.subscription.unsubscribe();
     let rolJugador = JSON.parse(localStorage.getItem('rolJugador')!);
     if (rolJugador === "host") {
       this.repatirBaraja();
     }
     this.router.navigate(['juego']);
-    this.subscription.unsubscribe();
   }
 
   private getTimeDifference() {
