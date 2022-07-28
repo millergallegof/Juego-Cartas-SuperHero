@@ -17,7 +17,6 @@ public class RouterRest {
                 (POST("/api/tarjeta/actualizar/{id}"), handlerTarjeta::actualizarPOSTUseCase).andRoute
                 (GET("/api/tarjeta/listar"), handlerTarjeta::listarTarjetasGETUseCase).andRoute
                 (POST("/api/juego/crear"), handlerJuego::crearJuegoPOSTUseCase).andRoute
-                (POST("/api/juego/ganador/{id}"), handlerJuego::asignarGanadorPOSTUseCase).andRoute
                 (GET("/api/juego/rondas/{id}"), handlerJuego::aumentaRondaPOSTUseCase).andRoute
                 (GET("/api/juego/listar"), handlerJuego::listarJuegosGETUseCase).andRoute
                 (POST("/api/juego/actualizar/jugadores/{id}"), handlerJuego::actualizarJugadoresPOSTUSeCase).andRoute
@@ -28,6 +27,7 @@ public class RouterRest {
                 (POST("/api/juego/retiro/{id}"), handlerJuego::asignarCartasMazoPOSTUseCase).andRoute
                 (POST("/api/juego/listar/baraja/jugador/{id}"), handlerJuego::listarBarajaJugadorPOSTUSeCase).andRoute
                 (POST("/api/juego/actualizar/baraja/jugador/{id}"), handlerJuego::actualizarBarajaJugadorPOSTUSeCase).andRoute
+                (DELETE("/api/juego/eliminar/{id}"), handlerJuego::eliminarJuegoDELETEUseCase).andRoute
                 (POST("/api/jugador/crear"), handlerJugador::guardarJugadorPostUseCase).andRoute
                 (GET("/api/jugador/retirarse/{id}"), handlerJugador::retirarseGETUseCase).andRoute
                 (GET("/api/jugador/aumentarpuntos/{id}"), handlerJugador::asignarPuntosGETUseCase).andRoute

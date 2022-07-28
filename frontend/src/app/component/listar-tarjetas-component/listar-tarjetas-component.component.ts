@@ -113,7 +113,7 @@ export class ListarTarjetasComponentComponent implements OnInit {
           })
       });
   }
-
+  //Apostar Tarjeta
   actualizarEstadoCarta(idTarjeta: string): void {
     let { uid } = JSON.parse(localStorage.getItem('user')!);
     let { idJuego } = JSON.parse(localStorage.getItem('informacionJuego')!);
