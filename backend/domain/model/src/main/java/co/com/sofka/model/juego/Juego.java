@@ -5,6 +5,7 @@ import co.com.sofka.model.tarjeta.Tarjeta;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -19,14 +20,16 @@ public class Juego {
     private String ganador;
     private String tableroId;
     private List<Jugador> jugadores;
+    private LocalDateTime createAt;
 
-    public Juego(String id, Integer ronda, List<Tarjeta> mazoJuego, String ganador, String tableroId, List<Jugador> jugadores) {
+    public Juego(String id, Integer ronda, List<Tarjeta> mazoJuego, String ganador, String tableroId, List<Jugador> jugadores, LocalDateTime createAt) {
         this.id = id;
         this.ronda = ronda;
         this.mazoJuego = mazoJuego;
         this.ganador = ganador;
         this.tableroId = tableroId;
         this.jugadores = jugadores;
+        this.createAt = createAt;
     }
 
     public Juego() {

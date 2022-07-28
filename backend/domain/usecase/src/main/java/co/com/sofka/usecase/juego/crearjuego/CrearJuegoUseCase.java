@@ -7,6 +7,7 @@ import co.com.sofka.model.tarjeta.gateways.TarjetaRepository;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class CrearJuegoUseCase {
         return tarjetaRepository.findAll()
                 .collectList()
                 .map(tarjetas -> {
+                    juego.setCreateAt(LocalDateTime.now());
                     juego.setMazoJuego(tarjetas);
                     return juego;
                 })

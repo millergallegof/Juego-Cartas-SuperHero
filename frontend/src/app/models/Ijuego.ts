@@ -8,4 +8,5 @@ export interface Juego{
     ganador: string;
     tableroId: string;
     jugadores: Jugador[];
+    createAt: string;
 }
