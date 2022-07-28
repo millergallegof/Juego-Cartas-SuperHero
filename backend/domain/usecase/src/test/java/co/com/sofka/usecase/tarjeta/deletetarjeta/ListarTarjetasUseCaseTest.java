@@ -1,4 +1,4 @@
-package co.com.sofka.usecase.tarjetas.listartarjeta;
+package co.com.sofka.usecase.tarjeta.deletetarjeta;
 
 import co.com.sofka.model.tarjeta.Tarjeta;
 import co.com.sofka.model.tarjeta.gateways.TarjetaRepository;
