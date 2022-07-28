@@ -29,7 +29,7 @@
     <div class="card col-sm-8 w-100 p-2 colorUsers content">
       <div class="d-flex justify-content-between">
         <p class="text-start text-white">Ronda: # {{ronda}} </p>
-        <p class="text-end text-white">Tiempo: <span>{{minutos}}:{{segundos}}</span></p>
+        <p *ngIf="secondsToDday > 0 ? true : false" class="text-end text-white">Tiempo: <span>{{minutesToDday}}:{{secondsToDday}}</span></p>
       </div>
 
       <div *ngIf="esVisible; else mostraTarjetas"
