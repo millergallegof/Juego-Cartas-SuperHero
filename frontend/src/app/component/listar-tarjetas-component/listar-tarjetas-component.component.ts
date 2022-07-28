@@ -46,6 +46,8 @@ export class ListarTarjetasComponentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.secondsToDday);
+
     let { ganador } = JSON.parse(localStorage.getItem('informacionJuego')!);
     setTimeout(() => {
       this.obtenerCartas();
@@ -190,7 +192,7 @@ export class ListarTarjetasComponentComponent implements OnInit {
     jugadorTarjeta.set(uid, tarjeta)
     this.servicioHttpTablero.enviarTarjeta(id, jugadorTarjeta)
       .subscribe(data => {
-          this.mostrarCartasTablero()
+        this.mostrarCartasTablero()
       })
   }
 
