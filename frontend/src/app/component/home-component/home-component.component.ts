@@ -42,10 +42,6 @@ export class HomeComponentComponent implements OnInit {
   crearSala(nickName: string): void {
     this.crearJugador(nickName);
     this.crearJuego();
-    // setTimeout(() => {
-    //   this.obtenerCartas();
-    // }, 500)
-    // this.crearJugador(nickName);
   }
 
   crearJugador(nickName: string): void {
@@ -76,8 +72,7 @@ export class HomeComponentComponent implements OnInit {
             localStorage.setItem('informacionJuego', JSON.stringify({
               idJuego: juego.id,
               ganador: juego.ganador,
-              fechaCreacionJuego: Date.parse(new Date().toString()),
-              fechaLimite: new Date(fechaCreacinJuego + 60000)
+              fechaLimiteComenzar: new Date(fechaCreacinJuego + 60000)
             }))
             localStorage.setItem('rolJugador', JSON.stringify("player"))
             this.servicioHttpTablero.obtenerTablero(juego.tableroId)
@@ -103,8 +98,7 @@ export class HomeComponentComponent implements OnInit {
         localStorage.setItem('informacionJuego', JSON.stringify({
           idJuego: data.id,
           ganador: data.ganador,
-          fechaCreacionJuego: fechaCreacinJuego,
-          fechaLimite: fechaCreacinJuego + 60000
+          fechaLimiteComenzar: fechaCreacinJuego + 60000
         }))
         JSON.parse(localStorage.getItem('informacionJuego')!);
       })

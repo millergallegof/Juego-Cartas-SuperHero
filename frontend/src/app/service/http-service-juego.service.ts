@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { noop, Observable } from 'rxjs';
+import { noop, Observable, retry } from 'rxjs';
 import { Tarjeta } from '../models/Itarjetas';
 import { PathRest } from '../static/hostbackend';
 import { Jugador } from '../models/Ijugador';
