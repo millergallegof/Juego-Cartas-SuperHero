@@ -50,7 +50,7 @@ mat-card-title{
 }
 
 .button {
-    background-color: #4CAF50; /* Green */
+    background-color: #7c7c7c; /* Green */
     border: none;
     color: white;
     padding: 5px 10px;
@@ -61,4 +61,5 @@ mat-card-title{
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     cursor: pointer;
+    border-radius: 15px;
 }
