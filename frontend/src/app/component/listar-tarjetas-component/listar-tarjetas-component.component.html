@@ -29,7 +29,9 @@
     <div class="card col-sm-8 w-100 p-2 colorUsers content">
       <div class="d-flex justify-content-between">
         <p class="text-start text-white">Ronda: # {{ronda}} </p>
-        <p *ngIf="secondsToDday > 0 ? true : false" class="text-end text-white">Tiempo: <span>{{minutesToDday}}:{{secondsToDday}}</span></p>
+        <p *ngIf="secondsToDday > 0 ? true : false" class="text-end text-white">Tiempo:
+          <span>{{minutesToDday}}:{{secondsToDday}}</span>
+        </p>
       </div>
 
       <div *ngIf="esVisible; else mostraTarjetas"
@@ -61,7 +63,7 @@
     <div class="col-sm-8 p-2">
       <h5 class="card-header text-white text-center p-2">Usuario</h5>
       <div class="card text-center colorUsers anyClass p-2">
-        <div *ngFor="let item of informationTarjetas" class="card text-bg-dark mb-3 cardDimencion">
+        <!-- <div *ngFor="let item of informationTarjetas" class="card text-bg-dark mb-3 cardDimencion">
           <input #idTarjetaInput type="hidden" value="{{item.id}}">
           <img src={{item.imagen}} class="card-header">
           <div class="card-body">
@@ -69,8 +71,20 @@
             <button class="btn btn-primary" [disabled]="disabledButton" (click)="actualizarEstadoCarta(item.id)">Poder
               XP: {{item.poderXp}}.</button>
           </div>
-        </div>
+        </div> -->
 
+        <mat-card *ngFor="let item of informationTarjetas" class="card text-bg-dark mb-3 cardDimencion">
+          <mat-card-title>{{ item.descripcion }}</mat-card-title>
+          <mat-card-content>
+            <input #idTarjetaInput type="hidden" value="{{item.id}}">
+            <img mat-card-image src="{{item.imagen}}" alt="Foto Carta">
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button [disabled]="disabledButton"
+              (click)="actualizarEstadoCarta(item.id)" class="button">Poder
+              XP: {{item.poderXp}}.</button>
+          </mat-card-actions>
+        </mat-card>
       </div>
       <li>
         <a class="btn btn-lg btn-danger">
