@@ -19,6 +19,9 @@ export class HomeComponentComponent implements OnInit {
   idTablero: string = "";
   idJuego: string = "";
 
+  emailJugador: string;
+  partidasGanadasJugador:number = 0;
+
   constructor(
     public autenticacionService: AutenticacionServiceService,
     public servicioHttpJugador: ServiceHttpJugador,
@@ -29,6 +32,7 @@ export class HomeComponentComponent implements OnInit {
 
   ngOnInit(): void {
     this.listarJuegos()
+    this.mostrarInformacionJugador();
   }
 
   listarJuegos(): void {
@@ -123,5 +127,15 @@ export class HomeComponentComponent implements OnInit {
       .subscribe(data => {
         this.juegos.push(data)
       });
+  }
+
+  
+  // Metodo encargado de asignar la informacion del usuario para mostrarla en el front
+  mostrarInformacionJugador(){
+    let {email, uid} = JSON.parse(localStorage.getItem('user')!);
+    this.emailJugador = email;  
+    this.servicioHttpJugador.obtenerPartidasGanadas(uid)
+    // .subscribe(data => this.partidasGanadasJugador = data.partidasGanadas);
+
   }
 }
