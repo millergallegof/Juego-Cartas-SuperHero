@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Tarjeta } from '../../models/Itarjetas';
-import { interval, timer } from 'rxjs';
+import { interval, retry, Subscription, timer } from 'rxjs';
 import { Bajara } from '../../models/Ibaraja';
 import { ServiceHttJuego } from '../../service/http-service-juego.service';
 import { ServiceHttpJugador } from 'src/app/service/http-service-jugador.service';
@@ -15,8 +15,15 @@ import { Route, Router } from '@angular/router';
 export class ListarTarjetasComponentComponent implements OnInit {
   tarjetImgUser: any[] = ['../../../assets/img/icon-user.png']
   // VARIABLES TIMER
-  minutos: number;
-  segundos: number;
+  private subscription: Subscription;
+  timeDifference: number;
+  secondsToDday: number;
+  minutesToDday: number;
+  fechaActual: Date = new Date();
+  fechaFinal: Date;
+  milliSecondsInASecond: number = 1000;
+  minutesInAnHour: number = 60;
+  SecondsInAMinute: number = 60;
 
   // VARIABLES ARREGLO JUGADOR
   informationTarjetas: Tarjeta[] = [];
@@ -36,17 +43,58 @@ export class ListarTarjetasComponentComponent implements OnInit {
     private servicioHttpJugador: ServiceHttpJugador,
     private servicioHttpTablero: ServiceHttpTablero,
     private router: Router
-  ) {
-    this.minutos = 0;
-    this.segundos = 30;
-    this.interval = setInterval(() => this.asignarGanadorTimer(), 1000);
-  }
+  ) { }
 
   ngOnInit(): void {
+    let { ganador } = JSON.parse(localStorage.getItem('informacionJuego')!);
     setTimeout(() => {
       this.obtenerCartas();
-    }, 500)
+    }, 800)
+    if (ganador === "") {
+      this.timerRonda()
+      this.esVisible = true;
+    }
     this.mostrarCartasTablero()
+  }
+
+  // ----------------------------------------------------------------------------------------------------
+  // TIMER RONDA
+  // ----------------------------------------------------------------------------------------------------
+  ngOnDestroy() {
+    this.subscription.unsubscribe()
+    let rolJugador = JSON.parse(localStorage.getItem('rolJugador')!);
+    if (rolJugador === "host") {
+      this.elegirGanadorTablero()
+    }
+    localStorage.setItem('limiteRonda', JSON.stringify(JSON.parse(localStorage.getItem('limiteRonda')!) + 33000))
+    this.revisarGanadorJuego()
+    this.disabledButton = false;
+    this.ngOnInit()
+  }
+
+  timerRonda() {
+
+    this.fechaFinal = new Date(JSON.parse(localStorage.getItem('limiteRonda')!))
+    this.subscription = interval(1000)
+      .subscribe(x => {
+        this.getTimeDifference();
+        if (this.secondsToDday <= 0) {
+          this.voltearTarjetasTablero()
+        }
+        if (this.secondsToDday <= -5) {
+          this.ngOnDestroy()
+        }
+      });
+  }
+
+  private getTimeDifference() {
+    this.timeDifference = this.fechaFinal.getTime() - new Date().getTime();
+    this.allocateTimeUnits(this.timeDifference);
+  }
+
+  private allocateTimeUnits(timeDifference: number) {
+    this.secondsToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond) % this.SecondsInAMinute);
+    this.minutesToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour) % this.SecondsInAMinute);
   }
 
   // ----------------------------------------------------------------------------------------------------
@@ -56,7 +104,7 @@ export class ListarTarjetasComponentComponent implements OnInit {
     let { idJuego } = JSON.parse(localStorage.getItem('informacionJuego')!);
     let { uid } = JSON.parse(localStorage.getItem('user')!);
     this.servicioHttpJuego
-      .listarBarajaJugador(idJuego, { id: uid })
+      .listarBarajaJugador(idJuego, { id: uid }).pipe(retry(2))
       .subscribe(data => {
         this.informationTarjetas = data.tarjetas;
         this.servicioHttpJugador.actualizarBaraja(uid, data)
@@ -76,10 +124,12 @@ export class ListarTarjetasComponentComponent implements OnInit {
     this.servicioHttpJugador.apostarTarjeta(uid, idTarjeta)
       .subscribe(jugador => {
         this.servicioHttpJuego.actualizarBarajaJugador(idJuego, { idJugador: uid, baraja: jugador.baraja! })
-          .subscribe(juego => { juego })
-        this.ngOnInit()
+          .subscribe(juego => {
+            this.eliminarCartaBaraja(idTarjeta);
+            this.mostrarCartasTablero()
+          });
       });
-    this.eliminarCartaBaraja(idTarjeta);
+
   }
 
   eliminarCartaBaraja(idTarjeta: string): void {
@@ -124,35 +174,10 @@ export class ListarTarjetasComponentComponent implements OnInit {
   // ----------------------------------------------------------------------------------------------------
   // TABLERO
   // ----------------------------------------------------------------------------------------------------
-  asignarGanadorTimer(): void {
-    let { ganadorId } = JSON.parse(localStorage.getItem('tablero')!);
-    let rolJugador = JSON.parse(localStorage.getItem('rolJugador')!);
-    if (--this.segundos <= 0) {
-      if (ganadorId !== null) {
-        if (rolJugador === "host") {
-          this.voltearTarjetasTablero()
-          setTimeout(() => {
-            this.revisarGanadorJuego()
-            this.elegirGanadorTablero()
-            this.ngOnInit()
-          }, 5000)
-        } else {
-          this.voltearTarjetasTablero()
-          setTimeout(() => {
-            this.ngOnInit()
-          }, 5000)
-        }
-        clearInterval(this.interval)
-      } else {
-        this.segundos = 10
-      }
-    }
-  }
-
   mostrarCartasTablero() {
     let { id } = JSON.parse(localStorage.getItem('tablero')!);
     this.servicioHttpTablero
-      .recibirTarjetas(id)
+      .recibirTarjetas(id).pipe(retry(2))
       .subscribe(data => {
         this.tarjetasTablero = data
       })
@@ -165,7 +190,7 @@ export class ListarTarjetasComponentComponent implements OnInit {
     jugadorTarjeta.set(uid, tarjeta)
     this.servicioHttpTablero.enviarTarjeta(id, jugadorTarjeta)
       .subscribe(data => {
-        this.mostrarCartasTablero()
+          this.mostrarCartasTablero()
       })
   }
 
@@ -179,9 +204,8 @@ export class ListarTarjetasComponentComponent implements OnInit {
           .subscribe(tarjetasGanador => {
             let { ganadorId } = JSON.parse(localStorage.getItem('tablero')!);
             this.servicioHttpJuego.actuaLizarBarajaGanadorRonda(idJuego, { idJugador: ganadorId, tarjetas: tarjetasGanador })
-              .subscribe(juego => {
-                this.eliminarTarjetasTablero()
-              })
+              .subscribe()
+            this.eliminarTarjetasTablero()
           })
       })
   }
@@ -193,9 +217,7 @@ export class ListarTarjetasComponentComponent implements OnInit {
   eliminarTarjetasTablero(): void {
     let { id } = JSON.parse(localStorage.getItem('tablero')!);
     this.servicioHttpTablero.eliminarTarjetas(id)
-      .subscribe(() => {
-        this.ngOnInit()
-      })
+      .subscribe()
   }
 
 }

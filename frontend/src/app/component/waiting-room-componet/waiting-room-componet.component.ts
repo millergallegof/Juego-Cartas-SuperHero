@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { ServiceHttJuego } from '../../service/http-service-juego.service';
 import { Router } from '@angular/router';
-import { interval, Subscription } from 'rxjs';
+import { interval, retry, Subscription } from 'rxjs';
 
 
 @Component({
@@ -19,7 +19,6 @@ export class WaitingRoomComponetComponent implements OnInit, OnDestroy {
   fechaActual: Date = new Date();
   fechaFinal: Date;
   milliSecondsInASecond: number = 1000;
-  hoursInADay: number = 24;
   minutesInAnHour: number = 60;
   SecondsInAMinute: number = 60;
 
@@ -30,11 +29,15 @@ export class WaitingRoomComponetComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     setTimeout(() => {
-      let { fechaLimite } = JSON.parse(localStorage.getItem('informacionJuego')!);
-      this.fechaFinal = new Date(fechaLimite)
-      this.subscription = interval(1000)
+      let { fechaLimiteComenzar } = JSON.parse(localStorage.getItem('informacionJuego')!);
+      localStorage.setItem('limiteRonda', JSON.stringify(fechaLimiteComenzar + 32000))
+      this.fechaFinal = new Date(fechaLimiteComenzar)
+      this.subscription = interval(1000).pipe(retry(2))
         .subscribe(x => {
           this.getTimeDifference();
+          if (this.secondsToDday <= 0) {
+            this.ngOnDestroy()
+          }
         });
     }, 1000)
   }

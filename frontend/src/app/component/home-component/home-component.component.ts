@@ -6,6 +6,7 @@ import { Jugador } from '../../models/Ijugador';
 import { ServiceHttpJugador } from '../../service/http-service-jugador.service';
 import { Juego } from '../../models/Ijuego';
 import { ServiceHttpTablero } from '../../service/http-service-tablero.service';
+import { retry } from 'rxjs';
 
 
 @Component({
@@ -44,10 +45,6 @@ export class HomeComponentComponent implements OnInit {
     this.crearJuego();
     this.crearJugador(nickName);
     this.crearJuego();
-    // setTimeout(() => {
-    //   this.obtenerCartas();
-    // }, 500)
-    // this.crearJugador(nickName);
   }
 
   crearJugador(nickName: string): void {
@@ -57,7 +54,8 @@ export class HomeComponentComponent implements OnInit {
       .crearJugador
       ({ id: uid, nickName: nickName, puntos: 0, baraja: null, estado: true })
       .subscribe(data => {
-        this.servicioHttpJuego.actualizarJugadores(data.id, data).subscribe(juego => juego)
+        this.servicioHttpJuego.actualizarJugadores(data.id, data).pipe(retry(2))
+          .subscribe(juego => juego)
         this.jugadores.push(data)
       });
 
@@ -78,8 +76,7 @@ export class HomeComponentComponent implements OnInit {
             localStorage.setItem('informacionJuego', JSON.stringify({
               idJuego: juego.id,
               ganador: juego.ganador,
-              fechaCreacionJuego: Date.parse(new Date().toString()),
-              fechaLimite: new Date(fechaCreacinJuego + 60000)
+              fechaLimiteComenzar: new Date(fechaCreacinJuego + 30000)
             }))
             localStorage.setItem('rolJugador', JSON.stringify("player"))
             this.servicioHttpTablero.obtenerTablero(juego.tableroId)
@@ -105,8 +102,7 @@ export class HomeComponentComponent implements OnInit {
         localStorage.setItem('informacionJuego', JSON.stringify({
           idJuego: data.id,
           ganador: data.ganador,
-          fechaCreacionJuego: fechaCreacinJuego,
-          fechaLimite: fechaCreacinJuego + 60000
+          fechaLimiteComenzar: fechaCreacinJuego + 30000
         }))
         JSON.parse(localStorage.getItem('informacionJuego')!);
       })

@@ -11,7 +11,7 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 @Configuration
 public class RouterRest {
     @Bean
-    public RouterFunction<ServerResponse> routerFunction(HandlerTarjeta handlerTarjeta, HandlerJuego handlerJuego, HandlerJugador handlerJugador, HandlerBaraja handlerBaraja, HandlerTablero handlerTablero) {
+    public RouterFunction<ServerResponse> routerFunction(HandlerTarjeta handlerTarjeta, HandlerJuego handlerJuego, HandlerJugador handlerJugador, HandlerTablero handlerTablero) {
         return route(POST("/api/tarjeta/crear"), handlerTarjeta::crearTarjetaPOSTUseCase).andRoute
                 (DELETE("/api/tarjeta/eliminar/{id}"), handlerTarjeta::eliminarTarjetaDELETEUseCase).andRoute
                 (POST("/api/tarjeta/actualizar/{id}"), handlerTarjeta::actualizarPOSTUseCase).andRoute
@@ -35,14 +35,13 @@ public class RouterRest {
                 (POST("/api/jugador/apostarcarta/{id}"), handlerJugador::apostaCartaPutUseCase).andRoute
                 (POST("/api/jugador/actualizar/baraja/{id}"), handlerJugador::actualizarBarajaJugadorPOSTUseCase).andRoute
                 (POST("/api/jugador/obtener/tarjeta/apostada/{id}"), handlerJugador::traerTarjetaApostadaJugadorPOSTUseCase).andRoute
-                (GET("/api/baraja/crear"), handlerBaraja::crearBarajaGETUseCase).andRoute
-                (GET("/api/baraja/listar"), handlerBaraja::listarBarajaGETUseCase).andRoute
                 (GET("/api/tablero/listar"), handlerTablero::listarTablerosGETUseCase).andRoute
                 (POST("/api/tablero/recibir/card/{id}"), handlerTablero::recibirTarjetaPOSTUseCase).andRoute
                 (GET("/api/tablero/ganador/{id}"), handlerTablero::elegirGanadorGETUseCase).andRoute
                 (GET("/api/tablero/ganador/tarjetas/{id}"), handlerTablero::enviarTarjetasGanadorGETUseCase).andRoute
                 (GET("/api/tablero/eliminar/tarjetas/{id}"), handlerTablero::eliminarTarjetasPOSTUseCase).andRoute
                 (GET("/api/tablero/buscar/{id}"), handlerTablero::obtenerTableroGETUseCase).andRoute
-                (POST("/api/tablero/crear"), handlerTablero::crearTableroPOSTUseCase);
+                (POST("/api/tablero/crear"), handlerTablero::crearTableroPOSTUseCase).andRoute
+                (DELETE("/api/tablero/eliminar/{id}"), handlerTablero::eliminarTableroDELETEUseCase);
     }
 }
