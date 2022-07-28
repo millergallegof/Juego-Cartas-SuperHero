@@ -12,6 +12,7 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -38,7 +39,8 @@ class ComenzarJuegoUseCaseTest {
         List<Jugador> jugadores = new ArrayList<>();
         jugadores.add( new Jugador("1", "Hernan", 0, true));
         List<Tarjeta> mazoCartas = new ArrayList<>();
-        Juego juego = new Juego("1", 1, mazoCartas, "", "2",jugadores);
+        LocalDateTime date = LocalDateTime.now();
+        Juego juego = new Juego("1", 1, mazoCartas, "", "2",jugadores,date);
         Mono<Juego> monoJuego = Mono.just(juego);
 
         when(juegoRepository.save(Mockito.any(Juego.class))).thenReturn(monoJuego);
