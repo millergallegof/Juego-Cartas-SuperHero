@@ -1,23 +1,25 @@
 <div class="wrapper">
 
-    <video playsinline="playsinline" autoplay="autoplay" autoplay [muted]="'muted'"> loop="loop">
-        <source src="../../../assets/video/intro-marvel-studios-hd.mp4" type="video/mp4">
-    </video>
-    <audio src="../../../assets/audio/mariogano.mp3" autoplay loop></audio>
+  <video playsinline="playsinline" autoplay="autoplay" autoplay [muted]="'muted'"> loop="loop">
+    <source src="../../../assets/video/intro-marvel-studios-hd.mp4" type="video/mp4">
+  </video>
+  <audio src="../../../assets/audio/mariogano.mp3" autoplay loop></audio>
 
 
 
-    <div class="container h-100">
-        <div class="d-flex h-100 text-center align-items-center">
-            <div class="w-50 text-white">
-                <div class="input-group col-md-12 d-flex justify-content-center">
-                    <h1> GANADOR  </h1>
-                    <div>
-                        <p style="font-size: 60px;"><span id="tens"></span></p>
-                        <button class="btn btn-dark" routerLink="/">Regresar al Home</button>
-                    </div>
-                </div>
+  <div class="d-flex justify-content-center">
+    <div style="width: 100px;">
+      <div class="w-50 text-white">
+        <div class="input-group col-md-8 d-flex justify-content-center">
+          <div class="col-xs-5 text-center">
+            <h1> GANASTE </h1>
+            <div>
+              <p style="font-size: 60px;"><span id="tens"></span></p>
+              <button class="btn btn-dark" routerLink="/">Regresar al Home</button>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

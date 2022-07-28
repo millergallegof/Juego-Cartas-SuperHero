@@ -35,8 +35,7 @@ const routesChildrens: Routes = [
   },
 
   {
-    path: 'login', component: LoginComponent,
-    canActivate: [AngularFireAuthGuard]
+    path: 'login', component: LoginComponent
   },
 
   {

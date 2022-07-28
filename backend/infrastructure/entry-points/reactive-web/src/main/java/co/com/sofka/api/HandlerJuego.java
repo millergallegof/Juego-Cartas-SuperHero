@@ -13,7 +13,6 @@ import co.com.sofka.usecase.juego.actualizarjugadores.ActualizarJugadoresJuegoUs
 import co.com.sofka.usecase.juego.asignarcartaretirojugador.AsignarCartaRetiroJugadorUseCase;
 import co.com.sofka.usecase.juego.comenzarjuego.ComenzarJuegoUseCase;
 import co.com.sofka.usecase.juego.crearjuego.CrearJuegoUseCase;
-import co.com.sofka.usecase.juego.asignarganador.AsignarGanadorUseCase;
 import co.com.sofka.usecase.juego.aumentaronda.AumentaRondaUseCase;
 import co.com.sofka.usecase.juego.finalizarjuego.FinalizarJuegoUseCase;
 import co.com.sofka.usecase.juego.listarbarajajugador.ListarBarajaJugadorUseCase;
@@ -33,8 +32,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HandlerJuego {
     private final CrearJuegoUseCase crearJuegoUseCase;
-
-    private final AsignarGanadorUseCase asignarGanadorUseCase;
     private final AumentaRondaUseCase aumentaRondaUseCase;
 
     private final ListarJuegosUseCase listarJuegoUseCase;
@@ -52,14 +49,6 @@ public class HandlerJuego {
                 .flatMap(e -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(crearJuegoUseCase.crearJuego(e), Juego.class));
-    }
-
-    public Mono<ServerResponse> asignarGanadorPOSTUseCase(ServerRequest serverRequest) {
-        var id = serverRequest.pathVariable("id");
-        return serverRequest.bodyToMono(Juego.class)
-                .flatMap(element -> ServerResponse.ok()
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(asignarGanadorUseCase.asignarGanador(id, element.getJugadores()), Juego.class));
     }
 
     public Mono<ServerResponse> aumentaRondaPOSTUseCase(ServerRequest serverRequest) {

@@ -64,6 +64,7 @@ export class ServiceHttJuego {
   }
 
   finalizarJuego(idJuego: string): Observable<Juego> {
+    console.log(idJuego)
     return this.httpJuego
       .get<Juego>
       (`${PathRest.getApiJuego}/finalizar/${idJuego}`)
