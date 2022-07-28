@@ -28,19 +28,18 @@ export class WaitingRoomComponetComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    let { fechaLimiteComenzar } = JSON.parse(localStorage.getItem('informacionJuego')!);
-    localStorage.setItem('limiteRonda', JSON.stringify(fechaLimiteComenzar * 60000))
     setTimeout(() => {
+      let { fechaLimiteComenzar } = JSON.parse(localStorage.getItem('informacionJuego')!);
+      localStorage.setItem('limiteRonda', JSON.stringify(fechaLimiteComenzar + 60000))
       this.fechaFinal = new Date(fechaLimiteComenzar)
       this.subscription = interval(1000)
         .subscribe(x => {
           this.getTimeDifference();
           if (this.secondsToDday <= 0) {
-            
             this.ngOnDestroy()
           }
         });
-    }, 800)
+    }, 400)
   }
 
   ngOnDestroy() {

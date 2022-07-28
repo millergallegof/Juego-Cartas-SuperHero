@@ -41,9 +41,6 @@ export class ListarTarjetasComponentComponent implements OnInit {
   interval: any;
   esVisible: boolean = true;
 
-  // VARIABLES TIMER
-
-
   constructor(
     private servicioHttpJuego: ServiceHttJuego,
     private servicioHttpJugador: ServiceHttpJugador,
@@ -52,15 +49,18 @@ export class ListarTarjetasComponentComponent implements OnInit {
   ) {
     this.minutos = 0;
     this.segundos = 30;
-    this.interval = setInterval(() => this.asignarGanadorTimer(), 1000);
+    // this.interval = setInterval(() => this.asignarGanadorTimer(), 1000);
   }
 
   ngOnInit(): void {
+    let { ganadorId } = JSON.parse(localStorage.getItem('tablero')!);
     setTimeout(() => {
       this.obtenerCartas();
     }, 500)
+    if (ganadorId === null) {
+      this.timerRonda()
+    }
     this.mostrarCartasTablero()
-
   }
   // ----------------------------------------------------------------------------------------------------
   // TIMER RONDA
@@ -68,9 +68,13 @@ export class ListarTarjetasComponentComponent implements OnInit {
   ngOnDestroy() {
     let rolJugador = JSON.parse(localStorage.getItem('rolJugador')!);
     if (rolJugador === "host") {
-
+      this.elegirGanadorTablero()
     }
     this.subscription.unsubscribe();
+    localStorage.setItem('limiteRonda', JSON.stringify(JSON.parse(localStorage.getItem('limiteRonda')!) + 60000))
+    this.revisarGanadorJuego()
+    this.disabledButton = false;
+    this.ngOnInit()
   }
 
   timerRonda() {
@@ -174,27 +178,14 @@ export class ListarTarjetasComponentComponent implements OnInit {
   // ----------------------------------------------------------------------------------------------------
   asignarGanadorTimer(): void {
     let { ganadorId } = JSON.parse(localStorage.getItem('tablero')!);
-    let rolJugador = JSON.parse(localStorage.getItem('rolJugador')!);
-    if (--this.segundos <= 0) {
-      if (ganadorId !== null) {
-        if (rolJugador === "host") {
-          // this.voltearTarjetasTablero()
-          setTimeout(() => {
-            this.revisarGanadorJuego()
-            this.elegirGanadorTablero()
-            this.ngOnInit()
-          }, 5000)
-        } else {
-          // this.voltearTarjetasTablero()
-          setTimeout(() => {
-            this.ngOnInit()
-          }, 5000)
-        }
-        clearInterval(this.interval)
-      } else {
-        this.segundos = 10
-      }
+
+
+    if (ganadorId !== null) {
+      clearInterval(this.interval)
+    } else {
+      this.segundos = 10
     }
+
   }
 
   mostrarCartasTablero() {
