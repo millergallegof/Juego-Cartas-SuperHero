@@ -40,10 +40,6 @@ export class HomeComponentComponent implements OnInit {
   }
 
   crearSala(nickName: string): void {
-<<<<<<< HEAD
-    this.crearJuego();
-=======
->>>>>>> 919e4417e75dc5d675897306aa72c1dc04aa47e7
     this.crearJugador(nickName);
     this.crearJuego();
     // setTimeout(() => {
