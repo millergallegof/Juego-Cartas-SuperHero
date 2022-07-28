@@ -38,10 +38,10 @@ class ComenzarJuegoUseCaseTest {
         List<Jugador> jugadores = new ArrayList<>();
         jugadores.add( new Jugador("1", "Hernan", 0, true));
         List<Tarjeta> mazoCartas = new ArrayList<>();
-        Juego juego = new Juego("1", 1, mazoCartas, "", "2",jugadores);
-        Mono<Juego> monoJuego = Mono.just(juego);
+//        Juego juego = new Juego("1", 1, mazoCartas, "", "2",jugadores);
+//        Mono<Juego> monoJuego = Mono.just(juego);
 
-        when(juegoRepository.save(Mockito.any(Juego.class))).thenReturn(monoJuego);
+//        when(juegoRepository.save(Mockito.any(Juego.class))).thenReturn(monoJuego);
 
         StepVerifier.create(comenzarJuegoUseCase.comenzarJuego("1",jugadores,"2"))
                 .expectNextMatches(idTablero -> idTablero.getId().equals("2"))

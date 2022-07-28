@@ -40,11 +40,8 @@ export class HomeComponentComponent implements OnInit {
   }
 
   crearSala(nickName: string): void {
-    // localStorage.setItem('creacionSala', JSON.stringify("host"))
-    this.crearJuego();
     this.crearJugador(nickName);
-    console.log(typeof new Date().getSeconds());
-
+    this.crearJuego();
   }
 
   crearJugador(nickName: string): void {
@@ -71,7 +68,12 @@ export class HomeComponentComponent implements OnInit {
       .subscribe(data => {
         this.servicioHttpJuego.actualizarJugadores(idJuego, data)
           .subscribe(juego => {
-            localStorage.setItem('informacionJuego', JSON.stringify({ idJuego: juego.id, ganador: juego.ganador }))
+            let fechaCreacinJuego = Date.parse(juego.createAt)
+            localStorage.setItem('informacionJuego', JSON.stringify({
+              idJuego: juego.id,
+              ganador: juego.ganador,
+              fechaLimiteComenzar: new Date(fechaCreacinJuego + 60000)
+            }))
             localStorage.setItem('rolJugador', JSON.stringify("player"))
             this.servicioHttpTablero.obtenerTablero(juego.tableroId)
               .subscribe(tablero => {
@@ -89,10 +91,15 @@ export class HomeComponentComponent implements OnInit {
   crearJuego(): void {
     let tarjetas: Tarjeta[] = [];
     this.servicioHttpJuego
-      .crearJuego({ id: null, ronda: 1, mazoJuego: tarjetas, ganador: "", tableroId: "", jugadores: this.jugadores })
+      .crearJuego({ id: null, ronda: 1, mazoJuego: tarjetas, ganador: "", tableroId: "", jugadores: this.jugadores, createAt: "" })
       .subscribe(data => {
         this.crearTablero(data.id!)
-        localStorage.setItem('informacionJuego', JSON.stringify({ idJuego: data.id, ganador: data.ganador }))
+        let fechaCreacinJuego = Date.parse(data.createAt)
+        localStorage.setItem('informacionJuego', JSON.stringify({
+          idJuego: data.id,
+          ganador: data.ganador,
+          fechaLimiteComenzar: fechaCreacinJuego + 60000
+        }))
         JSON.parse(localStorage.getItem('informacionJuego')!);
       })
   }

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Tarjeta } from '../../models/Itarjetas';
-import { interval, timer } from 'rxjs';
+import { interval, retry, Subscription, timer } from 'rxjs';
 import { Bajara } from '../../models/Ibaraja';
 import { ServiceHttJuego } from '../../service/http-service-juego.service';
 import { ServiceHttpJugador } from 'src/app/service/http-service-jugador.service';
@@ -18,6 +18,16 @@ export class ListarTarjetasComponentComponent implements OnInit {
   minutos: number;
   segundos: number;
 
+  private subscription: Subscription;
+  timeDifference: number;
+  secondsToDday: number;
+  minutesToDday: number;
+  fechaActual: Date = new Date();
+  fechaFinal: Date;
+  milliSecondsInASecond: number = 1000;
+  minutesInAnHour: number = 60;
+  SecondsInAMinute: number = 60;
+
   // VARIABLES ARREGLO JUGADOR
   informationTarjetas: Tarjeta[] = [];
   tarjetaEnviada: Tarjeta;
@@ -30,6 +40,9 @@ export class ListarTarjetasComponentComponent implements OnInit {
   tarjetasTableroTemporal: any[] = [];
   interval: any;
   esVisible: boolean = true;
+
+  // VARIABLES TIMER
+
 
   constructor(
     private servicioHttpJuego: ServiceHttJuego,
@@ -47,6 +60,41 @@ export class ListarTarjetasComponentComponent implements OnInit {
       this.obtenerCartas();
     }, 500)
     this.mostrarCartasTablero()
+
+  }
+  // ----------------------------------------------------------------------------------------------------
+  // TIMER RONDA
+  // ----------------------------------------------------------------------------------------------------
+  ngOnDestroy() {
+    let rolJugador = JSON.parse(localStorage.getItem('rolJugador')!);
+    if (rolJugador === "host") {
+
+    }
+    this.subscription.unsubscribe();
+  }
+
+  timerRonda() {
+    this.fechaFinal = new Date(JSON.parse(localStorage.getItem('limiteRonda')!))
+    this.subscription = interval(1000)
+      .subscribe(x => {
+        this.getTimeDifference();
+        if (this.secondsToDday <= 0) {
+          this.voltearTarjetasTablero()
+        }
+        if (this.secondsToDday <= -5) {
+          this.ngOnDestroy()
+        }
+      });
+  }
+
+  private getTimeDifference() {
+    this.timeDifference = this.fechaFinal.getTime() - new Date().getTime();
+    this.allocateTimeUnits(this.timeDifference);
+  }
+
+  private allocateTimeUnits(timeDifference: number) {
+    this.secondsToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond) % this.SecondsInAMinute);
+    this.minutesToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour) % this.SecondsInAMinute);
   }
 
   // ----------------------------------------------------------------------------------------------------
@@ -130,14 +178,14 @@ export class ListarTarjetasComponentComponent implements OnInit {
     if (--this.segundos <= 0) {
       if (ganadorId !== null) {
         if (rolJugador === "host") {
-          this.voltearTarjetasTablero()
+          // this.voltearTarjetasTablero()
           setTimeout(() => {
             this.revisarGanadorJuego()
             this.elegirGanadorTablero()
             this.ngOnInit()
           }, 5000)
         } else {
-          this.voltearTarjetasTablero()
+          // this.voltearTarjetasTablero()
           setTimeout(() => {
             this.ngOnInit()
           }, 5000)
