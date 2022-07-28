@@ -1,10 +1,12 @@
 package co.com.sofka.api;
 
+import co.com.sofka.model.juego.Juego;
 import co.com.sofka.model.tablero.Tablero;
 import co.com.sofka.model.tarjeta.Tarjeta;
 import co.com.sofka.usecase.tablero.createtablero.CreateTableroUseCase;
 import co.com.sofka.usecase.tablero.elegirganadortablero.ElegirGanadorTableroUseCase;
 import co.com.sofka.usecase.tablero.eliminarcartastablero.EliminarTarjetasTableroUseCase;
+import co.com.sofka.usecase.tablero.eliminartablero.EliminarTableroUseCase;
 import co.com.sofka.usecase.tablero.enviartarjetasganador.EnviarTarjetasGanadorUseCase;
 import co.com.sofka.usecase.tablero.listartablero.ListarTableroUseCase;
 import co.com.sofka.usecase.tablero.obtenertableroporidusecase.ObtenerTableroPorIdUseCase;
@@ -24,13 +26,14 @@ import java.util.Map;
 public class HandlerTablero {
 
     private final CreateTableroUseCase createTableroUseCase;
-
     private final ListarTableroUseCase listarTableroUseCase;
     private final RecibirTarjetaUseCase recibirTarjetaUseCase;
     private final ElegirGanadorTableroUseCase elegirGanadorTableroUseCase;
     private final EnviarTarjetasGanadorUseCase enviarTarjetasGanadorUseCase;
     private final EliminarTarjetasTableroUseCase eliminarTarjetasTableroUseCase;
     private final ObtenerTableroPorIdUseCase obtenerTableroPorIdUseCase;
+
+    private final EliminarTableroUseCase eliminarTableroUseCase;
 
     public Mono<ServerResponse> crearTableroPOSTUseCase(ServerRequest serverRequest) {
         return serverRequest.bodyToMono(Tablero.class)
@@ -80,6 +83,13 @@ public class HandlerTablero {
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(obtenerTableroPorIdUseCase.obtenerTablero(idTablero), Tablero.class);
+    }
+
+    public Mono<ServerResponse> eliminarTableroDELETEUseCase(ServerRequest serverRequest) {
+        var id = serverRequest.pathVariable("id");
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(eliminarTableroUseCase.eliminarTablero(id), Tablero.class);
     }
 
 }
