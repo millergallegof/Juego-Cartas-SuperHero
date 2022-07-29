@@ -34,7 +34,7 @@ export class WaitingRoomComponetComponent implements OnInit, OnDestroy {
       let { fechaLimiteComenzar } = JSON.parse(localStorage.getItem('informacionJuego')!);
       let rolJugador = JSON.parse(localStorage.getItem('rolJugador')!);
       if (rolJugador === "host") {
-        localStorage.setItem('limiteRonda', JSON.stringify(fechaLimiteComenzar + 32000))
+        localStorage.setItem('limiteRonda', JSON.stringify(fechaLimiteComenzar + 30000))
       } else {
         localStorage.setItem('limiteRonda', JSON.stringify(fechaLimiteComenzar + 34000))
       }
@@ -43,6 +43,9 @@ export class WaitingRoomComponetComponent implements OnInit, OnDestroy {
         .subscribe(x => {
           this.getTimeDifference();
           if (this.secondsToDday === 0) {
+            if (rolJugador === "host") {
+              this.repartirBaraja();
+            }
             this.ngOnDestroy()
           }
         });
@@ -52,11 +55,12 @@ export class WaitingRoomComponetComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
     let rolJugador = JSON.parse(localStorage.getItem('rolJugador')!);
-    if (rolJugador === "host") {
-      this.repatirBaraja();
-    }
-    this.router.navigate(['juego']);
+
+    setTimeout(() => {
+      this.router.navigate(['juego']);
+    }, 1000)
   }
+
 
   private getTimeDifference() {
     this.timeDifference = this.fechaFinal.getTime() - new Date().getTime();
@@ -68,12 +72,12 @@ export class WaitingRoomComponetComponent implements OnInit, OnDestroy {
     this.minutesToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour) % this.SecondsInAMinute);
   }
 
-  repatirBaraja(): void {
-    console.log()
+  repartirBaraja(): void {
     let { idJuego } = JSON.parse(localStorage.getItem('informacionJuego')!);
     this.servicioHttpJuego
       .repartirBaraja(idJuego)
-      .subscribe(() => {
+      .subscribe(data => {
+        this.router.navigate(['juego']);
       });
   }
 

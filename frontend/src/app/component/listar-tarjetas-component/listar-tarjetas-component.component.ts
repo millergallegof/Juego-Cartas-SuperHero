@@ -240,14 +240,15 @@ export class ListarTarjetasComponentComponent implements OnInit {
               this.servicioHttpJugador.actualizarTarjetasJugador(tablero.ganadorId, tarjetasGanador).subscribe();
               // actualiza tarjetas Jugador BD Juego
               this.servicioHttpJuego.actuaLizarBarajaGanadorRonda(idJuego, { idJugador: tablero.ganadorId, tarjetas: tarjetasGanador })
-                .subscribe(() => {
-
+                .subscribe(data => {
+                  console.log(data);
                 })
             }
             setTimeout(() => {
               // elimina Tarjetas del tablero
               this.eliminarTarjetasTablero()
             }, 1000)
+
           })
       })
   }
