@@ -105,4 +105,10 @@ export class ServiceHttJuego {
       (`${PathRest.getApiJuego}/actualizar/baraja/jugador/${idJuego}`, jugadorBaraja)
   }
 
+  eliminarJuego(idJuego: string): Observable<Juego> {
+    return this.httpJuego
+      .delete<Juego>
+      (`${PathRest.getApiJuego}/eliminar/${idJuego}`)
+  }
+
 }

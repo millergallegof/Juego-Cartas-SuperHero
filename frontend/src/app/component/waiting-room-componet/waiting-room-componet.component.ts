@@ -69,4 +69,15 @@ export class WaitingRoomComponetComponent implements OnInit, OnDestroy {
       });
   }
 
+  eliminarJuego(): void {
+    let { idJuego } = JSON.parse(localStorage.getItem('informacionJuego')!);
+    this.servicioHttpJuego.eliminarJuego(idJuego)
+      .subscribe(() => {
+        localStorage.removeItem("informacionJuego")
+        localStorage.removeItem("rolJugador")
+        localStorage.removeItem("tablero")
+        localStorage.removeItem("limiteRonda")
+      })
+  }
+
 }

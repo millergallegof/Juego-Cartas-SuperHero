@@ -41,10 +41,8 @@ export class HomeComponentComponent implements OnInit {
   }
 
   crearSala(nickName: string): void {
-    // localStorage.setItem('creacionSala', JSON.stringify("host"))
     this.crearJuego();
     this.crearJugador(nickName);
-    this.crearJuego();
   }
 
   crearJugador(nickName: string): void {
@@ -52,7 +50,7 @@ export class HomeComponentComponent implements OnInit {
     localStorage.setItem('rolJugador', JSON.stringify("host"))
     this.servicioHttpJugador
       .crearJugador
-      ({ id: uid, nickName: nickName, puntos: 0, baraja: null, estado: true })
+      ({ id: uid, nickName: nickName, puntos: 0, baraja: null, estado: true }).pipe(retry(2))
       .subscribe(data => {
         this.servicioHttpJuego.actualizarJugadores(data.id, data).pipe(retry(2))
           .subscribe(juego => juego)
