@@ -13,7 +13,7 @@ public class FinalizarJuegoUseCase {
     private final JuegoRepository juegoRepository;
     private final TarjetaRepository tarjetaRepository;
     private Jugador jugador;
-    private Integer contador = 0;
+    private Integer contador;
 
     public Mono<Juego> finalizaJuego(String idJuego) {
         return juegoRepository.findById(idJuego)
@@ -24,7 +24,7 @@ public class FinalizarJuegoUseCase {
                             .subscribe(numTarjetas -> {
                                 var idGanador = juego.getJugadores().stream()
                                         .map(player1 -> {
-                                            if (!player1.getBaraja().getTarjetas().isEmpty()) {
+                                            if (player1.getBaraja().getTarjetas().size() > 0) {
                                                 this.contador += 1;
                                                 return player1;
                                             } else {
@@ -38,11 +38,13 @@ public class FinalizarJuegoUseCase {
                                                 return acum;
                                             }
                                         }).get();
-                                if (this.contador == 0) {
+                                if (this.contador == 1) {
                                     this.jugador = idGanador;
                                 }
+                                System.out.println(this.contador);
                             });
-                    if (this.contador == 0) {
+                    System.out.println(this.contador);
+                    if (this.contador == 1) {
                         juego.setGanador(this.jugador.getId());
                     }
                     return juego;
