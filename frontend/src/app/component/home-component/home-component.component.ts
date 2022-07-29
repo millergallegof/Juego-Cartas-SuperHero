@@ -21,7 +21,7 @@ export class HomeComponentComponent implements OnInit {
   idJuego: string = "";
 
   emailJugador: string;
-  partidasGanadasJugador:number = 0;
+  partidasGanadasJugador: number = 0;
 
   constructor(
     public autenticacionService: AutenticacionServiceService,
@@ -78,7 +78,7 @@ export class HomeComponentComponent implements OnInit {
             localStorage.setItem('informacionJuego', JSON.stringify({
               idJuego: juego.id,
               ganador: juego.ganador,
-              fechaLimiteComenzar: new Date(fechaCreacinJuego + 30000)
+              fechaLimiteComenzar: fechaCreacinJuego + 30000
             }))
             localStorage.setItem('rolJugador', JSON.stringify("player"))
             this.servicioHttpTablero.obtenerTablero(juego.tableroId)
@@ -133,11 +133,11 @@ export class HomeComponentComponent implements OnInit {
 
 
   // Metodo encargado de asignar la informacion del usuario para mostrarla en el front
-  mostrarInformacionJugador(){
-    let {email, uid} = JSON.parse(localStorage.getItem('user')!);
+  mostrarInformacionJugador() {
+    let { email, uid } = JSON.parse(localStorage.getItem('user')!);
     this.emailJugador = email;
     this.servicioHttpJugador.obtenerPartidasGanadas(uid)
-    .subscribe(data => this.partidasGanadasJugador = data.puntos);
+      .subscribe(data => this.partidasGanadasJugador = data.puntos);
 
   }
 }
