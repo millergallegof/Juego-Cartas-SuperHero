@@ -7,7 +7,6 @@ import co.com.sofka.model.juego.Juego;
 import co.com.sofka.model.juego.JugadorBaraja;
 import co.com.sofka.model.jugador.Identificacion;
 import co.com.sofka.model.jugador.Jugador;
-import co.com.sofka.model.tarjeta.Tarjeta;
 import co.com.sofka.usecase.juego.actualizarbarajajugadorjuego.ActualizarBarajaJugadorJuegoUseCase;
 import co.com.sofka.usecase.juego.actualizarganador.ActualizarGanadorRondaUseCase;
 import co.com.sofka.usecase.juego.actualizarjugadores.ActualizarJugadoresJuegoUseCase;
@@ -19,16 +18,14 @@ import co.com.sofka.usecase.juego.eliminarjuego.EliminarJuegoUseCase;
 import co.com.sofka.usecase.juego.finalizarjuego.FinalizarJuegoUseCase;
 import co.com.sofka.usecase.juego.listarbarajajugador.ListarBarajaJugadorUseCase;
 import co.com.sofka.usecase.juego.listarjuegos.ListarJuegosUseCase;
+import co.com.sofka.usecase.juego.obtenerjuegoporid.ObtenerJuegoPorIdUseCase;
 import co.com.sofka.usecase.juego.repartirbaraja.RepartirBarajaUseCase;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
-
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -44,8 +41,9 @@ public class HandlerJuego {
     private final ActualizarJugadoresJuegoUseCase actualizarJugadoresJuegoUseCase;
     private final ListarBarajaJugadorUseCase listarBarajaJugadorUseCase;
     private final ActualizarBarajaJugadorJuegoUseCase actualizarBarajaJugadorJuegoUseCase;
-
     private final EliminarJuegoUseCase eliminarJuegoUseCase;
+    private final ObtenerJuegoPorIdUseCase obtenerJuegoPorIdUseCase;
+
 
     public Mono<ServerResponse> crearJuegoPOSTUseCase(ServerRequest serverRequest) {
         return serverRequest.bodyToMono(Juego.class)
@@ -134,6 +132,13 @@ public class HandlerJuego {
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(eliminarJuegoUseCase.eliminarJuego(id), Juego.class);
+    }
+
+    public Mono<ServerResponse> obtenerJuegoIdGETUseCase(ServerRequest serverRequest) {
+        var id = serverRequest.pathVariable("id");
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(obtenerJuegoPorIdUseCase.finById(id), Juego.class);
     }
 
 }

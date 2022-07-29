@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/cor
 import { ServiceHttJuego } from '../../service/http-service-juego.service';
 import { Router } from '@angular/router';
 import { interval, retry, Subscription } from 'rxjs';
+import { ServiceHttpTablero } from 'src/app/service/http-service-tablero.service';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class WaitingRoomComponetComponent implements OnInit, OnDestroy {
 
   constructor(
     private servicioHttpJuego: ServiceHttJuego,
+    private servicioHttpTablero: ServiceHttpTablero,
     private router: Router
   ) { }
 
@@ -76,6 +78,8 @@ export class WaitingRoomComponetComponent implements OnInit, OnDestroy {
 
   eliminarJuego(): void {
     let { idJuego } = JSON.parse(localStorage.getItem('informacionJuego')!);
+    let { id } = JSON.parse(localStorage.getItem('tablero')!);
+    this.servicioHttpTablero.eliminarTablero(id).subscribe()
     this.servicioHttpJuego.eliminarJuego(idJuego)
       .subscribe(() => {
         localStorage.removeItem("informacionJuego")
