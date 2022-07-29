@@ -18,7 +18,8 @@ public class ActualizarTarjetasJugadorUseCase {
     public Mono<Jugador> actualizarTarjetas(String id, List<Tarjeta> tarjetas) {
         return jugadorRepository.findById(id)
                 .map(jugador -> {
-                    var newTarjetas = Stream.concat(tarjetas.stream(), jugador.getBaraja().getTarjetas().stream()).collect(Collectors.toList());
+                    var newTarjetas = Stream.concat(tarjetas.stream(), jugador.getBaraja().getTarjetas().stream())
+                            .collect(Collectors.toList());
                     jugador.getBaraja().setTarjetas(newTarjetas);
                     return jugador;
                 }).flatMap(jugadorRepository::save);
