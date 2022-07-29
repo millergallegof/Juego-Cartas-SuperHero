@@ -74,7 +74,7 @@ export class HomeComponentComponent implements OnInit {
             localStorage.setItem('informacionJuego', JSON.stringify({
               idJuego: juego.id,
               ganador: juego.ganador,
-              fechaLimiteComenzar: new Date(fechaCreacinJuego + 30000)
+              fechaLimiteComenzar: Date.parse(new Date(fechaCreacinJuego + 30000).toString())
             }))
             localStorage.setItem('rolJugador', JSON.stringify("player"))
             this.servicioHttpTablero.obtenerTablero(juego.tableroId)

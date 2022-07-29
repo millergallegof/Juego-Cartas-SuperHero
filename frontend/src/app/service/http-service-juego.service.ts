@@ -11,6 +11,7 @@ import { JugadoresTablero } from '../models/jugadoresTablero';
 import { ElementosJugadorJuego } from '../models/IElementosJugadorJuego';
 import { IdentificacionJugador } from '../models/IIdentificacionUsuario';
 import { JugadorBaraja } from '../models/IJugadorBaraja';
+import { Tablero } from '../models/Itablero';
 
 
 
@@ -109,6 +110,12 @@ export class ServiceHttJuego {
     return this.httpJuego
       .delete<Juego>
       (`${PathRest.getApiJuego}/eliminar/${idJuego}`)
+  }
+
+  obtenerJuego(idJuego:string): Observable<Juego> {
+    return this.httpJuego
+    .get<Juego>
+    (`${PathRest.getApiJuego}/buscar/${idJuego}`)
   }
 
 }

@@ -63,4 +63,10 @@ export class ServiceHttpTablero {
       (`${PathRest.getApiTablero}/buscar/${idTablero}`)
   }
 
+  eliminarTablero(idTablero: string): Observable<Tablero> {
+    return this.httpTablero
+    .delete<Tablero>
+    (`${PathRest.getApiTablero}/eliminar/${idTablero}`)
+  }
+
 }

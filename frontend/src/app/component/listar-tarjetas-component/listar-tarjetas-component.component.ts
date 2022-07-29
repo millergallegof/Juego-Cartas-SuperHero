@@ -46,16 +46,11 @@ export class ListarTarjetasComponentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.secondsToDday);
-
-    let { ganador } = JSON.parse(localStorage.getItem('informacionJuego')!);
     setTimeout(() => {
       this.obtenerCartas();
     }, 800)
-    if (ganador === "") {
-      this.timerRonda()
-      this.esVisible = true;
-    }
+    this.timerRonda()
+    this.esVisible = true;
     this.mostrarCartasTablero()
   }
 
@@ -65,22 +60,23 @@ export class ListarTarjetasComponentComponent implements OnInit {
   ngOnDestroy() {
     this.subscription.unsubscribe()
     let rolJugador = JSON.parse(localStorage.getItem('rolJugador')!);
+    let limiteRonda = JSON.parse(localStorage.getItem('limiteRonda')!);
     if (rolJugador === "host") {
       this.elegirGanadorTablero()
+      this.revisarGanadorJuego()
     }
-    localStorage.setItem('limiteRonda', JSON.stringify(JSON.parse(localStorage.getItem('limiteRonda')!) + 33000))
-    this.revisarGanadorJuego()
+    localStorage.setItem('limiteRonda', JSON.stringify(limiteRonda + 30000))
     this.disabledButton = false;
-    this.ngOnInit()
+    this.obtenerGanadorJuego()
   }
 
   timerRonda() {
-
     this.fechaFinal = new Date(JSON.parse(localStorage.getItem('limiteRonda')!))
     this.subscription = interval(1000)
       .subscribe(x => {
         this.getTimeDifference();
-        if (this.secondsToDday <= 0) {
+        if (this.secondsToDday == 0) {
+          this.mostrarCartasTablero()
           this.voltearTarjetasTablero()
         }
         if (this.secondsToDday <= -5) {
@@ -148,7 +144,6 @@ export class ListarTarjetasComponentComponent implements OnInit {
     this.servicioHttpJuego.aumentaRonda(idJuego)
       .subscribe(data => {
         this.ronda = data.ronda
-        this.ngOnInit()
       });
   }
 
@@ -156,20 +151,28 @@ export class ListarTarjetasComponentComponent implements OnInit {
     let { idJuego } = JSON.parse(localStorage.getItem('informacionJuego')!);
     let { uid } = JSON.parse(localStorage.getItem('user')!);
     this.servicioHttpJuego.finalizarJuego(idJuego)
-      .subscribe(data => {
-        if (data.ganador === "") {
-          console.log("Nadie Gano" + data)
+      .subscribe()
+  }
+
+  obtenerGanadorJuego(): void {
+    let { idJuego } = JSON.parse(localStorage.getItem('informacionJuego')!);
+    let { uid } = JSON.parse(localStorage.getItem('user')!);
+    this.servicioHttpJuego.obtenerJuego(idJuego)
+      .subscribe(juego => {
+        if (juego.ganador === "") {
+          console.log("Nadie Gano" + juego)
           this.aumentarRonda()
         } else {
-          localStorage.setItem('informacionJuego', JSON.stringify({ idJuego: data.id, ganador: data.ganador }))
+          localStorage.setItem('informacionJuego', JSON.stringify({ idJuego: juego.id, ganador: juego.ganador }))
           setTimeout(() => {
-            if (data.ganador == uid) {
+            if (juego.ganador == uid) {
               this.router.navigate(['/ganador'])
             } else {
               this.router.navigate(['/gameover'])
             }
           }, 500)
         }
+        this.ngOnInit()
       })
   }
 
