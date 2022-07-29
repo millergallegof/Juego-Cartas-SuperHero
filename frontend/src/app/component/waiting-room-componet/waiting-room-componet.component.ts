@@ -39,10 +39,10 @@ export class WaitingRoomComponetComponent implements OnInit, OnDestroy {
         localStorage.setItem('limiteRonda', JSON.stringify(fechaLimiteComenzar + 34000))
       }
       this.fechaFinal = new Date(fechaLimiteComenzar)
-      this.subscription = interval(1000).pipe(retry(2))
+      this.subscription = interval(1000)
         .subscribe(x => {
           this.getTimeDifference();
-          if (this.secondsToDday <= 0) {
+          if (this.secondsToDday === 0) {
             this.ngOnDestroy()
           }
         });
@@ -69,6 +69,7 @@ export class WaitingRoomComponetComponent implements OnInit, OnDestroy {
   }
 
   repatirBaraja(): void {
+    console.log()
     let { idJuego } = JSON.parse(localStorage.getItem('informacionJuego')!);
     this.servicioHttpJuego
       .repartirBaraja(idJuego)

@@ -238,13 +238,16 @@ export class ListarTarjetasComponentComponent implements OnInit {
             if (uid === tablero.ganadorId) {
               // actualiza tarjetas BD Jugador
               this.servicioHttpJugador.actualizarTarjetasJugador(tablero.ganadorId, tarjetasGanador).subscribe();
+              // actualiza tarjetas Jugador BD Juego
+              this.servicioHttpJuego.actuaLizarBarajaGanadorRonda(idJuego, { idJugador: tablero.ganadorId, tarjetas: tarjetasGanador })
+                .subscribe(() => {
+
+                })
             }
-            // actualiza tarjetas Jugador BD Juego
-            this.servicioHttpJuego.actuaLizarBarajaGanadorRonda(idJuego, { idJugador: tablero.ganadorId, tarjetas: tarjetasGanador })
-              .subscribe(() => {
-                // elimina Tarjetas del tablero
-                this.eliminarTarjetasTablero()
-              })
+            setTimeout(() => {
+              // elimina Tarjetas del tablero
+              this.eliminarTarjetasTablero()
+            }, 1000)
           })
       })
   }
