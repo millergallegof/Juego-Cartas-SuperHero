@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ServiceHttJuego } from 'src/app/service/http-service-juego.service';
+import { ServiceHttpTablero } from 'src/app/service/http-service-tablero.service';
 
 @Component({
   selector: 'app-game-over',
@@ -7,11 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameOverComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private servicioHttpJuego: ServiceHttJuego,
+    private servicioHttpTablero: ServiceHttpTablero,
+  ) { }
 
   ngOnInit(): void {
   }
 
-  
+  salirJuego(): void {
+    let { idJuego } = JSON.parse(localStorage.getItem('informacionJuego')!);
+    let { id } = JSON.parse(localStorage.getItem('tablero')!);
+    this.servicioHttpTablero.eliminarTablero(id).subscribe()
+    this.servicioHttpJuego.eliminarJuego(idJuego)
+      .subscribe(() => {
+        localStorage.removeItem("informacionJuego")
+        localStorage.removeItem("rolJugador")
+        localStorage.removeItem("tablero")
+        localStorage.removeItem("limiteRonda")
+      })
+  }
+
 
 }
