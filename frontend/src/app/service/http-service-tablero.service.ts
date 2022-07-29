@@ -32,7 +32,7 @@ export class ServiceHttpTablero {
       (`${PathRest.getApiTablero}/crear`, tablero)
   }
 
-  enviarTarjeta(idTablero: string, tarjetas: Map<string, Tarjeta>): Observable<Tablero> {
+  recibirTarjetasTablero(idTablero: string, tarjetas: Map<string, Tarjeta>): Observable<Tablero> {
     let tarjetaEnviar = Object.fromEntries(tarjetas);
     return this.httpTablero
       .post<Tablero>
@@ -45,7 +45,7 @@ export class ServiceHttpTablero {
       (`${PathRest.getApiTablero}/ganador/${idTablero}`)
   }
 
-  recibirTarjetas(idTablero: string): Observable<Tarjeta[]> {
+  enviarTarjetasTablero(idTablero: string): Observable<Tarjeta[]> {
     return this.httpTablero
       .get<Tarjeta[]>
       (`${PathRest.getApiTablero}/ganador/tarjetas/${idTablero}`)

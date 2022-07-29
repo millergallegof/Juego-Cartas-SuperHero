@@ -1,22 +1,27 @@
 package co.com.sofka.api;
 
 import co.com.sofka.model.baraja.Baraja;
-import co.com.sofka.model.jugador.Identificacion;
 import co.com.sofka.model.jugador.Jugador;
+import co.com.sofka.model.tablero.Tablero;
 import co.com.sofka.model.tarjeta.Tarjeta;
 import co.com.sofka.usecase.jugador.actualizarbaraja.ActualizarBarajaJugadorUseCase;
+import co.com.sofka.usecase.jugador.actualizartarjetasjugador.ActualizarTarjetasJugadorUseCase;
 import co.com.sofka.usecase.jugador.apostarcarta.ApostarCartaUseCase;
 import co.com.sofka.usecase.jugador.aumentarpuntos.AumentarPuntosUseCase;
 import co.com.sofka.usecase.jugador.cambiarestado.CambiarEstadoUseCase;
 import co.com.sofka.usecase.jugador.retirarse.RetirarseUseCase;
 import co.com.sofka.usecase.jugador.savejugador.SaveJugadorUseCase;
-import co.com.sofka.usecase.jugador.traertarjetaapostadajugador.TraerTarjetaApostadaJugadorUseCase;
+import co.com.sofka.usecase.jugador.obtenertarjetaapostada.ObtenerTarjetaApostadaJugadorUseCase;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
+import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
@@ -31,7 +36,8 @@ public class HandlerJugador {
 
     private final ActualizarBarajaJugadorUseCase actualizarBarajaJugadorUseCase;
 
-    private final TraerTarjetaApostadaJugadorUseCase traerTarjetaApostadaJugadorUseCase;
+    private final ObtenerTarjetaApostadaJugadorUseCase traerTarjetaApostadaJugadorUseCase;
+    private final ActualizarTarjetasJugadorUseCase actualizarTarjetasJugadorUseCase;
 
     public Mono<ServerResponse> apostaCartaPutUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
@@ -87,5 +93,15 @@ public class HandlerJugador {
                 .flatMap(element -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(traerTarjetaApostadaJugadorUseCase.TraerTarjetaApostadaJugador(id, element), Tarjeta.class));
+    }
+
+    public Mono<ServerResponse> actualizarTarjetasJugadorPOSTUseCase(ServerRequest serverRequest) {
+        ParameterizedTypeReference<List<Tarjeta>> modeloPeticion = new ParameterizedTypeReference<List<Tarjeta>>() {
+        };
+        var id = serverRequest.pathVariable("id");
+        return serverRequest.bodyToMono(modeloPeticion)
+                .flatMap(element -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(actualizarTarjetasJugadorUseCase.actualizarTarjetas(id, element), Jugador.class));
     }
 }
