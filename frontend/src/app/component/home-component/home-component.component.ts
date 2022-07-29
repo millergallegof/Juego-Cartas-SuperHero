@@ -137,7 +137,7 @@ export class HomeComponentComponent implements OnInit {
     let {email, uid} = JSON.parse(localStorage.getItem('user')!);
     this.emailJugador = email;
     this.servicioHttpJugador.obtenerPartidasGanadas(uid)
-    // .subscribe(data => this.partidasGanadasJugador = data.partidasGanadas);
+    .subscribe(data => this.partidasGanadasJugador = data.puntos);
 
   }
 }

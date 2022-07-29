@@ -88,7 +88,7 @@ export class ServiceHttJuego {
       (`${PathRest.getApiJuego}/ganador/ronda/${idJuego}`, elementosJuego, this.httpOptions)
   }
 
-  asignarCartasMazo(idJugador: string, identificacionJugador: IdentificacionJugador): Observable<Juego> {
+  retirarJugadorJuego(idJugador: string, identificacionJugador: IdentificacionJugador): Observable<Juego> {
     return this.httpJuego
       .post<Juego>
       (`${PathRest.getApiJuego}/retiro/${idJugador}`, identificacionJugador, this.httpOptions);

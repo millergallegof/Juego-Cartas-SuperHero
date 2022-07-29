@@ -71,6 +71,12 @@ export class ServiceHttpJugador {
     (`${PathRest.getApiJugador}/actualizar/tarjetas/${idJugador}`, tarjetas)
   }
 
+  obtenerPartidasGanadas(idjugador: string): Observable<Jugador> {
+    return this.httpJugador
+      .get<Jugador>
+      (`${PathRest.getApiJugador}/puntos/${idjugador}`)
+  }
+
   //  METODOS FIREBASE TRAER INFORMACION
   /**
    * Metodo encarcado de validar la informacion que pasara en el

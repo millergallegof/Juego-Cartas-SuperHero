@@ -62,14 +62,15 @@ export class ListarTarjetasComponentComponent implements OnInit {
     this.subscription.unsubscribe()
     let rolJugador = JSON.parse(localStorage.getItem('rolJugador')!);
     let limiteRonda = JSON.parse(localStorage.getItem('limiteRonda')!);
-    if (rolJugador === "host") {
-      this.revisarGanadorJuego()
-    }
     this.elegirGanadorTablero()
     localStorage.setItem('limiteRonda', JSON.stringify(limiteRonda + 30000))
     this.disabledButton = false;
     setTimeout(() => {
+      if (rolJugador === "host") {
+        this.revisarGanadorJuego()
+      }
       this.obtenerGanadorJuego()
+      this.mostrarCartasTablero()
     }, 1000)
   }
 
@@ -103,7 +104,7 @@ export class ListarTarjetasComponentComponent implements OnInit {
   }
 
   // ----------------------------------------------------------------------------------------------------
-  // LISTAR TARJETAS JUGADOR
+  // JUGADOR
   // ----------------------------------------------------------------------------------------------------
   // OK
   obtenerCartas(): void {
@@ -141,14 +142,22 @@ export class ListarTarjetasComponentComponent implements OnInit {
             this.mostrarCartasTablero()
           });
       });
-
-
   }
 
   eliminarCartaBaraja(idTarjeta: string): void {
     let temporal = this.informationTarjetas.filter(element => element.id !== idTarjeta);
     this.informationTarjetas = temporal;
     this.disabledButton = true;
+  }
+
+  rendirse(): void {
+    let { idJuego } = JSON.parse(localStorage.getItem('informacionJuego')!);
+    let { uid } = JSON.parse(localStorage.getItem('user')!);
+    this.servicioHttpJuego.retirarJugadorJuego(idJuego, { id: uid })
+      .subscribe(data => {
+        this.subscription.unsubscribe()
+        this.router.navigate(['/'])
+      })
   }
 
   // ----------------------------------------------------------------------------------------------------
@@ -185,6 +194,7 @@ export class ListarTarjetasComponentComponent implements OnInit {
           localStorage.setItem('informacionJuego', JSON.stringify({ idJuego: juego.id, ganador: juego.ganador }))
           setTimeout(() => {
             if (juego.ganador == uid) {
+              this.servicioHttpJugador.aumentarPuntos(uid).subscribe()
               this.router.navigate(['/ganador'])
             } else {
               this.router.navigate(['/gameover'])

@@ -9,6 +9,7 @@ import co.com.sofka.usecase.jugador.actualizartarjetasjugador.ActualizarTarjetas
 import co.com.sofka.usecase.jugador.apostarcarta.ApostarCartaUseCase;
 import co.com.sofka.usecase.jugador.aumentarpuntos.AumentarPuntosUseCase;
 import co.com.sofka.usecase.jugador.cambiarestado.CambiarEstadoUseCase;
+import co.com.sofka.usecase.jugador.obtenerpuntosjugador.ObtenerPuntosJugadorUseCase;
 import co.com.sofka.usecase.jugador.retirarse.RetirarseUseCase;
 import co.com.sofka.usecase.jugador.savejugador.SaveJugadorUseCase;
 import co.com.sofka.usecase.jugador.obtenertarjetaapostada.ObtenerTarjetaApostadaJugadorUseCase;
@@ -38,6 +39,7 @@ public class HandlerJugador {
 
     private final ObtenerTarjetaApostadaJugadorUseCase traerTarjetaApostadaJugadorUseCase;
     private final ActualizarTarjetasJugadorUseCase actualizarTarjetasJugadorUseCase;
+    private final ObtenerPuntosJugadorUseCase obtenerPuntosJugadorUseCase;
 
     public Mono<ServerResponse> apostaCartaPutUseCase(ServerRequest serverRequest) {
         var id = serverRequest.pathVariable("id");
@@ -103,5 +105,12 @@ public class HandlerJugador {
                 .flatMap(element -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(actualizarTarjetasJugadorUseCase.actualizarTarjetas(id, element), Jugador.class));
+    }
+
+    public Mono<ServerResponse> obtenerJugadorGETUseCase(ServerRequest serverRequest) {
+        var id = serverRequest.pathVariable("id");
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(obtenerPuntosJugadorUseCase.obtenerPuntosJugador(id), Jugador.class);
     }
 }

@@ -33,6 +33,7 @@ public class RouterRest {
                 (GET("/api/jugador/retirarse/{id}"), handlerJugador::retirarseGETUseCase).andRoute
                 (GET("/api/jugador/aumentarpuntos/{id}"), handlerJugador::asignarPuntosGETUseCase).andRoute
                 (GET("/api/jugador/cambiarestado/{id}"), handlerJugador::cambiarEstadoGETUseCase).andRoute
+                (GET("/api/jugador/puntos/{id}"), handlerJugador::obtenerJugadorGETUseCase).andRoute
                 (POST("/api/jugador/apostarcarta/{id}"), handlerJugador::apostaCartaPutUseCase).andRoute
                 (POST("/api/jugador/actualizar/baraja/{id}"), handlerJugador::actualizarBarajaJugadorPOSTUseCase).andRoute
                 (POST("/api/jugador/actualizar/tarjetas/{id}"), handlerJugador::actualizarTarjetasJugadorPOSTUseCase).andRoute
