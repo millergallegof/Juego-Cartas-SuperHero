@@ -69,7 +69,9 @@ export class ListarTarjetasComponentComponent implements OnInit {
       if (rolJugador === "host") {
         this.revisarGanadorJuego()
       }
-      this.obtenerGanadorJuego()
+      setTimeout(() => {
+        this.obtenerGanadorJuego()
+      }, 1000)
       this.mostrarCartasTablero()
     }, 1000)
   }
@@ -253,9 +255,7 @@ export class ListarTarjetasComponentComponent implements OnInit {
               this.servicioHttpJugador.actualizarTarjetasJugador(tablero.ganadorId, tarjetasGanador).subscribe();
               // actualiza tarjetas Jugador BD Juego
               this.servicioHttpJuego.actuaLizarBarajaGanadorRonda(idJuego, { idJugador: tablero.ganadorId, tarjetas: tarjetasGanador })
-                .subscribe(data => {
-                  console.log(data);
-                })
+                .subscribe()
             }
             setTimeout(() => {
               // elimina Tarjetas del tablero
@@ -273,7 +273,9 @@ export class ListarTarjetasComponentComponent implements OnInit {
   eliminarTarjetasTablero(): void {
     let { id } = JSON.parse(localStorage.getItem('tablero')!);
     this.servicioHttpTablero.eliminarTarjetas(id)
-      .subscribe()
+      .subscribe(() => {
+        this.mostrarCartasTablero()
+      })
   }
 
 }
