@@ -230,7 +230,6 @@ export class ListarTarjetasComponentComponent implements OnInit {
     // elije el ganador del tablero
     this.servicioHttpTablero.elegirGanador(id)
       .subscribe(tablero => {
-        console.log(tablero.ganadorId);
         // envias las tarjetas que estaban en juego en el tablero
         this.servicioHttpTablero.enviarTarjetasTablero(id)
           .subscribe(tarjetasGanador => {
