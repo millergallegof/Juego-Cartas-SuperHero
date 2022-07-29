@@ -17,15 +17,16 @@ public class ApostarCartaUseCase {
     public Mono<Jugador> apostarCarta(String idJugador, String idTarjeta) {
         return jugadorRepository.findById(idJugador)
                 .map(player -> {
-                  var tarjetaAEnviar =  player.getBaraja().getTarjetas().stream()
+                    var tarjetaApostar = player.getBaraja().getTarjetas()
+                            .stream()
                             .reduce((acumulador, tarjeta) -> {
-                                if (acumulador.getId() != idTarjeta) {
+                                if (tarjeta.getId().equals(idTarjeta)) {
                                     return tarjeta;
-                                } else {
+                                }else {
                                     return acumulador;
                                 }
                             }).get();
-                    player.getBaraja().getTarjetas().remove(tarjetaAEnviar);
+                    player.getBaraja().getTarjetas().remove(tarjetaApostar);
                     return player;
                 })
                 .flatMap(jugadorRepository::save);

@@ -128,17 +128,17 @@ export class ListarTarjetasComponentComponent implements OnInit {
       .subscribe(data => {
         // envia la tarjeta a la BD Tablero
         this.enviarTarjetaTablero(data)
-        // quita de la BD Jugador la tarjeta que se esta apostando
-        this.servicioHttpJugador.apostarTarjeta(uid, data.id)
-          .subscribe(jugador => {
-            // Quita de la BD Juego la tarjeta que fue apostada
-            this.servicioHttpJuego.actualizarBarajaJugador(idJuego, { idJugador: uid, baraja: jugador.baraja! })
-              .subscribe(juego => {
-                // elimina la carta del arreglo que muestra la baraja del jugador
-                this.eliminarCartaBaraja(data.id);
-                // muestra las cartas del tablero
-                this.mostrarCartasTablero()
-              });
+      });
+    // quita de la BD Jugador la tarjeta que se esta apostando
+    this.servicioHttpJugador.apostarTarjeta(uid, idTarjeta)
+      .subscribe(jugador => {
+        // elimina la carta del arreglo que muestra la baraja del jugador
+        this.eliminarCartaBaraja(idTarjeta);
+        // Quita de la BD Juego la tarjeta que fue apostada
+        this.servicioHttpJuego.actualizarBarajaJugador(idJuego, { idJugador: uid, baraja: jugador.baraja! })
+          .subscribe(juego => {
+            // muestra las cartas del tablero
+            this.mostrarCartasTablero()
           });
       });
 
@@ -230,6 +230,7 @@ export class ListarTarjetasComponentComponent implements OnInit {
     // elije el ganador del tablero
     this.servicioHttpTablero.elegirGanador(id)
       .subscribe(tablero => {
+
         // envias las tarjetas que estaban en juego en el tablero
         this.servicioHttpTablero.enviarTarjetasTablero(id)
           .subscribe(tarjetasGanador => {
