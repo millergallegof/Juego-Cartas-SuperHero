@@ -63,9 +63,9 @@ export class ListarTarjetasComponentComponent implements OnInit {
     let rolJugador = JSON.parse(localStorage.getItem('rolJugador')!);
     let limiteRonda = JSON.parse(localStorage.getItem('limiteRonda')!);
     if (rolJugador === "host") {
-      this.elegirGanadorTablero()
       this.revisarGanadorJuego()
     }
+    this.elegirGanadorTablero()
     localStorage.setItem('limiteRonda', JSON.stringify(limiteRonda + 30000))
     this.disabledButton = false;
     setTimeout(() => {
@@ -230,7 +230,6 @@ export class ListarTarjetasComponentComponent implements OnInit {
     // elije el ganador del tablero
     this.servicioHttpTablero.elegirGanador(id)
       .subscribe(tablero => {
-
         // envias las tarjetas que estaban en juego en el tablero
         this.servicioHttpTablero.enviarTarjetasTablero(id)
           .subscribe(tarjetasGanador => {
@@ -238,12 +237,13 @@ export class ListarTarjetasComponentComponent implements OnInit {
             if (uid === tablero.ganadorId) {
               // actualiza tarjetas BD Jugador
               this.servicioHttpJugador.actualizarTarjetasJugador(tablero.ganadorId, tarjetasGanador).subscribe();
-              // actualiza tarjetas Jugador BD Juego
-              this.servicioHttpJuego.actuaLizarBarajaGanadorRonda(idJuego, { idJugador: tablero.ganadorId, tarjetas: tarjetasGanador })
-                .subscribe()
             }
-            // elimina Tarjetas del tablero
-            this.eliminarTarjetasTablero()
+            // actualiza tarjetas Jugador BD Juego
+            this.servicioHttpJuego.actuaLizarBarajaGanadorRonda(idJuego, { idJugador: tablero.ganadorId, tarjetas: tarjetasGanador })
+              .subscribe(() => {
+                // elimina Tarjetas del tablero
+                this.eliminarTarjetasTablero()
+              })
           })
       })
   }
