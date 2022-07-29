@@ -155,6 +155,10 @@ export class ListarTarjetasComponentComponent implements OnInit {
     let { uid } = JSON.parse(localStorage.getItem('user')!);
     this.servicioHttpJuego.retirarJugadorJuego(idJuego, { id: uid })
       .subscribe(data => {
+        localStorage.removeItem("informacionJuego")
+        localStorage.removeItem("rolJugador")
+        localStorage.removeItem("tablero")
+        localStorage.removeItem("limiteRonda")
         this.subscription.unsubscribe()
         this.router.navigate(['/'])
       })
