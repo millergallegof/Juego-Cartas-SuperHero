@@ -43,3 +43,23 @@ h5{
     background: rgb(141, 121, 121);
     border-radius: 2px;   
 }
+
+
+mat-card-title{
+    font-size: 12px;
+}
+
+.button {
+    background-color: #7c7c7c; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 15px;
+}

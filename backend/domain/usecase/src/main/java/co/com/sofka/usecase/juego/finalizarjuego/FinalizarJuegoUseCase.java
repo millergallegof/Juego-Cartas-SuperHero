@@ -17,7 +17,6 @@ public class FinalizarJuegoUseCase {
 
     public Mono<Juego> finalizaJuego(String idJuego) {
         return juegoRepository.findById(idJuego)
-//                .publishOn(Schedulers.boundedElastic())
                 .map(juego -> {
                     tarjetaRepository.findAll()
                             .count()

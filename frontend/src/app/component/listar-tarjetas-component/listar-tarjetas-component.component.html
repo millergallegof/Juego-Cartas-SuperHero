@@ -29,29 +29,31 @@
     <div class="card col-sm-8 w-100 p-2 colorUsers content">
       <div class="d-flex justify-content-between">
         <p class="text-start text-white">Ronda: # {{ronda}} </p>
-        <p *ngIf="secondsToDday > 0 ? true : false" class="text-end text-white">Tiempo: <span>{{minutesToDday}}:{{secondsToDday}}</span></p>
+        <p *ngIf="secondsToDday > 0 ? true : false" class="text-end text-white">Tiempo:
+          <span>{{minutesToDday}}:{{secondsToDday}}</span>
+        </p>
       </div>
 
       <div *ngIf="esVisible; else mostraTarjetas"
         class="text-center content d-flex justify-content-around align-items-center minh-100">
-        <div *ngFor="let item of tarjetasTablero" class="card text-bg-dark mb-3 cardDimencion ">
-          <img src="{{ imagenTemporal }}" class="card-header" alt="img/carta">
-          <div class="card-body">
-            <h5 class="card-title">{{ "Espera.." }} </h5>
+        <mat-card *ngFor="let item of tarjetasTablero" class="card text-bg-dark mb-3 cardDimencion">
+          <mat-card-content>
+            <img mat-card-image src="{{ imagenTemporal }}" alt="img/carta">
+            <mat-card-title class="card-title">{{ "Espera.." }} </mat-card-title>
             <p class="card-text">Poder XP: {{00}}</p>
-          </div>
-        </div>
+          </mat-card-content>
+        </mat-card>
       </div>
 
       <ng-template #mostraTarjetas>
         <div class="text-center content d-flex justify-content-around align-items-center minh-100">
-          <div *ngFor="let tarjeta of tarjetasTablero" class="card text-bg-dark mb-3 cardDimencion ">
-            <img src="{{ tarjeta.imagen }}" class="card-header" alt="img/carta">
-            <div class="card-body">
-              <h5 class="card-title">{{ tarjeta.descripcion }} </h5>
+          <mat-card *ngFor="let tarjeta of tarjetasTablero" class="card text-bg-dark mb-3 cardDimencion ">
+            <mat-card-content>
+              <mat-card-title>{{ tarjeta.descripcion }}</mat-card-title>
+              <img mat-card-image src="{{ tarjeta.imagen }}" alt="img/carta">
               <p class="card-text">Poder XP: {{tarjeta.poderXp}}</p>
-            </div>
-          </div>
+            </mat-card-content>
+          </mat-card>
         </div>
       </ng-template>
 
@@ -61,17 +63,20 @@
     <div class="col-sm-8 p-2">
       <h5 class="card-header text-white text-center p-2">Usuario</h5>
       <div class="card text-center colorUsers anyClass p-2">
-        <div *ngFor="let item of informationTarjetas" class="card text-bg-dark mb-3 cardDimencion">
-          <input #idTarjetaInput type="hidden" value="{{item.id}}">
-          <img src={{item.imagen}} class="card-header">
-          <div class="card-body">
-            <h5 class="card-title">{{ item.descripcion }}</h5>
-            <button class="btn btn-primary" [disabled]="disabledButton" (click)="actualizarEstadoCarta(item.id)">Poder
+        <mat-card *ngFor="let item of informationTarjetas" class="card text-bg-dark mb-3 cardDimencion">
+          <mat-card-title>{{ item.descripcion }}</mat-card-title>
+          <mat-card-content>
+            <input #idTarjetaInput type="hidden" value="{{item.id}}">
+            <img mat-card-image src="{{item.imagen}}" alt="Foto Carta">
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button [disabled]="disabledButton"
+              (click)="actualizarEstadoCarta(item.id)" class="button">Poder
               XP: {{item.poderXp}}.</button>
-          </div>
-        </div>
-
+          </mat-card-actions>
+        </mat-card>
       </div>
+      
       <li>
         <a class="btn btn-lg btn-danger">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModuleModule } from './app-routing-module.module';
 import { HttpClientModule } from '@angular/common/http';
+import { MatCardModule } from '@angular/material/card';
 
 import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -33,7 +34,7 @@ import { GanadorComponent } from './component/ganador/ganador.component';
     ListarTarjetasComponentComponent,
     WaitingRoomComponetComponent,
     GameOverComponent,
-    GanadorComponent
+    GanadorComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +45,8 @@ import { GanadorComponent } from './component/ganador/ganador.component';
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule
   ],
   providers: [
     AutenticacionServiceService

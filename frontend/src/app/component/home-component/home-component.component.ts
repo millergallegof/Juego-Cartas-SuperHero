@@ -20,6 +20,9 @@ export class HomeComponentComponent implements OnInit {
   idTablero: string = "";
   idJuego: string = "";
 
+  emailJugador: string;
+  partidasGanadasJugador:number = 0;
+
   constructor(
     public autenticacionService: AutenticacionServiceService,
     public servicioHttpJugador: ServiceHttpJugador,
@@ -30,6 +33,7 @@ export class HomeComponentComponent implements OnInit {
 
   ngOnInit(): void {
     this.listarJuegos()
+    this.mostrarInformacionJugador();
   }
 
   listarJuegos(): void {
@@ -50,7 +54,7 @@ export class HomeComponentComponent implements OnInit {
     localStorage.setItem('rolJugador', JSON.stringify("host"))
     this.servicioHttpJugador
       .crearJugador
-      ({ id: uid, nickName: nickName, puntos: 0, baraja: null, estado: true }).pipe(retry(2))
+      ({ id: uid, nickName: nickName, puntos: 0, baraja: null, estado: true })
       .subscribe(data => {
         this.servicioHttpJuego.actualizarJugadores(data.id, data).pipe(retry(2))
           .subscribe(juego => juego)
@@ -74,7 +78,7 @@ export class HomeComponentComponent implements OnInit {
             localStorage.setItem('informacionJuego', JSON.stringify({
               idJuego: juego.id,
               ganador: juego.ganador,
-              fechaLimiteComenzar: Date.parse(new Date(fechaCreacinJuego + 30000).toString())
+              fechaLimiteComenzar: new Date(fechaCreacinJuego + 30000)
             }))
             localStorage.setItem('rolJugador', JSON.stringify("player"))
             this.servicioHttpTablero.obtenerTablero(juego.tableroId)
@@ -125,5 +129,15 @@ export class HomeComponentComponent implements OnInit {
       .subscribe(data => {
         this.juegos.push(data)
       });
+  }
+
+
+  // Metodo encargado de asignar la informacion del usuario para mostrarla en el front
+  mostrarInformacionJugador(){
+    let {email, uid} = JSON.parse(localStorage.getItem('user')!);
+    this.emailJugador = email;
+    this.servicioHttpJugador.obtenerPartidasGanadas(uid)
+    // .subscribe(data => this.partidasGanadasJugador = data.partidasGanadas);
+
   }
 }
