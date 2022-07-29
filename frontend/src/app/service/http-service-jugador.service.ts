@@ -65,6 +65,12 @@ export class ServiceHttpJugador {
       (`${PathRest.getApiJugador}/obtener/tarjeta/apostada/${idjugador}`, idTarjeta)
   }
 
+  actualizarTarjetasJugador(idJugador:string, tarjetas:Tarjeta[]): Observable<Jugador> {
+    return this.httpJugador
+    .post<Jugador>
+    (`${PathRest.getApiJugador}/actualizar/tarjetas/${idJugador}`, tarjetas)
+  }
+
   //  METODOS FIREBASE TRAER INFORMACION
   /**
    * Metodo encarcado de validar la informacion que pasara en el

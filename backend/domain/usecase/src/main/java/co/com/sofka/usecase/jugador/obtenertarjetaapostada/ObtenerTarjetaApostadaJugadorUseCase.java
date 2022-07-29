@@ -1,14 +1,12 @@
-package co.com.sofka.usecase.jugador.traertarjetaapostadajugador;
+package co.com.sofka.usecase.jugador.obtenertarjetaapostada;
 
-import co.com.sofka.model.juego.gateways.JuegoRepository;
-import co.com.sofka.model.jugador.Jugador;
 import co.com.sofka.model.jugador.gateways.JugadorRepository;
 import co.com.sofka.model.tarjeta.Tarjeta;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
-public class TraerTarjetaApostadaJugadorUseCase {
+public class ObtenerTarjetaApostadaJugadorUseCase {
 
     private final JugadorRepository jugadorRepository;
 
