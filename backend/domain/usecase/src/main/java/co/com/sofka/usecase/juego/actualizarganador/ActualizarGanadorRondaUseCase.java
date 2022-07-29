@@ -23,7 +23,7 @@ public class ActualizarGanadorRondaUseCase {
                                 if (jugador.getId().equals(idJugador)) {
                                     var listTarjeta = Stream.concat(jugador.getBaraja().getTarjetas().stream(), tarjetas.stream())
                                             .collect(Collectors.toList());
-                                    jugador.setBaraja(new Baraja(listTarjeta));
+                                    jugador.getBaraja().setTarjetas(listTarjeta);
                                     return jugador;
                                 } else {
                                     return jugador;
