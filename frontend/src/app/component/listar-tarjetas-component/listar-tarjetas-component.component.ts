@@ -63,9 +63,9 @@ export class ListarTarjetasComponentComponent implements OnInit {
     let rolJugador = JSON.parse(localStorage.getItem('rolJugador')!);
     let limiteRonda = JSON.parse(localStorage.getItem('limiteRonda')!);
     if (rolJugador === "host") {
-      this.elegirGanadorTablero()
+
       this.revisarGanadorJuego()
-    }
+    }this.elegirGanadorTablero()
     localStorage.setItem('limiteRonda', JSON.stringify(limiteRonda + 30000))
     this.disabledButton = false;
     setTimeout(() => {
