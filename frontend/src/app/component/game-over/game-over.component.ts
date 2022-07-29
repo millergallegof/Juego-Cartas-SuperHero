@@ -18,10 +18,8 @@ export class GameOverComponent implements OnInit {
   }
 
   salirJuego(): void {
-    let { idJuego } = JSON.parse(localStorage.getItem('informacionJuego')!);
     let { id } = JSON.parse(localStorage.getItem('tablero')!);
-    this.servicioHttpTablero.eliminarTablero(id).subscribe()
-    this.servicioHttpJuego.eliminarJuego(idJuego)
+    this.servicioHttpTablero.eliminarTablero(id)
       .subscribe(() => {
         localStorage.removeItem("informacionJuego")
         localStorage.removeItem("rolJugador")

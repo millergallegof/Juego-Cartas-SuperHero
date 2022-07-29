@@ -12,16 +12,14 @@ export class GanadorComponent implements OnInit {
   constructor(
     private servicioHttpJuego: ServiceHttJuego,
     private servicioHttpTablero: ServiceHttpTablero,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
   }
 
   salirJuego(): void {
-    let { idJuego } = JSON.parse(localStorage.getItem('informacionJuego')!);
     let { id } = JSON.parse(localStorage.getItem('tablero')!);
-    this.servicioHttpTablero.eliminarTablero(id).subscribe()
-    this.servicioHttpJuego.eliminarJuego(idJuego)
+    this.servicioHttpTablero.eliminarTablero(id)
       .subscribe(() => {
         localStorage.removeItem("informacionJuego")
         localStorage.removeItem("rolJugador")
